@@ -558,10 +558,11 @@ CASOS = [
     ("Local", "BCRA A3500", a3500),
 ]
 
-for b, n, f in CASOS:
-    caso(b, n, f)
+if __name__ == "__main__":
+    for b, n, f in CASOS:
+        caso(b, n, f)
 
-tabla = ["\n# Resumen\n", "| Bloque | Fuente | Estado | Detalle |", "|---|---|---|---|"]
-tabla += [f"| {b} | {n} | {e} | {d.replace('|', '/')} |" for b, n, e, d in resumen]
-(RES / "test_report.md").write_text("\n".join(tabla + out), encoding="utf-8")
-print("\n".join(tabla))
+    tabla = ["\n# Resumen\n", "| Bloque | Fuente | Estado | Detalle |", "|---|---|---|---|"]
+    tabla += [f"| {b} | {n} | {e} | {d.replace('|', '/')} |" for b, n, e, d in resumen]
+    (RES / "test_report.md").write_text("\n".join(tabla + out), encoding="utf-8")
+    print("\n".join(tabla))
