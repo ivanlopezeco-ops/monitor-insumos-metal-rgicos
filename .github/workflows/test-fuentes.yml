@@ -19,8 +19,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install requests pandas openpyxl xlrd lxml html5lib pdfplumber
-      - run: python tests/test_fuentes_2.py
+      - run: pip install requests pandas openpyxl xlrd lxml html5lib pdfplumber beautifulsoup4
+      - run: python tests/test_fuentes_3.py
       - name: Guardar resultados en el repo
         if: always()
         run: |
