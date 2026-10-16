@@ -20,7 +20,7 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install requests pandas openpyxl xlrd lxml html5lib pdfplumber beautifulsoup4
-      - run: python tests/test_fuentes_3.py
+      - run: python tests/test_fuentes_4.py
       - name: Guardar resultados en el repo
         if: always()
         run: |
