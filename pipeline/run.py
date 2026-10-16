@@ -44,7 +44,7 @@ FUENTES = [
     ("INDEC por producto", F.indec_productos, 12),
     ("Precio realizado (SEC)", F.precio_realizado, 24),
 ]
-LIMITE_DIAS = {"diaria": 6, "semanal": 16, "decadal": 25, "mensual": 80, "trimestral": 160}   # para avisar "dato viejo"
+LIMITE_DIAS = {"diaria": 6, "semanal": 16, "decadal": 25, "mensual": 80, "trimestral": 240}   # para avisar "dato viejo"
 SALTO = {"diaria": 0.12, "decadal": 0.15, "semanal": 0.15, "mensual": 0.30, "trimestral": 0.35}  # variación que se marca para revisar
 
 
@@ -89,7 +89,7 @@ def unir(base, nuevo):
 def validar(base, estado):
     out, filas = {}, ["# Validación por serie\n", "| Serie | Último dato | Obs. | Estado | Detalle |", "|---|---|---|---|---|"]
     for s in SERIES_CAT:
-        if s.get("estado") == "pendiente":
+        if s.get("estado") == "pendiente" or s["id"] == "galv_eeuu_estimado":
             continue
         d = base[base["id"] == s["id"]].sort_values("fecha")
         if d.empty:

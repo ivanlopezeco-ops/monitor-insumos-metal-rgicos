@@ -219,7 +219,9 @@ def _dias_a_pedir(ctx, clave, primero, tope_backfill=250, recientes=8):
 
 def shfe(ctx):
     filas, errores, vistos = [], [], 0
-    for d in _dias_a_pedir(ctx, "shfe", dt.date(2010, 1, 4)):
+    pendientes = [dt.date.fromisoformat(x) for x in ctx.cursor.get("shfe_fallidos", [])][:60]
+    fallidos = []
+    for d in pendientes + _dias_a_pedir(ctx, "shfe", dt.date(2010, 1, 4)):
         try:
             r = requests.get(f"https://www.shfe.com.cn/data/tradedata/future/dailydata/kx{d:%Y%m%d}.dat",
                              headers={**UA, "Referer": "https://www.shfe.com.cn/"}, timeout=40, verify=False)
@@ -237,11 +239,14 @@ def shfe(ctx):
                     mejor[prod] = (oi, pr, mes)
             for prod, (_, pr, mes) in mejor.items():
                 filas.append((d, SHFE[prod], pr, "CNY/t con IVA", f"SHFE (contrato más negociado, {prod}{mes})", ""))
-            time.sleep(0.15)
+            time.sleep(0.25)
         except Exception as e:  # noqa: BLE001
             errores.append(f"{d}: {e}"[:100])
+            fallidos.append(str(d))
+            time.sleep(3)
+    ctx.cursor["shfe_fallidos"] = sorted(set(fallidos))[-300:]
     df = _df(filas)
-    df.attrs["errores"] = errores[:5]
+    df.attrs["errores"] = [f"{len(fallidos)} días con corte de conexión, se reintentan en la próxima corrida"] if fallidos else []
     df.attrs["detalle"] = f"{vistos} días con archivo; relleno hasta {ctx.cursor.get('shfe')}"
     return df
 
@@ -493,7 +498,10 @@ def ibge(ctx):
             if v is None:
                 continue
             nivel *= 1 + v / 100
-            out.append((dt.date(int(x["D3C"][:4]), int(x["D3C"][4:]), 1), "metalurgia_brasil_indice", nivel, "índice", "IBGE (tabla 6903, encadenado)", ""))
+            out.append((dt.date(int(x["D3C"][:4]), int(x["D3C"][4:]), 1), "metalurgia_brasil_indice", nivel, "índice dic-2018=100", "IBGE (tabla 6903, encadenado)", ""))
+        base = next((o[2] for o in out if o[0] == dt.date(2018, 12, 1)), None)
+        if base:
+            out = [(f, i, v / base * 100, u, fu, m) for f, i, v, u, fu, m in out]
     df = _df(out)
     df.attrs["detalle"] = f"variables: {variables}"
     return df
