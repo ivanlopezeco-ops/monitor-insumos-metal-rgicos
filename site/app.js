@@ -55,8 +55,9 @@ function grafico(el, cfg) {
   const c = COL(); const ch = echarts.init(el, null, { renderer: "canvas" }); charts.push(ch);
   const [ra, rb] = rango(cfg.r);
   const ancho = el.clientWidth || 600;
-  const leyenda = cfg.series.length > 3;
-  const margen = leyenda ? 16 : Math.round(Math.min(170, Math.max(90, ancho * 0.28)));
+  const leyenda = !cfg.conChips && cfg.series.length > 3;
+  const etiquetas = !leyenda && cfg.series.length <= 6;
+  const margen = !etiquetas ? 16 : Math.round(Math.min(170, Math.max(90, ancho * 0.24)));
   let fMin = null;
   const series = cfg.series.map((s, i) => {
     let d = s.d;
@@ -72,7 +73,7 @@ function grafico(el, cfg) {
       name: s.nombre, type: "line", data: d, showSymbol: s.mensual && vis.length < 60, symbol: "circle", symbolSize: 4,
       lineStyle: { width: i === 0 ? 2.2 : 1.6, color, type: s.punteado ? [5, 4] : "solid" }, itemStyle: { color },
       emphasis: { disabled: true }, connectNulls: true, sampling: d.length > 1500 ? "lttb" : undefined, z: 10 - i,
-      endLabel: { show: !leyenda, formatter: (p) => `${s.corto || s.nombre} ${fmt(p.value[1], dec)}`, color, fontSize: 11, fontWeight: 600, fontFamily: "Poppins", distance: 6 },
+      endLabel: { show: etiquetas, formatter: (p) => `${s.corto || s.nombre} ${fmt(p.value[1], dec)}`, color, fontSize: 11, fontWeight: 600, fontFamily: "Poppins", distance: 6 },
       labelLayout: { moveOverlap: "shiftY" }, _u: s.unidad, _dec: dec,
     };
   });
@@ -151,7 +152,9 @@ function tablaVariaciones(ids, moneda) {
 // cfg: {titulo, bajada, ids, indice (siempre base 100), monedas (permitir USD/$/original)}
 function tarjeta(cont, cfg) {
   const card = document.createElement("section"); card.className = "card ancha";
-  const st = { r: { ...R }, moneda: "usd", base100: !!cfg.indice, on: new Set(cfg.ids.filter((id) => M(id).d.length).slice(0, 7)) };
+  const conDatos = cfg.ids.filter((id) => M(id).d.length);
+  const sinRuido = conDatos.filter((id) => M(id).tipo !== "precio_comercio_exterior");
+  const st = { r: { ...R }, moneda: "usd", base100: !!cfg.indice, on: new Set((sinRuido.length >= 2 ? sinRuido : conDatos).slice(0, 6)) };
   if (!st.on.size) cfg.ids.forEach((id) => st.on.add(id));
   card.innerHTML = `<div class="card-top"><h3></h3><div class="mini-rangos" role="group" aria-label="Período de este gráfico"></div></div>
     <p class="bajada"></p><div class="controles"></div><div class="chips"></div><div class="chart"></div><div class="vars"></div>
@@ -184,9 +187,10 @@ function tarjeta(cont, cfg) {
     const mr = card.querySelector(".mini-rangos"); mr.innerHTML = "";
     RANGOS.forEach(([t, d]) => { const b = document.createElement("button"); b.textContent = t; if (st.r.dias === d && !st.r.desde) b.className = "on";
       b.onclick = () => { st.r = { dias: d }; card._dibujar(); }; mr.appendChild(b); });
-    const series = ids.map((id) => ({ d: datos(id, st.moneda), nombre: M(id).nombre, corto: M(id).mercado, color: colorDe(id),
+    const corto = (id) => { const s = M(id); return s.mercado + (s.tipo === "futuro" ? " (fut.)" : s.tipo === "precio_comercio_exterior" ? " (com. ext.)" : s.tipo === "estimacion" ? " (est.)" : ""); };
+    const series = ids.map((id) => ({ d: datos(id, st.moneda), nombre: M(id).nombre, corto: corto(id), color: colorDe(id),
       mensual: !["diaria"].includes(M(id).frecuencia), punteado: ["estimacion"].includes(M(id).tipo), unidad: unidad(id, st.moneda) })).filter((s) => s.d.length);
-    if (series.length) grafico(el, { series, r: st.r, base100: st.base100, alZoom: (a) => { st.r = { dias: Math.round((Date.now() - Date.parse(a)) / 864e5) }; card._dibujarTabla(); } });
+    if (series.length) grafico(el, { series, r: st.r, conChips: cfg.ids.length > 1, base100: st.base100, alZoom: (a) => { st.r = { dias: Math.round((Date.now() - Date.parse(a)) / 864e5) }; card._dibujarTabla(); } });
     else el.innerHTML = `<p class="bajada" style="padding:40px 0;text-align:center">Todavía no hay datos para estas series. Se completan a medida que corre la actualización.</p>`;
     card._dibujarTabla();
     card.querySelector(".fichas").innerHTML = ids.map(ficha).join("");
