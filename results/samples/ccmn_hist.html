@@ -1,0 +1,2269 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>长江有色金属价格行情_长江有色金属现货市场-长江有色金属网</title>
+                 <meta name="keywords" content="长江现货,长江有色,长江有色金属价格行情,长江有色金属网价格,长江有色金属交易市场,长江有色金属,长江有色网,铜价,铝锭价格，长江有色金属网铜价,铜价格走势图,铝锭价格走势图,电解铜价格,上海长江有色金属网,长江有色金属网" />
+                 <meta name="description" content="长江有色金属网提供今日长江有色金属现货交易价格行情,包括铜铝锌镍铅锡小金属贵金属的每日报价,行情价格走势图,为有色金属行业提供报价结算分析参考依据" />
+             <link rel="stylesheet" href="https://static.ccmn.cn/layui-v2.2.3/layui/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="https://static.ccmn.cn/css/??Reset.css,data.css,recharge.css,home_head.css">
+    <script type="text/javascript" src="https://static.ccmn.cn/js/echarts.min.js"></script>
+    <script type="text/javascript" src="https://static.ccmn.cn/js/getUrlParam.js"></script>
+    <script type="text/javascript" src="https://static.ccmn.cn/laydate/laydate.js"></script>
+    <script type="text/javascript" src="https://static.ccmn.cn/layui-v2.2.3/layui/layui.js" charset="utf-8"></script>
+
+</head>
+
+<body>
+<script type="text/javascript" src="https://static.ccmn.cn/js/jquery-1.11.1.min.js"></script>
+<div class="headerBar">
+    <div id="home_head"></div>
+    <div class="logoBar">
+    <div class="comWidth clearfloat">
+        <div class="logoLeft left">
+            <div class="logoLeft_box">
+                <a href="https://www.ccmn.cn/"><img src="https://static.ccmn.cn/images/logo5.png" alt="logo"></a>
+                <label id="loginModelName"></label>
+            </div>
+        </div>
+        <div class="logoRight right">
+            <div class="logoRight_box">
+                <div class="logoRight_input left">
+                    <select class="logoRight_select">
+                        <option value="provide">商品</option>
+                        <option value="provide">商品</option>
+                        <option value="provide">商品</option>
+                    </select>
+                    <input class="logoRight_text" type="text" name="logoRight_text"/>
+                    <input class="logoRight_search" type="button" name="logoRight_search" value="搜索"/>
+                </div>
+                <a href="https://vip.ccmn.cn/back/centerWeb/personal/personalCenter?page=buyerInquiry">
+                            <input class="logoRight_release right" type="button" name="logoRight_release"
+                                   value="发布询价单"/>
+                        </a>
+                    </div>
+            <div class="logoRight_hot">
+            </div>
+        </div>
+    </div>
+</div><div class="menuBar">
+    <div class="comWidth">
+        <div class="menu">
+            <ul>
+                <li class="current"><a href="https://www.ccmn.cn/historyprice/">历史数据</a></li>
+<li><a href="https://www.ccmn.cn/lme.shtml">伦敦期货</a></li>
+                <li><a href="https://www.ccmn.cn/shqh.shtml">上海期货</a></li>
+                <li><a href="https://www.ccmn.cn/cjxh.shtml">长江现货</a></li>
+                <li><a href="https://www.ccmn.cn/cjysw.shtml">长江综合</a></li>
+                <li><a href="https://www.ccmn.cn/shdc.shtml">上海地区</a></li>
+                <li><a href="https://www.ccmn.cn/gdxh.shtml">广东现货</a></li>
+                <li><a href="https://www.ccmn.cn/thj_119900.shtml">铁合金</a></li>
+                <li><a href="https://www.ccmn.cn/bxg_520200.shtml">不锈钢</a></li>
+                <li><a href="https://www.ccmn.cn/luliao_450600.shtml">炉料</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script>
+        document.getElementById("loginModelName").innerHTML = "历史数据";
+        $("#home_head").load("//static.ccmn.cn/home/home_head.html");
+    </script>
+</div><div class="mask" style="display: none">
+</div>
+<div class="contentBar">
+    <div class="comWidth">
+        <p class="place">
+            <label>当前位置：</label><a href="https://www.ccmn.cn">长江有色金属网</a>&gt;<a href="https://www.ccmn.cn/historyprice/">历史数据</a>&gt;长江现货</p>
+        <div class="box">
+            <html>
+<head>
+    <meta charset="utf-8">
+    <title>历史数据</title>
+</head>
+<body>
+<div class="choice left">
+    <span>市场分类</span>
+    <input type="hidden" id="type" value="XH"/>
+    <ul id="choice">
+        <li class="current" id="xh">
+            <label>全国现货市场<span></span></label>
+            <ul>
+                <li><a href="https://www.ccmn.cn/cjxh.shtml">长江现货</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/cjysw.shtml">长江综合</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/shdc.shtml">上海地区</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/gdxh.shtml">广东现货</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/tjxh.shtml">天津现货</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/fsxh.shtml">佛山现货</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/jnxh.shtml">济南现货</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/syxh.shtml">沈阳现货</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/bjxh.shtml">北京现货</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/wxxh.shtml">无锡现货</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/xnxh.shtml">西安现货</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/cqxh.shtml">重庆现货</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/gzxh.shtml">广州现货</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/whxh.shtml">武汉现货</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/kmxh.shtml">昆明现货</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/gdkc.shtml">各地矿产</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/nmgys.shtml">内蒙古有色</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/jxys.shtml">江西有色</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/henys.shtml">河南有色</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/sxys1.shtml">山西有色</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/scys.shtml">四川有色</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/nxys.shtml">宁夏有色</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/zjys.shtml">浙江有色</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/sdys.shtml">山东有色</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/jsys.shtml">江苏有色</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/hbys1.shtml">河北有色</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/ahys.shtml">安徽有色</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/hbys.shtml">湖北有色</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/fjys.shtml">福建有色</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/gsys.shtml">甘肃有色</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/llys.shtml">辽宁有色</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/jlys.shtml">吉林有色</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/hnys.shtml">湖南有色</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/tjys.shtml">天津有色</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/gxys.shtml">广西有色</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/gdys.shtml">广东有色</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/ynys.shtml">云南有色</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/xjys.shtml">新疆有色</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/gzys.shtml">贵州有色</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/cqys.shtml">重庆有色</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/sxys.shtml">陕西有色</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/gnsc.shtml">国内市场</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/gjsc.shtml">国际市场</a>
+                        </li>
+                    </ul>
+        </li>
+        <li id="fl">
+            <label>全国废旧市场<span></span></label>
+            <ul>
+                <li><a href="https://www.ccmn.cn/fsfl.shtml">佛山金属废料</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/tjfl.shtml">天津金属废料</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/tzfl.shtml">台州金属废料</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/shfl.shtml">上海金属废料</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/qyfl.shtml">清远金属废料</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/sdfl.shtml">山东金属废料</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/cqfl.shtml">重庆金属废料</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/gzfl.shtml">贵州金属废料</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/jnfl.shtml">济南金属废料</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/cdfl.shtml">成都金属废料</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/gxfl.shtml">广西金属废料</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/hnfl.shtml">湖南金属废料</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/lnfl.shtml">辽宁金属废料</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/hubfl.shtml">湖北金属废料</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/fjfl.shtml">福建金属废料</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/sxfl.shtml">陕西金属废料</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/ahfl.shtml">安徽金属废料</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/sxifl.shtml">山西金属废料</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/bjfl.shtml">北京金属废料</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/scfl.shtml">四川金属废料</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/jxfl.shtml">江西金属废料</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/ynfl.shtml">云南金属废料</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/jlfl.shtml">吉林金属废料</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/jsfl.shtml">江苏金属废料</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/nmgfl.shtml">内蒙古金属废料</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/henfl.shtml">河南金属废料</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/hljfl.shtml">黑龙江金属废料</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/hebfl.shtml">河北金属废料</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/zjfl.shtml">浙江金属废料</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/gjfl.shtml">国际金属废料</a>
+                        </li>
+                    </ul>
+        </li>
+        <li id="qh">
+            <label>全国期货市场<span></span></label>
+            <ul>
+                <li><a href="https://www.ccmn.cn/lme.shtml">伦敦期货</a>
+                        </li>
+                    <li><a href="https://www.ccmn.cn/shqh.shtml">上海期货</a>
+                        </li>
+                    </ul>
+        </li>
+        <li id="thj">
+            <label>铁合金数据<span></span></label>
+            <ul>
+                <li><a href="https://www.ccmn.cn/thj_119900.shtml">上海铁合金</a></li>
+                <li><a href="https://www.ccmn.cn/thj_461000.shtml">洛阳铁合金</a></li>
+                <li><a href="https://www.ccmn.cn/thj_129900.shtml">天津铁合金</a></li>
+                <li><a href="https://www.ccmn.cn/thj_460300.shtml">安阳铁合金</a></li>
+                <li><a href="https://www.ccmn.cn/thj_520200.shtml">无锡铁合金</a></li>
+                <li><a href="https://www.ccmn.cn/thj_480100.shtml">武汉铁合金</a></li>
+                <li><a href="https://www.ccmn.cn/thj_570100.shtml">西安铁合金</a></li>
+                <li><a href="https://www.ccmn.cn/thj_520100.shtml">南京铁合金</a></li>
+                <li><a href="https://www.ccmn.cn/thj_510800.shtml">锦州铁合金</a></li>
+                <li><a href="https://www.ccmn.cn/thj_511400.shtml">葫芦岛铁合金</a></li>
+                </ul>
+        </li>
+        <li id="bxg">
+            <label>不锈钢数据<span></span></label>
+            <ul>
+                <li><a href="https://www.ccmn.cn/bxg_520200.shtml">无锡不锈钢</a></li>
+                <li><a href="https://www.ccmn.cn/bxg_410800.shtml">佛山不锈钢</a></li>
+                <li><a href="https://www.ccmn.cn/bxg_119900.shtml">上海不锈钢</a></li>
+                <li><a href="https://www.ccmn.cn/bxg_510100.shtml">沈阳不锈钢</a></li>
+                <li><a href="https://www.ccmn.cn/bxg_590100.shtml">太原不锈钢</a></li>
+                <li><a href="https://www.ccmn.cn/bxg_310100.shtml">杭州不锈钢</a></li>
+                </ul>
+        </li>
+        <li id="lul">
+            <label>炉料数据<span></span></label>
+            <ul>
+                <li><a href="https://www.ccmn.cn/luliao_450600.shtml">唐山炉料</a></li>
+                <li><a href="https://www.ccmn.cn/luliao_450200.shtml">邯郸炉料</a></li>
+                <li><a href="https://www.ccmn.cn/luliao_460300.shtml">安阳炉料</a></li>
+                <li><a href="https://www.ccmn.cn/luliao_520800.shtml">徐州炉料</a></li>
+                <li><a href="https://www.ccmn.cn/luliao_119900.shtml">上海炉料</a></li>
+                <li><a href="https://www.ccmn.cn/luliao_511100.shtml">辽阳炉料</a></li>
+                <li><a href="https://www.ccmn.cn/luliao_580600.shtml">淄博炉料</a></li>
+                <li><a href="https://www.ccmn.cn/luliao_510600.shtml">本溪炉料</a></li>
+                <li><a href="https://www.ccmn.cn/luliao_510400.shtml">鞍山炉料</a></li>
+                <li><a href="https://www.ccmn.cn/luliao_129900.shtml">天津炉料</a></li>
+                </ul>
+        </li>
+        <li id="fxgj">
+            <label>分析工具<span></span></label>
+            <ul>
+                <li><a href="/historyprice/tb/">同比</a></li>
+                <li><a href="/historyprice/hb/">环比</a></li>
+                <li><a href="/historyprice/qx/">期现基差</a></li>
+                <li><a href="/historyprice/hl/">沪伦比值</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<script type="text/javascript">
+    $(function () {
+        var type = $("#type").val();
+        if (type != null && type != "") {
+            $("#choice li").removeAttr("class");
+            if (type == "XH") {
+                $("#xh").attr("class", "current");
+            } else if (type == "SH") {
+                $("#qh").attr("class", "current");
+            } else if (type == "LME") {
+                $("#qh").attr("class", "current");
+            } else if (type == "FL") {
+                $("#fl").attr("class", "current");
+            } else if (type == "thj") {
+                $("#thj").attr("class", "current");
+            } else if (type == "bxg") {
+                $("#bxg").attr("class", "current");
+            } else if (type == "lul") {
+                $("#lul").attr("class", "current");
+            } else {
+                $("#fxgj").attr("class", "current");
+            }
+        }
+    })
+</script>
+</body>
+</html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>历史数据</title>
+    <style>
+        .content2{
+            position: relative;
+            z-index: -1;
+        }
+        /* 确保表格内容在水印上方 */
+        .content2 thead th,
+        .content2 tbody td {
+            background-color: rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+        .content2 tbody::before {
+            content: '';
+            position: absolute;
+            top: 48px!important;
+            left: 35px;
+            right: 275px;
+            bottom: 0;
+            background-image: url('https://static.ccmn.cn/icon/shuiyin3.png');
+            background-repeat: repeat;   /* 平铺或单图均可 */
+            background-attachment: local; /* 保留滚动效果（需配合父级滚动） */
+            pointer-events: none;        /* 不干扰内容交互 */
+            z-index: -1;               /* 置于内容下方 */
+        }
+        /* 禁用日期样式 */
+        .laydate-day-disabled {
+            background: #f5f5f5 !important;
+            color: #ccc !important;
+            cursor: not-allowed !important;
+            pointer-events: none !important;
+        }
+    </style>
+
+</head>
+<body>
+<div class="content right">
+    <input type="hidden" id="marketVmid" value="40288092327140f601327141c0560001"/>
+    <input type="hidden" id="colName" value="cjxh"/>
+    <div class="content1">
+        <label>按日期查询：</label>
+        <select class="metalMarkey1" onchange="selectOnchange1()" style="margin-left: 0px;">
+            <option value="">请选择市场</option>
+            <option value="40288092327140f601327141c0560001">长江现货</option>
+                        <option value="4028809232fb12120132fb4545a10001">长江综合</option>
+                        <option value="4028809232fb12120132fb47a1f00002">上海地区</option>
+                        <option value="402880923271426f01327142cce40001">广东现货</option>
+                        <option value="402880923271437401327145184b0006">天津现货</option>
+                        <option value="4028809232715753013271606e470004">佛山现货</option>
+                        <option value="402880923271437401327144b3a50003">济南现货</option>
+                        <option value="402880923271437401327144cfa90004">沈阳现货</option>
+                        <option value="402880923271437401327144ece60005">北京现货</option>
+                        <option value="4028809232714374013271453efd0007">无锡现货</option>
+                        <option value="4028809232714374013271455d820008">西安现货</option>
+                        <option value="40288092327143740132714577e00009">重庆现货</option>
+                        <option value="ff808081429ce38d01429cf8225200d1">广州现货</option>
+                        <option value="4028809232714374013271459461000a">武汉现货</option>
+                        <option value="402880923271437401327145b0a3000b">昆明现货</option>
+                        <option value="4028808233830fdc013386b076ca0047">各地矿产</option>
+                        <option value="ff80808133c96de10133c9a34aad0014">内蒙古有色</option>
+                        <option value="ff80808133c96de10133c9a372310015">江西有色</option>
+                        <option value="ff80808133c96de10133c9a3b95e0016">河南有色</option>
+                        <option value="ff80808133c96de10133c9a3f5e40017">山西有色</option>
+                        <option value="ff80808133c96de10133c9a424070018">四川有色</option>
+                        <option value="ff80808133c96de10133c9a448ce0019">宁夏有色</option>
+                        <option value="ff80808133c96de10133c9a4758d001a">浙江有色</option>
+                        <option value="ff80808133c96de10133c9a4c1b3001b">山东有色</option>
+                        <option value="ff80808133c96de10133c9a5245a001c">江苏有色</option>
+                        <option value="a579dfc7cec744efad26b947e9d74273">河北有色</option>
+                        <option value="0861cbf305ea44e7abab17fa5811ca05">安徽有色</option>
+                        <option value="f22224020272489fb429b195bcee99b9">湖北有色</option>
+                        <option value="1be9d4f6059d4ec0beb76e4a50d973b8">福建有色</option>
+                        <option value="a38ee9067c5d4da4b382a69c7eea974c">甘肃有色</option>
+                        <option value="3315388d4bc04d1b91e5ada700bd4abc">辽宁有色</option>
+                        <option value="82f77fa5a3b040ecbdd4a40969162500">吉林有色</option>
+                        <option value="45f90142cb094580aa59af7a694ff46f">湖南有色</option>
+                        <option value="7906f2d55d044d53a55213e5638558d8">天津有色</option>
+                        <option value="ea222f52621b46a4b0d2809e218480cd">广西有色</option>
+                        <option value="fff6d96b0b444772840ede0bb36b4e8d">广东有色</option>
+                        <option value="9f124898a6fe4eff93a355db110ed5a2">云南有色</option>
+                        <option value="6dc0855ac8d347b98c4bf16a84af74ca">新疆有色</option>
+                        <option value="6557c4202b544abbb7e32946bf2e6021">贵州有色</option>
+                        <option value="578d3a17c7114276934b3b3e3f5f242e">重庆有色</option>
+                        <option value="3ca36794feef4f5c9e3e55fdc0f452ae">陕西有色</option>
+                        <option value="ff80808133c611c60133c8c2b27b005e">国内市场</option>
+                        <option value="ff80808133c1ad980133c3c27abd0059">国际市场</option>
+                        </select>
+        <div id="calendar1Div">
+            <input id="calendar1" autocomplete="off" onfocus="this.style.borderColor='#DDD'" type="text" placeholder="请选择时间">
+        </div>
+        <a id="select1" style="margin-left: 25px;">价格查询</a>
+    </div>
+    <div class="content5 clearfloat">
+        <label>按日区间查询：</label>
+        <div class="clearfloat" style="overflow: hidden;">
+
+            <p style="float: left;">
+                <select class="metalMarkey2" onchange="selectOnchange2()">
+                    <option value="">请选择市场</option>
+                    <option value="40288092327140f601327141c0560001">长江现货</option>
+                                <option value="4028809232fb12120132fb4545a10001">长江综合</option>
+                                <option value="4028809232fb12120132fb47a1f00002">上海地区</option>
+                                <option value="402880923271426f01327142cce40001">广东现货</option>
+                                <option value="402880923271437401327145184b0006">天津现货</option>
+                                <option value="4028809232715753013271606e470004">佛山现货</option>
+                                <option value="402880923271437401327144b3a50003">济南现货</option>
+                                <option value="402880923271437401327144cfa90004">沈阳现货</option>
+                                <option value="402880923271437401327144ece60005">北京现货</option>
+                                <option value="4028809232714374013271453efd0007">无锡现货</option>
+                                <option value="4028809232714374013271455d820008">西安现货</option>
+                                <option value="40288092327143740132714577e00009">重庆现货</option>
+                                <option value="ff808081429ce38d01429cf8225200d1">广州现货</option>
+                                <option value="4028809232714374013271459461000a">武汉现货</option>
+                                <option value="402880923271437401327145b0a3000b">昆明现货</option>
+                                <option value="4028808233830fdc013386b076ca0047">各地矿产</option>
+                                <option value="ff80808133c96de10133c9a34aad0014">内蒙古有色</option>
+                                <option value="ff80808133c96de10133c9a372310015">江西有色</option>
+                                <option value="ff80808133c96de10133c9a3b95e0016">河南有色</option>
+                                <option value="ff80808133c96de10133c9a3f5e40017">山西有色</option>
+                                <option value="ff80808133c96de10133c9a424070018">四川有色</option>
+                                <option value="ff80808133c96de10133c9a448ce0019">宁夏有色</option>
+                                <option value="ff80808133c96de10133c9a4758d001a">浙江有色</option>
+                                <option value="ff80808133c96de10133c9a4c1b3001b">山东有色</option>
+                                <option value="ff80808133c96de10133c9a5245a001c">江苏有色</option>
+                                <option value="a579dfc7cec744efad26b947e9d74273">河北有色</option>
+                                <option value="0861cbf305ea44e7abab17fa5811ca05">安徽有色</option>
+                                <option value="f22224020272489fb429b195bcee99b9">湖北有色</option>
+                                <option value="1be9d4f6059d4ec0beb76e4a50d973b8">福建有色</option>
+                                <option value="a38ee9067c5d4da4b382a69c7eea974c">甘肃有色</option>
+                                <option value="3315388d4bc04d1b91e5ada700bd4abc">辽宁有色</option>
+                                <option value="82f77fa5a3b040ecbdd4a40969162500">吉林有色</option>
+                                <option value="45f90142cb094580aa59af7a694ff46f">湖南有色</option>
+                                <option value="7906f2d55d044d53a55213e5638558d8">天津有色</option>
+                                <option value="ea222f52621b46a4b0d2809e218480cd">广西有色</option>
+                                <option value="fff6d96b0b444772840ede0bb36b4e8d">广东有色</option>
+                                <option value="9f124898a6fe4eff93a355db110ed5a2">云南有色</option>
+                                <option value="6dc0855ac8d347b98c4bf16a84af74ca">新疆有色</option>
+                                <option value="6557c4202b544abbb7e32946bf2e6021">贵州有色</option>
+                                <option value="578d3a17c7114276934b3b3e3f5f242e">重庆有色</option>
+                                <option value="3ca36794feef4f5c9e3e55fdc0f452ae">陕西有色</option>
+                                <option value="ff80808133c611c60133c8c2b27b005e">国内市场</option>
+                                <option value="ff80808133c1ad980133c3c27abd0059">国际市场</option>
+                                </select>
+                <select class="metalType">
+                    <option value="">请选择品种</option>
+                </select>
+            <p style="display: inline-block; margin-right: 30px; float: left;">
+            <div id="calendar2Div">
+                <input type="text" name="text" id="calendar2" placeholder="请选择时间"/>
+            </div>
+                <label style="display: inline-block; line-height: 32px;float: left;padding: 0 10px;">-</label>
+            <div id="calendar3Div">
+                <input type="text" name="text" id="calendar3" placeholder="请选择时间"/>
+            </div>
+            </p>
+                <a id="select2" style="margin-left: 25px;">价格查询</a>
+            </p>
+        </div>
+    </div>
+    <div class="content5 clearfloat">
+        <label>按月区间查询：</label>
+
+        <p style="float: left;">
+            <select class="metalMarkey3" onchange="selectOnchange3()">
+                <option value="">请选择市场</option>
+                <option value="40288092327140f601327141c0560001">长江现货</option>
+                    <option value="4028809232fb12120132fb4545a10001">长江综合</option>
+                    <option value="4028809232fb12120132fb47a1f00002">上海地区</option>
+                    <option value="402880923271426f01327142cce40001">广东现货</option>
+                    <option value="402880923271437401327145184b0006">天津现货</option>
+                    <option value="4028809232715753013271606e470004">佛山现货</option>
+                    <option value="402880923271437401327144b3a50003">济南现货</option>
+                    <option value="402880923271437401327144cfa90004">沈阳现货</option>
+                    <option value="402880923271437401327144ece60005">北京现货</option>
+                    <option value="4028809232714374013271453efd0007">无锡现货</option>
+                    <option value="4028809232714374013271455d820008">西安现货</option>
+                    <option value="40288092327143740132714577e00009">重庆现货</option>
+                    <option value="ff808081429ce38d01429cf8225200d1">广州现货</option>
+                    <option value="4028809232714374013271459461000a">武汉现货</option>
+                    <option value="402880923271437401327145b0a3000b">昆明现货</option>
+                    <option value="4028808233830fdc013386b076ca0047">各地矿产</option>
+                    <option value="ff80808133c96de10133c9a34aad0014">内蒙古有色</option>
+                    <option value="ff80808133c96de10133c9a372310015">江西有色</option>
+                    <option value="ff80808133c96de10133c9a3b95e0016">河南有色</option>
+                    <option value="ff80808133c96de10133c9a3f5e40017">山西有色</option>
+                    <option value="ff80808133c96de10133c9a424070018">四川有色</option>
+                    <option value="ff80808133c96de10133c9a448ce0019">宁夏有色</option>
+                    <option value="ff80808133c96de10133c9a4758d001a">浙江有色</option>
+                    <option value="ff80808133c96de10133c9a4c1b3001b">山东有色</option>
+                    <option value="ff80808133c96de10133c9a5245a001c">江苏有色</option>
+                    <option value="a579dfc7cec744efad26b947e9d74273">河北有色</option>
+                    <option value="0861cbf305ea44e7abab17fa5811ca05">安徽有色</option>
+                    <option value="f22224020272489fb429b195bcee99b9">湖北有色</option>
+                    <option value="1be9d4f6059d4ec0beb76e4a50d973b8">福建有色</option>
+                    <option value="a38ee9067c5d4da4b382a69c7eea974c">甘肃有色</option>
+                    <option value="3315388d4bc04d1b91e5ada700bd4abc">辽宁有色</option>
+                    <option value="82f77fa5a3b040ecbdd4a40969162500">吉林有色</option>
+                    <option value="45f90142cb094580aa59af7a694ff46f">湖南有色</option>
+                    <option value="7906f2d55d044d53a55213e5638558d8">天津有色</option>
+                    <option value="ea222f52621b46a4b0d2809e218480cd">广西有色</option>
+                    <option value="fff6d96b0b444772840ede0bb36b4e8d">广东有色</option>
+                    <option value="9f124898a6fe4eff93a355db110ed5a2">云南有色</option>
+                    <option value="6dc0855ac8d347b98c4bf16a84af74ca">新疆有色</option>
+                    <option value="6557c4202b544abbb7e32946bf2e6021">贵州有色</option>
+                    <option value="578d3a17c7114276934b3b3e3f5f242e">重庆有色</option>
+                    <option value="3ca36794feef4f5c9e3e55fdc0f452ae">陕西有色</option>
+                    <option value="ff80808133c611c60133c8c2b27b005e">国内市场</option>
+                    <option value="ff80808133c1ad980133c3c27abd0059">国际市场</option>
+                    </select>
+            <select class="metalType3">
+                <option value="">请选择品种</option>
+            </select>
+        <p style="display: inline-block; margin-right: 30px; float: left;">
+            <div id="calendar4Div">
+                <input id="calendar4" onfocus="this.style.borderColor='#DDD'" type="text" placeholder="请选择时间">
+            </div>
+            <label style="display: inline-block; line-height: 32px;float: left;padding: 0 10px;">-</label>
+            <div id="calendar5Div">
+                <input id="calendar5" onfocus="this.style.borderColor='#DDD'" type="text" placeholder="请选择时间">
+            </div>
+        </p>
+            <a id="select3" style="margin-left: 25px;">价格查询</a>
+        </p>
+    </div>
+    <div class="content6">
+        <div id="main" style="width: 900px; height: 400px; display: none;"></div>
+        <div class="back2" style="display: none;"></div>
+    </div>
+
+    <table class="content2" id="table1" >
+        <!-- 引入静态数据页面，首次加载 -->
+        <iframe id="staticIframe" style="border: 0px;width: 100%;height: 2500px;" src="https://www.ccmn.cn/history_data/cjxh.html"></iframe>
+    </table>
+    <table class="content2" id="table2" style="display:none;"></table>
+    <table class="content2" id="table3" style="display:none;"></table>
+    <input type="hidden" value="" id="clickFlag">
+</div>
+<script src="https://static.ccmn.cn/js/history_pay_stock.js" type="text/javascript"></script>
+<script>
+    $(document).ready(function () {
+        var usercode = ""
+            console.log('user',usercode);
+        $(".jinbiNum").text("金币余额："+usercode.userCode ).hide();
+    });
+</script>
+<script type="text/javascript">
+
+var lock = true;
+    $(".metalMarkey2").bind("change", function () {
+        var marketVmid = $(this).val();
+        var html = '<option value="">请选择品种</option>';
+        if(marketVmid){
+            $.post("/shop/historyData/getProductSort", {marketVmid:marketVmid}, function (result) {
+                if(result){
+                    for (var i = 0; i < result.length; i++) {
+                        html += '<option value="' + result[i].productSortVmid + '">' + result[i].productSortName + '</option>';
+                    }
+                    $(".metalType").html(html);
+                }
+            });
+        }
+    });
+    $(".metalMarkey3").bind("change", function () {
+        var marketVmid = $(this).val();
+        var html = '<option value="">请选择品种</option>';
+       if(marketVmid){
+           $.post("/shop/historyData/getProductSort", {marketVmid: marketVmid}, function (result) {
+               if(result){
+                   for (var i = 0; i < result.length; i++) {
+                       html += '<option value="' + result[i].productSortVmid + '">' + result[i].productSortName + '</option>';
+                   }
+                   $(".metalType3").html(html);
+               }
+           });
+       }
+    });
+
+    //按日期查询
+
+    $("#select1").click(function () {
+        $("#clickFlag").val(1);
+        showList1();
+    });
+    //按日期间查询
+    $("#select2").click(function () {
+        $("#clickFlag").val(2);
+        showList2();
+    });
+    //按月期间查询
+    $("#select3").click(function () {
+        $("#clickFlag").val(3);
+        showList3();
+    });
+    var html = "";
+
+
+    function htmlSum1(priceList, tableId) {
+        var sum1 = 0;
+        var sum2 = 0;
+        var sum3 = 0;
+        var sum4 = 0;
+        var priceLength = priceList.length;
+        $("#table1 tr").find("td:eq(2)").each(function (i, v) {
+            sum1 = sum1 + Number($(v).html());
+        });
+        $("#table1 tr").find("td:eq(3)").each(function (i, v) {
+            sum2 = sum2 + Number($(v).html());
+        });
+        $("#table1 tr").find("td:eq(4)").each(function (i, v) {
+            sum3 = sum3 + Number($(v).html());
+        });
+        $("#table1 tr").find("td:eq(5)").each(function (i, v) {
+            sum4 = sum4 + Number($(v).html());
+        });
+        var htmlSum = '<tr style="font-weight: bold;">' +
+            '<td colspan="2">总均价:</td>' +
+            '<td>' + (Number(sum1 / priceLength)).toFixed(2) + '</td>' +
+            '<td>' + (Number(sum2 / priceLength)).toFixed(2) + '</td>' +
+            '<td>' + (Number(sum3 / priceLength)).toFixed(2) + '</td>' +
+            '<td>' + (Number(sum4 / priceLength)).toFixed(2) + '</td>' +
+            '<td></td>' +'<td></td>' +
+            '</tr>';
+        $(tableId).append(htmlSum);
+    }
+
+    function htmlSum2(priceList, tableId) {
+        var sum1 = 0;
+        var sum2 = 0;
+        var sum3 = 0;
+        var sum4 = 0;
+        var sum5 = 0;
+        var priceLength = priceList.length;
+        $("#table2 tr").find("td:eq(2)").each(function (i, v) {
+            sum1 = sum1 + Number($(v).html());
+        });
+        $("#table2 tr").find("td:eq(3)").each(function (i, v) {
+            sum2 = sum2 + Number($(v).html());
+        });
+        $("#table2 tr").find("td:eq(4)").each(function (i, v) {
+            sum3 = sum3 + Number($(v).html());
+        });
+        $("#table2 tr").find("td:eq(5)").each(function (i, v) {
+            sum4 = sum4 + Number($(v).html());
+        });
+        $("#table2 tr").find("td:eq(6)").each(function (i, v) {
+            sum5 = sum5 + Number($(v).html());
+        });
+        var htmlSum = '<tr style="font-weight: bold;">' +
+            '<td colspan="2">总均价:</td>' +
+            '<td>' + (Number(sum1 / priceLength)).toFixed(2) + '</td>' +
+            '<td>' + (Number(sum2 / priceLength)).toFixed(2) + '</td>' +
+            '<td>' + (Number(sum3 / priceLength)).toFixed(2) + '</td>' +
+            '<td>' + (Number(sum4 / priceLength)).toFixed(2) + '</td>' +
+            '<td>' + (Number(sum5 / priceLength)).toFixed(2) + '</td>' +
+            '<td colspan="6"></td>' +'<td></td>' +
+            '</tr>';
+        $(tableId).append(htmlSum);
+    }
+
+    function htmlSum3(priceList, tableId) {
+        var sum1 = 0;
+        var sum2 = 0;
+        var sum3 = 0;
+        var sum4 = 0;
+        var sum5 = 0;
+        var sum6 = 0;
+        var priceLength = priceList.length;
+        $("#table3 tr").find("td:eq(2)").each(function (i, v) {
+            sum1 = sum1 + Number($(v).html());
+        });
+        $("#table3 tr").find("td:eq(3)").each(function (i, v) {
+            sum2 = sum2 + Number($(v).html());
+        });
+        $("#table3 tr").find("td:eq(4)").each(function (i, v) {
+            sum3 = sum3 + Number($(v).html());
+        });
+        $("#table3 tr").find("td:eq(5)").each(function (i, v) {
+            sum4 = sum4 + Number($(v).html());
+        });
+        $("#table3 tr").find("td:eq(6)").each(function (i, v) {
+            sum5 = sum5 + Number($(v).html());
+        });
+        $("#table3 tr").find("td:eq(7)").each(function (i, v) {
+            sum6 = sum6 + Number($(v).html());
+        });
+        var htmlSum = '<tr style="font-weight: bold;">' +
+            '<td colspan="2">总均价:</td>' +
+            '<td>' + (Number(sum1 / priceLength)).toFixed(2) + '</td>' +
+            '<td>' + (Number(sum2 / priceLength)).toFixed(2) + '</td>' +
+            '<td>' + (Number(sum3 / priceLength)).toFixed(2) + '</td>' +
+            '<td>' + (Number(sum4 / priceLength)).toFixed(2) + '</td>' +
+            '<td>' + (Number(sum5 / priceLength)).toFixed(2) + '</td>' +
+            '<td>' + (Number(sum6 / priceLength)).toFixed(2) + '</td>' +
+            '<td colspan="3"></td>' +'<td></td>' +
+            '</tr>';
+        $(tableId).append(htmlSum);
+    }
+
+
+    function tablePrice1(priceList) {
+        html += '<tbody class="content2"><tr>' +
+            '<th>序号</th>' +
+            '<th>品名</th>' +
+            '<th>最低价</th>' +
+            '<th>最高价</th>' +
+            '<th>均价</th>' +
+            '<th>涨跌</th>' +
+            '<th>日期</th>' +
+            '<th>备注</th>' +
+            '</tr>';
+        for (var i = 0; i < priceList.length; i++) {
+            var cut = i + 1;
+            html += '<tr>' +
+                '<td>' + cut + '</td>' +
+                '<td>' + priceList[i].productSortName + '</td>' +
+                '<td>' + priceList[i].minPrice + '</td>' +
+                '<td>' + priceList[i].maxPrice + '</td>' +
+                '<td>' + priceList[i].avgPrice + '</td>';
+            if (Number(priceList[i].highsLowsAmount) > 0) {
+                html += '<td style="color: #F71954;">' + priceList[i].highsLowsAmount + '</td>';
+            } else if (Number(priceList[i].highsLowsAmount) < 0) {
+                html += '<td style="color:#00a800;">' + priceList[i].highsLowsAmount + '</td>';
+            } else {
+                html += '<td>' + priceList[i].highsLowsAmount + '</td>';
+            }
+            html += '<td>' + priceList[i].publishDate + '</td>' ;
+            html += '<td>' + (priceList[i].remark ? priceList[i].remark + ', ' : '') +
+                priceList[i].unit + '</td>'+
+                '</tr>';
+            cut++;
+        }
+        html += '</tbody>';
+        $("#table1").show();
+        $("#table2").hide();
+        $("#table3").hide();
+        $("#staticIframe").css("display","none");
+        $("#table1").empty().html(html);
+    };
+
+    function tablePrice2(priceList) {
+        html += '<tbody class="content2"><tr>' +
+            '<th>序号</th>' +
+            '<th>品名</th>' +
+            '<th>开盘价</th>' +
+            '<th>收盘价</th>' +
+            '<th>涨跌</th>' +
+            '<th>结算价</th>' +
+            '<th>昨结算</th>' +
+            '<th>加权平均价</th>' +
+            '<th>周总库存</th>' +
+            '<th>库存增减</th>' +
+            '<th>持仓量</th>' +
+            '<th>持仓量增减</th>' +
+            '<th>日期</th>' +
+            '<th>备注</th>' +
+            '</tr>';
+        for (var i = 0; i < priceList.length; i++) {
+            var cut = i + 1;
+            var weeksAllStock = priceList[i].weeksAllStock || '-';
+            var highsLowsNum = priceList[i].highsLowsNum  || '-';
+
+            html += '<tr>' +
+                '<td>' + cut + '</td>' +
+                '<td>' + priceList[i].productSortName + '</td>' +
+                '<td>' + priceList[i].openQuotationPrice + '</td>' +
+                '<td>' + priceList[i].closeingQuotationPrice + '</td>';
+            if (Number(priceList[i].highsLowsAmount) > 0) {
+                html += '<td style="color: #F71954;">' + priceList[i].highsLowsAmount + '</td>';
+            } else if (Number(priceList[i].highsLowsAmount) < 0) {
+                html += '<td style="color:#00a800;">' + priceList[i].highsLowsAmount + '</td>';
+            } else {
+                html += '<td>' + priceList[i].highsLowsAmount + '</td>';
+            }
+            var settlePrice = priceList[i].settlePrice;
+            if (typeof (settlePrice) == "undefined") {
+                settlePrice = "-";
+            }
+            html += '<td>' + settlePrice + '</td>' +
+                '<td>' + priceList[i].previousPrice + '</td>' +
+                '<td>' + priceList[i].weightAvgPrice + '</td>' +
+                '<td>' + weeksAllStock + '</td>' +
+                '<td>' + highsLowsNum + '</td>' +
+                '<td>' + priceList[i].positionsNum + '</td>';
+            if (Number(priceList[i].highPositionsNum) > 0) {
+                html += '<td style="color: #F71954;">' + priceList[i].highPositionsNum + '</td>';
+            } else if (Number(priceList[i].highPositionsNum) < 0) {
+                html += '<td style="color:#00a800;">' + priceList[i].highPositionsNum + '</td>';
+            } else {
+                html += '<td>' + priceList[i].highPositionsNum + '</td>';
+            }
+            html += '<td>' + priceList[i].publishDate + '</td>' ;
+            html += '<td>' + (priceList[i].remark ? priceList[i].remark + ', ' : '') +
+                priceList[i].unit + '</td>' + '</tr>';
+            cut++;
+        }
+        html += '</tbody>';
+        $("#table1").hide();
+        $("#table2").show();
+        $("#table3").hide();
+        $("#staticIframe").css("display","none");
+        $("#table2").empty().html(html);
+    }
+
+    function tablePrice3(priceList) {
+        html += '<tbody class="content2"><tr>' +
+            '<th>序号</th>' +
+            '<th>品名</th>' +
+            '<th>最新价</th>' +
+            '<th>涨跌</th>' +
+            '<th>昨收</th>' +
+            '<th>现货结算</th>' +
+            '<th>总存量</th>' +
+            '<th>库存增减</th>' +
+            '<th>持仓量</th>' +
+            '<th>持仓量增减</th>' +
+            '<th>日期</th>' +
+            '<th>备注</th>' +
+            '</tr>';
+        for (var i = 0; i < priceList.length; i++) {
+            var cut = i + 1;
+            var allStock = priceList[i].allStock;
+            if (allStock == null) {
+                allStock = 0;
+            }
+            var highsLowsNum = priceList[i].highsLowsNum;
+            if (typeof (highsLowsNum) == "undefined") {
+                highsLowsNum = 0;
+            }
+            html += '<tr>' +
+                '<td>' + cut + '</td>' +
+                '<td>' + priceList[i].productSortName + '</td>' +
+                '<td>' + priceList[i].newsPrice + '</td>';
+            if (Number(priceList[i].highsLowsAmount) > 0) {
+                html += '<td style="color: #F71954;">' + priceList[i].highsLowsAmount + '</td>';
+            } else if (Number(priceList[i].highsLowsAmount) < 0) {
+                html += '<td style="color:#00a800;">' + priceList[i].highsLowsAmount + '</td>';
+            } else {
+                html += '<td>' + priceList[i].highsLowsAmount + '</td>';
+            }
+            var settlePrice = priceList[i].settlePrice;
+            if (typeof (settlePrice) == "undefined") {
+                settlePrice = "-";
+            }
+            html += '<td>' + priceList[i].previousPrice + '</td>' +
+                '<td>' + settlePrice + '</td>' +
+                '<td>' + allStock + '</td>';
+            if (Number(highsLowsNum) > 0) {
+                html += '<td style="color: #F71954;">' + highsLowsNum + '</td>';
+            } else if (Number(highsLowsNum) < 0) {
+                html += '<td style="color:#00a800;">' + highsLowsNum + '</td>';
+            } else {
+                html += '<td>' + highsLowsNum + '</td>';
+            }
+            html += '<td>' + priceList[i].positionsNum + '</td>';
+            if (Number(priceList[i].highPositionsNum) > 0) {
+                html += '<td style="color: #F71954;">' + priceList[i].highPositionsNum + '</td>';
+            } else if (Number(priceList[i].highPositionsNum) < 0) {
+                html += '<td style="color:#00a800;">' + priceList[i].highPositionsNum + '</td>';
+            } else {
+                html += '<td>' + priceList[i].highPositionsNum + '</td>';
+            }
+            html += '<td>' + priceList[i].publishDate + '</td>';
+            html += '<td>' + (priceList[i].remark ? priceList[i].remark + ', ' : '') +
+                priceList[i].unit + '</td>' + '</tr>';
+            cut++;
+        }
+        html += '</tbody>';
+        $("#table1").hide();
+        $("#table2").hide();
+        $("#table3").show();
+        $("#staticIframe").css("display","none");
+        $("#table3").empty().html(html);
+    }
+
+
+    function tablePrice4(priceList) {
+        html += '<tbody class="content2"><tr>' +
+            '<th>序号</th>' +
+            '<th>品名</th>' +
+            '<th>最低均价</th>' +
+            '<th>最高均价</th>' +
+            '<th>总均价</th>' +
+            '<th>日期区间</th>' +
+            '<th>备注</th>' +
+            '</tr>';
+        for (var i = 0; i < priceList.length; i++) {
+            var cut = i + 1;
+            html += '<tr>' +
+                '<td>' + cut + '</td>' +
+                '<td>' + priceList[i].productSortName + '</td>' +
+                '<td>' + priceList[i].minPrice + '</td>' +
+                '<td>' + priceList[i].maxPrice + '</td>' +
+                '<td>' + priceList[i].price + '</td>' +
+                '<td>' + priceList[i].month + '</td>' +
+                '<td>' + (priceList[i].remark ? priceList[i].remark + ', ' : '') +
+                priceList[i].unit + '</td>' +
+                '</tr>';
+            cut++;
+        }
+        html += '</tbody>';
+        $("#table1").show();
+        $("#table2").hide();
+        $("#table3").hide();
+        $("#staticIframe").css("display","none");
+        $("#table1").empty().html(html);
+    }
+
+
+    function getPriceData(marketVmid) {
+        if (marketVmid == null || marketVmid == '') {
+            marketVmid = $(".metalMarkey1").children('option').eq(1).val();
+        }
+        $.ajax({
+            url: "/shop/historyData/getCorpStmarketPriceList",
+            type: "post",
+            dataType: "json",
+            data: {"marketVmid": marketVmid},
+            success: function (data) {
+                if (data.success) {
+                    var priceList = data.body.priceList;
+                    if (priceList.length > 0) {
+                        html = '<caption align="top" style="font-size: 16px;line-height: 40px;color: #ff7700;">市场：' + priceList[0].marketName + '&nbsp;&nbsp;&nbsp;日期：' + priceList[0].publishDate+ '</caption>';
+                        if (priceList[0].stType == "XH" || priceList[0].stType == "FL") {
+                            tablePrice1(priceList);
+                        } else if (priceList[0].stType == "SH") {
+                            tablePrice2(priceList);
+                        } else if (priceList[0].stType == "LME") {
+                            tablePrice3(priceList);
+                        }
+                    } else {
+                        $("table").html("");
+                    }
+                } else {
+                    alert(data.msg);
+                }
+            }
+        });
+    }
+/*
+    var marketVmid = $("#marketVmid").val() || $("#colName").val();
+    if (!UrlParm.parm("payFlag")) {
+        $("#table1").load("//www.ccmn.cn/history_data/" + $("#colName").val() + ".html", function (responseTxt, statusTxt, xhr) {
+            if (statusTxt == "success")
+                $("#table1").show();
+            if (statusTxt == "error")
+                getPriceData(marketVmid)
+        })
+    }
+*/
+
+    function myEcharts(title, dataTime, minData, maxData, avgData) {
+        $("#main").show();
+        $("#main").css("display", "block");
+        $(".back2").show();
+        var myChart = echarts.init(document.getElementById('main'));
+        var option = {
+            color: ['#0263ff', '#ff002f', '#ffa713'],
+            title: { text: title, textStyle: { fontSize: 18, color: '#FFA715' } },
+            tooltip: { trigger: 'axis' },
+            legend: { 
+                right: '10%', 
+                data: ['最高价', '最低价', '均价'],
+                selected: { '均价': true, '最高价': false, '最低价': false }
+            },
+            grid: { left: '1%', right: '4%', bottom: '2%', containLabel: true },
+            xAxis: { type: 'category', boundaryGap: false, data: dataTime },
+            yAxis: { type: 'value', scale: true },
+            series: [
+                { name: '最高价', type: 'line', smooth: true, data: maxData },
+                { name: '最低价', type: 'line', smooth: true, data: minData },
+                { name: '均价', type: 'line', smooth: true, data: avgData }
+            ]
+        };
+        myChart.setOption(option);
+        
+        // legend 单选
+        myChart.off('legendselectchanged');
+        myChart.on('legendselectchanged', function(params){
+            var keep = params.name;
+            var s = { '最高价': false, '最低价': false, '均价': false };
+            s[keep] = true;
+            myChart.setOption({ legend: { selected: s } });
+        });
+    }
+
+    function myEcharts2(title, timeData, openQuotationPrice, closeingQuotationPrice) {
+        $("#main").show();
+        $("#main").css("display", "block");
+        $(".back2").show();
+        var myChart = echarts.init(document.getElementById('main'));
+        var colors = ['#ffa713', '#ff002f'];
+        var option = {
+            color: colors,
+            title: { text: title, textStyle: { fontSize: 18, color: '#FFA715' } },
+            tooltip: { trigger: 'axis' },
+            legend: { right: '10%', data: ['结算价', '收盘价'], selected: { '结算价': true, '收盘价': false } },
+            grid: { left: '1%', right: '4%', bottom: '2%', containLabel: true },
+            xAxis: { type: 'category', boundaryGap: false, data: timeData },
+            yAxis: { type: 'value', scale: true },
+            series: [
+                { name: '结算价', type: 'line', smooth: true, data: openQuotationPrice },
+                { name: '收盘价', type: 'line', smooth: true, data: closeingQuotationPrice }
+            ]
+        };
+        myChart.setOption(option);
+        
+        // legend 单选
+        myChart.off('legendselectchanged');
+        myChart.on('legendselectchanged', function(params){
+            var s = { '结算价': false, '收盘价': false };
+            s[params.name] = true;
+            myChart.setOption({ legend: { selected: s } });
+        });
+    }
+
+    function myEcharts3(title, timeData, newsPrice) {
+        $("#main").show();
+        $("#main").css("display", "block");
+        $(".back2").show();
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+        // 指定图表的配置项和数据
+        var colors = ['#ffa713'];
+        var option = {
+            color: colors,
+            title: {
+                text: title,
+                textStyle: {
+                    //字体大小
+                    fontSize: 18,
+                    color: '#FFA715'
+                }
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                right: '10%',
+                data: ['现货结算'],
+                selected: {
+                    '现货结算': true
+                }
+            },
+            grid: {
+                left: '1%',
+                right: '4%',
+                bottom: '2%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: timeData
+            },
+            yAxis: {
+                type: 'value',
+                scale: true
+            },
+            series: [{
+                name: '现货结算',
+                type: 'line',
+                smooth: true,
+                stack: 'newsPrice',
+                data: newsPrice
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    }
+
+    function myEcharts4(title, timeData, avgPrice) {
+        $("#main").show();
+        $("#main").css("display", "block");
+        $(".back2").show();
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+        // 指定图表的配置项和数据
+        var colors = ['#ffa713'];
+        var option = {
+            color: colors,
+            title: {
+                text: title,
+                textStyle: {
+                    //字体大小
+                    fontSize: 18,
+                    color: '#FFA715'
+                }
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                right: '10%',
+                data: ['均价'],
+            },
+            grid: {
+                left: '1%',
+                right: '4%',
+                bottom: '2%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: timeData
+            },
+            yAxis: {
+                type: 'value',
+                scale: true
+            },
+            series: [{
+                name: '均价',
+                type: 'line',
+                smooth: true,
+                stack: 'price7',
+                data: avgPrice
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    }
+
+
+    //选择市场事件
+    function selectOnchange2(){
+        var marketVmid = $(".metalMarkey2").val();
+        $("#calendar2Div").empty();
+        $("#calendar2Div").html('<input type="text" name="text" id="calendar2" placeholder="请选择时间"/>')
+        $("#calendar3Div").empty();
+        $("#calendar3Div").html('<input type="text" name="text" id="calendar3" placeholder="请选择时间"/>')
+        if(marketVmid == '40288092327130dc0132713266e50001') {//版权问题，上海现货只能查22年3月1日之后的信息。这串字符串是上海现货的id 40288092327130dc0132713266e50001
+            initCalendar2('2022-3-1');
+        }else{
+            initCalendar2(minDate);
+        }
+    }
+    //重新加载按日期查询控件
+    function initCalendar2(date){
+        layui.use('laydate', function() {
+            laydate.render({
+                elem: '#calendar2',
+                theme: '#F9A809',
+                min: date,
+                max: 0,
+                showBottom: false,
+                trigger: 'click',
+            });
+            laydate.render({
+                elem: '#calendar3',
+                theme: '#F9A809',
+                min: date,
+                max: 0,
+                showBottom: false,
+                trigger: 'click',
+            });
+        })
+    }
+    function showList2() {
+        var publishDate1 = $("#calendar2").val();
+        var publishDate2 = $("#calendar3").val();
+        var marketVmid = $(".metalMarkey2").val();
+        var productSortVmid = $(".metalType").val();
+        if (!publishDate1 || !publishDate2) {
+            alert("请选择日期区间");
+        } else if (!marketVmid) {
+            alert("请选择市场");
+        } else if (!productSortVmid) {
+            alert("请选择金属类型");
+        } else {
+            var day = DateDiff(publishDate1, publishDate2);
+            if (day > 366) {
+                alert("日期区间不能大于一年");
+                return;
+            } else if (day < 0) {
+                alert("开始日期" + publishDate1 + "大于结束日期 " + publishDate2 + "");
+                return;
+            }
+            $("#select2").attr("disabled",true).css("pointer-events","none");
+            $("#select2").html("正在加载");
+            // $.post("/historyprice/getPriceListStartAndEndTime", {"marketVmid": marketVmid,"productSortVmid": productSortVmid,"startTime": publishDate1, "endTime": publishDate2}, function (result) {
+            $.ajax({
+                url: "/shop/historyData/getPriceListStartAndEndTime",
+                type: "post",
+                dataType: "json",
+                data: {
+                    "marketVmid": marketVmid,
+                    "productSortVmid": productSortVmid,
+                    "startTime": publishDate1 ,
+                    "endTime": publishDate2
+                },
+                success: function (result) {
+                html = "";
+                if (result.success) {
+                    if (result.body && result.body.priceList && result.body.priceList.length > 0) {
+                        var priceList = result.body.priceList;
+                        html = '<caption align="top" style="font-size: 16px;line-height: 40px;color: #ff7700;">市场：' + priceList[0].marketName
+                            + '&nbsp;&nbsp;&nbsp;品名：' + priceList[0].productSortName
+                            + '&nbsp;&nbsp;&nbsp;日期：' + publishDate1 + '&nbsp;到&nbsp;' + publishDate2 + '</caption>';
+                        if (priceList[0].stType == "XH" || priceList[0].stType == "FL") {
+                            tablePrice1(priceList);
+                            htmlSum1(priceList, "#table1");
+                        } else if (priceList[0].stType == "SH") {
+                            tablePrice2(priceList);
+                            htmlSum2(priceList, "#table2");
+                        } else if (priceList[0].stType == "LME") {
+                            tablePrice3(priceList);
+                            htmlSum3(priceList, "#table3");
+                        } else if (priceList[0].stType == "STS") {
+                            tablePrice1(priceList);
+                            $(".content6").hide();
+                        }
+                        //最低价
+                        var minData = [];
+                        //最高价
+                        var maxData = [];
+                        //均价
+                        var avgData = [];
+                        //开盘价
+                        var openQuotationPrice = [];
+                        //收盘价
+                        var closeingQuotationPrice = [];
+                        //结算价
+                        var settlePrice = [];
+                        //最新价
+                        var newsPrice = [];
+                        //时间
+                        var timeData = [];
+                        for (var i = 0; i < priceList.length; i++) {
+                            timeData.unshift(priceList[i].publishDate);
+                            minData.unshift(priceList[i].minPrice);
+                            maxData.unshift(priceList[i].maxPrice);
+                            avgData.unshift(priceList[i].avgPrice);
+                            openQuotationPrice.unshift(priceList[i].openQuotationPrice);
+                            closeingQuotationPrice.unshift(priceList[i].closeingQuotationPrice);
+                            settlePrice.unshift(priceList[i].settlePrice);
+                            newsPrice.unshift(priceList[i].newsPrice);
+                        }
+                        $(".content6").show();
+                        var title = publishDate1 + "到" + publishDate2 + "，" + priceList[0].marketName + priceList[0].productSortName + "价格走势图";
+                        $("#main").hide();
+                        $(".back2").hide();
+                        if(priceList.length > 2) {
+                            if (priceList[0].stType == "XH" || priceList[0].stType == "FL") {
+                                //取最高，最低，均价
+                                myEcharts(title, timeData, minData, maxData, avgData)
+                            } else if (priceList[0].stType == "SH") {
+                                //取开盘，收盘
+                                myEcharts2(title, timeData, settlePrice, closeingQuotationPrice);
+                            } else if (priceList[0].stType == "LME") {
+                                //取现货结算
+                                myEcharts3(title, timeData, settlePrice);
+                            }
+                        }
+                    } else {
+                        var metalMarkey = $(".metalMarkey2").find("option:selected").text();
+                        var metalType = $(".metalType").find("option:selected").text();
+                        var calendar = $("#calendar2").val() + "到" + $("#calendar3").val();
+                        showRecharge(result, metalMarkey + metalType, calendar);
+                    }
+                    $("#select2").attr("disabled",false).css("pointer-events","auto");
+                    $("#select2").html("价格查询");
+                } else {
+                    $("#select2").attr("disabled",false).css("pointer-events","auto");
+                    $("#select2").html("价格查询");
+                    alert(result.msg);
+                }
+            },
+                error: function (xhr, status, error) {
+                    console.error("请求失败: " + error);
+                    console.log("响应状态: " + xhr.status);
+                    console.log("响应文本: " + xhr.responseText);
+                }
+            });
+
+        }
+    };
+
+    //选择市场事件
+    function selectOnchange3(){
+        var marketVmid = $(".metalMarkey3").val();
+        $("#calendar4Div").empty();
+        $("#calendar4Div").html('<input id="calendar4" onfocus="this.style.borderColor=\'#DDD\'" type="text" placeholder="请选择时间">')
+        $("#calendar5Div").empty();
+        $("#calendar5Div").html('<input id="calendar5" onfocus="this.style.borderColor=\'#DDD\'" type="text" placeholder="请选择时间">')
+        if(marketVmid == '40288092327130dc0132713266e50001') {//版权问题，上海现货只能查22年3月1日之后的信息。这串字符串是上海现货的id 40288092327130dc0132713266e50001
+            initCalendar3('2022-3-1');
+        }else{
+            initCalendar3(minDate);
+        }
+    }
+    //重新加载按月查询控件（calendar4 开始时间，calendar5 自动计算）
+    function initCalendar3(date){
+        layui.use('laydate', function() {
+            var laydate = layui.laydate;
+            var minStartDate = date;
+            
+            // 开始时间最大不能超过当前时间-1月（确保计算出的结束时间一定在今天之前）
+            var now = new Date();
+            now.setMonth(now.getMonth() - 1);
+            var maxStartDate = now.getFullYear() + '-' + 
+                (now.getMonth() + 1 < 10 ? '0' + (now.getMonth() + 1) : now.getMonth() + 1) + '-' + 
+                (now.getDate() < 10 ? '0' + now.getDate() : now.getDate());
+            
+            // ========== 开始时间选择器（calendar4） ==========
+            laydate.render({
+                elem: '#calendar4',
+                theme: '#F9A809',
+                min: minStartDate,
+                max: maxStartDate,
+                type: 'date',
+                showBottom: true,
+                btns: ['confirm'],
+                trigger: 'click',
+                done: function(value){
+                    if(value){
+                        // 自动计算结束时间并填入
+                        var endDate = calculateEndDate(value);
+                        $("#calendar5").val(endDate);
+                    }
+                }
+            });
+            
+            // ========== 结束时间（calendar5）只读，不可手动选择 ==========
+            $("#calendar5").attr("readonly", true).css("background-color", "#f5f5f5");
+            // 清理之前可能存在的 laydate 绑定
+            $("#calendar5").removeAttr("lay-key");
+        });
+    }
+    
+    // 计算结束时间：开始时间 + 12月 - 1天，若超过今天则逐月递减
+    function calculateEndDate(startDateStr){
+        var startDate = new Date(startDateStr);
+        var today = new Date();
+        today.setHours(0, 0, 0, 0);
+        
+        var n = 12;
+        while(n > 0){
+            var endDate = new Date(startDate);
+            endDate.setMonth(endDate.getMonth() + n);
+            endDate.setDate(endDate.getDate() - 1);
+            
+            // 结束时间小于今天，则使用此值
+            if(endDate < today){
+                return formatDate(endDate);
+            }
+            n--;
+        }
+        // 兜底：返回昨天
+        var yesterday = new Date(today);
+        yesterday.setDate(yesterday.getDate() - 1);
+        return formatDate(yesterday);
+    }
+    
+    // 格式化日期为 YYYY-MM-DD
+    function formatDate(d){
+        var y = d.getFullYear();
+        var m = d.getMonth() + 1;
+        var day = d.getDate();
+        return y + '-' + (m < 10 ? '0' + m : m) + '-' + (day < 10 ? '0' + day : day);
+    }
+    
+    // 走势图数据缓存
+    var chartTimeData = [];
+    var chartMaxData = [];
+    var chartMinData = [];
+    var chartAvgData = [];
+    var chartTitle = "";
+    
+    // 按类型渲染走势图（均价/最高价/最低价三线合一，legend 单选切换）
+    function renderChart(type){
+        $("#main").show().css("display", "block");
+        $(".back2").show();
+        var myChart = echarts.init(document.getElementById('main'));
+        var option = {
+            color: ['#ffa713', '#ff002f', '#0263ff'],
+            title: { text: chartTitle, textStyle: { fontSize: 18, color: '#FFA715' } },
+            tooltip: { trigger: 'axis' },
+            legend: { 
+                right: '10%',
+                data: ['最高价', '最低价', '均价'],
+                selected: { '均价': true, '最高价': false, '最低价': false }
+            },
+            grid: { left: '1%', right: '4%', bottom: '2%', containLabel: true },
+            xAxis: { type: 'category', boundaryGap: false, data: chartTimeData },
+            yAxis: { type: 'value', scale: true },
+            series: [
+                { name: '最高价', type: 'line', smooth: true, data: chartMaxData },
+                { name: '最低价', type: 'line', smooth: true, data: chartMinData },
+                { name: '均价', type: 'line', smooth: true, data: chartAvgData }
+            ]
+        };
+        myChart.setOption(option);
+        
+        // legend 单选：点击一个时，只保留该选项
+        myChart.off('legendselectchanged');
+        myChart.on('legendselectchanged', function(params){
+            var keepName = params.name;
+            var newSelected = {};
+            ['最高价','最低价','均价'].forEach(function(n){
+                newSelected[n] = (n === keepName);
+            });
+            myChart.setOption({ legend: { selected: newSelected } });
+        });
+        
+        // 根据传入的 type 设置初始选中
+        var initSelected = {};
+        ['最高价','最低价','均价'].forEach(function(n){
+            initSelected[n] = false;
+        });
+        if(type === 'max') initSelected['最高价'] = true;
+        else if(type === 'min') initSelected['最低价'] = true;
+        else initSelected['均价'] = true;
+        myChart.setOption({ legend: { selected: initSelected } });
+    }
+    
+    function showList3() {
+        var publishDate1 = $("#calendar4").val();
+        var publishDate2 = $("#calendar5").val();
+        var marketVmid = $(".metalMarkey3").val();
+        var productSortVmid = $(".metalType3").val();
+        if (!publishDate1 || !publishDate2) {
+            alert("请选择日期区间");
+        } else if (!marketVmid) {
+            alert("请选择市场");
+        } else if (!productSortVmid) {
+            alert("请选择金属类型");
+        } else {
+            $("#select3").attr("disabled",true).css("pointer-events","none");
+            $("#select3").html("正在加载");
+            $.ajax({
+                url: "/shop/historyData/getPriceSumListStartAndEndTime",
+                type: "post",
+                dataType: "json",
+                data: {
+                    "marketVmid": marketVmid,
+                    "productSortVmid": productSortVmid,
+                    "startTime": publishDate1,
+                    "endTime": publishDate2
+                },
+                success: function (data) {
+                    html = "";
+                    if (data.success) {
+                        if (data.body && data.body.priceList && data.body.priceList.length > 0) {
+                            var priceList = data.body.priceList;
+                            html = '<caption align="top" style="font-size: 16px;line-height: 40px;color: #ff7700;">市场：' + priceList[0].marketName
+                                + '&nbsp;&nbsp;&nbsp;品名：' + priceList[0].productSortName
+                                + '&nbsp;&nbsp;&nbsp;日期：' + publishDate1 + '&nbsp;到&nbsp;' + publishDate2
+                                + '</caption>';
+                            $(".content6").hide();
+                            tablePrice4(priceList);
+
+                            // 收集最高/最低/均价三种数据
+                            chartMaxData = [];
+                            chartMinData = [];
+                            chartAvgData = [];
+                            chartTimeData = [];
+                            for (var i = 0; i < priceList.length; i++) {
+                                chartTimeData.unshift(priceList[i].month);
+                                chartMaxData.unshift(priceList[i].maxPrice || priceList[i].price || 0);
+                                chartMinData.unshift(priceList[i].minPrice || priceList[i].price || 0);
+                                chartAvgData.unshift(priceList[i].price || 0);
+                            }
+                            chartTitle = publishDate1 + "到" + publishDate2 + "，" + priceList[0].marketName + priceList[0].productSortName + "价格走势图";
+                            $(".content6").show();
+                            if(priceList.length > 2){
+                                renderChart('avg');
+                            }
+                        } else {
+                            $(".content6").hide();
+                            var metalMarkey = $(".metalMarkey3").find("option:selected").text();
+                            var metalType = $(".metalType3").find("option:selected").text();
+                            var calendar = $("#calendar4").val() + "到" + $("#calendar5").val();
+                            showRecharge(data, metalMarkey + metalType, calendar);
+                        }
+                        $("#select3").attr("disabled",true).css("pointer-events","auto");
+                        $("#select3").html("价格查询");
+                    } else {
+                        $("#select3").attr("disabled",true).css("pointer-events","auto");
+                        $("#select3").html("价格查询");
+                        alert(data.msg);
+                    }
+                }
+            });
+        }
+    };
+
+    //选择市场事件
+    function selectOnchange1(){
+        var marketVmid = $(".metalMarkey1").val();
+        // $("#calendar1Div").empty();
+        // $("#calendar1Div").html('<input id="calendar1" autocomplete="off" onfocus="this.style.borderColor=\'#DDD\'" type="text" placeholder="请选择时间">')
+        if(marketVmid == '40288092327130dc0132713266e50001') {//版权问题，上海现货只能查22年3月1日之后的信息。这串字符串是上海现货的id 40288092327130dc0132713266e50001
+            initCalendar1('2022-3-1');
+        }else{
+            initCalendar1(minDate);
+        }
+    }
+    //重新加载按日期查询控件
+    function initCalendar1(date){
+        layui.use('laydate', function() {
+            laydate.render({
+                elem: '#calendar1',
+                // value: new Date(),
+                theme: '#F9A809',
+                min: date,
+                max: 0,
+                showBottom: false
+            });
+        })
+    }
+    function showList1() {
+        var publishDate = $("#calendar1").val();
+        var marketVmid = $(".metalMarkey1").val();
+        if (!publishDate) {
+            alert("请选择日期");
+            lock = true;
+        } else if (!marketVmid) {
+            alert("请选择市场");
+            lock = true;
+        }else if(publishDate < '2022-03-01' && marketVmid == '40288092327130dc0132713266e50001'){//版权问题，上海现货只能查22年3月1日之后的信息。这串字符串是上海现货的id
+            alert("上海现货请选择2022年3月1日之后");
+            lock=true;
+        } else {
+            $("#select1").attr("disabled",true).css("pointer-events","none");
+            $("#select1").html("正在加载");
+            $.ajax({
+                url: "/shop/historyData/getPriceListAndDateTime",
+                type: "post",
+                dataType: "json",
+                data: {"marketVmid": marketVmid, "publishDate": publishDate},
+                success: function (data) {
+                    html = "";
+                    if (data.success) {
+                        $("#main").hide();
+                        $(".back2").hide();
+                        //有数据，且是数据通
+                        if (data.body && data.body.priceList && data.body.priceList.length > 0) {
+                            var priceList = data.body.priceList;
+                            html += '<caption align="top" style="font-size: 16px;line-height: 40px;color: #ff7700;">市场：' + priceList[0].marketName + '&nbsp;&nbsp;&nbsp;日期：' + publishDate + '</caption>';
+                            if (priceList[0].stType == "XH" || priceList[0].stType == "FL") {
+                                tablePrice1(priceList);
+                            } else if (priceList[0].stType == "SH") {
+                                tablePrice2(priceList);
+                            } else if (priceList[0].stType == "LME") {
+                                tablePrice3(priceList);
+                            }
+                        } else {
+                            var metalMarkey = $(".metalMarkey1").find("option:selected").text();
+                            var calendar = $("#calendar1").val();
+                            showRecharge(data, metalMarkey, calendar);
+                        }
+                    } else {
+                        alert(data.msg);
+                    }
+                    $("#select1").attr("disabled",true).css("pointer-events","auto");
+                    $("#select1").html("价格查询");
+                    lock = true;
+                }, error: function () {
+                    $("#select1").attr("disabled",true).css("pointer-events","auto");
+                    $("#select1").html("价格查询");
+                    lock = true;
+                }
+            });
+        }
+    };
+
+    function showRecharge(data, metalMarkey, calendar) {
+        //有数据，不是数据通，但返回值不包含数据，包含money子段
+        if (data.body && data.body.money) {
+            // 弹框弹出时, 强制默认"升级数据通会员" 选中, 避免沿用上一次的"按次数" 选中状态
+            $(".nav .time").removeClass("cur");
+            $(".nav .vip").addClass("cur");
+            // 重置支付方式为默认: 数据通会员 -> 支付宝(微信)
+            $(".pay_ms a").removeClass("cur");
+            $(".pay_ms .alipay a").addClass("cur");
+            // 重置金额/输入框/金币相关显示
+            $(".num").hide();
+            $(".year").show();
+            $(".jinbi").hide();
+            $(".jinbipay").hide();
+            $(".wxpay").show();
+            $(".alipay").show();
+            $(".jinbiInput").hide();
+            $(".jinbiNum").hide();
+            $(".maskOne").show().children(".recharge").show()
+                .find("._market").html("<s></s>" + metalMarkey)
+                .siblings("p").html("<s></s>" + calendar);
+            $(".money").children(".num").find("em").html(data.body.money);
+            recharge();
+        } else {
+            //不包含money字段
+            html += '<caption align="top" style="font-size: 16px;line-height: 40px;color: #ff7700;">无数据</caption>';
+            $("#staticIframe").css("display","none");
+            $("table").empty().html(html);
+        }
+
+    }
+
+    function recharge() {
+        if (lock) {
+            $.ajax({
+                type: 'get',
+                url: 'https://mall.ccmn.cn/front/datavip/rechargeType',
+                data: {rechargeType: 3},
+                dataType: "json",
+                xhrFields: { withCredentials: true },
+                crossDomain: true,
+                async: true,
+                beforeSend: function () {  },
+                success: function (result) {
+                    if (result) {
+                        var html = "";
+                        for (var item in result) {
+                            if (item == 0) {
+                                html += "<li class='in' data-id='" + result[item].id + "'>";
+                            } else {
+                                html += "<li data-id='" + result[item].id + "'>";
+                            }
+                            html += result[item].duration + result[item].unit + result[item].discountPrice + "元</li>";
+                        }
+                        $(".year ul").empty().append(html);
+                        lock = false;
+                    }
+                },
+                error: function (xhr, status, err) {
+                    console.log('[history_right] ajax error status=', status, 'err=', err, 'statusCode=', xhr && xhr.status);
+                }
+            });
+        }
+    }
+</script>
+</body>
+</html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title></title>
+    <link rel="stylesheet" href="https://static.ccmn.cn/css/recharge.css"/>
+    <link rel="stylesheet" href="https://static.ccmn.cn/layui-v2.2.3/layui/css/layui.css" media="all">
+    <style>
+        .money {
+            display: flex;
+            align-items: center;
+            height: 36px;
+        }
+        .jinbiNum {
+            margin-left: 20px;
+            white-space: nowrap;
+        }
+        .sub_remarks {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-top: 5px;
+        }
+        .sub_remarks label {
+             display: flex;
+             align-items: center;
+             margin-top: 10px;
+             cursor: pointer;
+             font-size: 14px;
+             color: #666;
+         }
+        .sub_remarks input[type="checkbox"] {
+            margin-right: 5px;
+            width: 14px;
+            height: 14px;
+            cursor: pointer;
+        }
+        .sub_but .payfor.disabled {
+            background-color: #000;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+<div class="maskOne" style="display: none">
+    <div class="recharge" style="width: 690px;height: 400px">
+        <div class="close-btn"></div>
+        <h3>您的账户等级不够，无法查看历史数据。</h3>
+        <div class="nav clearfloat">
+            <div class="vip cur" style="width: 335px">
+                <h4><s></s>升级数据通会员<span style="color: red;font-size: 12px">（按年收费，不限次数）</span></h4>
+                <p><s></s>全年不限查询次数&nbsp;&nbsp;<em></em>享全网历史数据</p>
+                <p><s></s>享全网历史走势&nbsp;&nbsp;<em class="more"></em>更多会员特权</p>
+                <i class="recommend">推荐</i>
+            </div>
+            <div class="time" style="width: 335px">
+                <h4><s></s>按次数查询历史数据 <span style="color: red;font-size: 12px">（按次收费，当次有效）</span></h4>
+                <p><s></s></p>
+                <span class="_market"><s></s></span>
+</div>
+        </div>
+        <form method="post" id="payInputForm" target="_blank"
+              style="display: inline">
+            <input type="hidden" id="recommendId" name="recommendId">
+            <input type="hidden" id="_marketVmid" name="marketVmid">
+            <input type="hidden" id="_marketName" name="marketName">
+            <input type="hidden" id="_endTime" name="endTime">
+            <input type="hidden" id="_startTime" name="startTime">
+            <input type="hidden" id="_productSortVmid" name="productSortVmid">
+            <input type="hidden" id="_productSortName" name="productSortName">
+            <input type="hidden" id="_flag" name="flag">
+            <input type="hidden" id="_url" name="url">
+        </form>
+        <div class="pay">
+            <div class="pay_m  clearfloat">
+                <ul class="pay_ms ">
+                    <li>支付方式:</li>
+                    <li class="alipay"><a class="cur"><em></em><span>支付宝</span></a></li>
+                    <li class="wxpay"><a><em></em><span>微信支付</span></a></li>
+                    <li class="jinbi"><a><em></em><span>金币支付</span></a></li>
+                    <li class="jinbipay"><a><em></em><span>金币充值</span></a></li>
+                </ul>
+            </div>
+            <div class="money" style="height: 36px">
+                <div class="order">订单金额：</div>
+                <div class="num"><em>35</em><span>金币</span></div>
+                <div class="jinbiInput" style="display: none; float: left;">
+                    <input type="number" id="rechargeAmount" placeholder="输入充值金额" style="width: 100px; height: 30px; border: 1px solid #D5D5D5; padding: 0 5px;">
+                    <span>金币</span>
+                </div>
+                <div class="jinbiNum" style="float: right; margin-right: 325px;display: none;"></div>
+                <div class="year">
+                    <ul>
+                        <li></li>
+                    </ul>
+                </div>
+                <form id="coinPayForm" method="post" action="/front/wechat/pay/coinPay" target="_blank" style="display: none;">
+                    <input type="hidden" name="other_amount" id="coinPayAmount">
+                    <input type="hidden" name="recommendId" value="7761cb539e534381b8ba4fc4ab5de505">
+                </form>
+            </div>
+        </div>
+        <div class="sub_remarks" style="margin-top: 5px">
+            <p style="padding-top: 5px;color: #666;">注：支付过程中浏览器会有几次跳转，支付完成之前请勿关闭浏览器，否则可能造成支付失败</p>
+            <p style="padding-top: 5px;color: #666;">开具发票，请请前往会员后台-账号中心-发票管理开具发票</p>
+            <label>
+                <input id="never_return_btn" type="checkbox" checked> 一经购买不予退货
+            </label>
+        </div>
+        <div class="sub_but">
+            <a href="javascript:void(0);" class="payfor">确认支付</a>
+            <a href="javascript:void(0);" class="cancel">取消支付</a>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="https://static.ccmn.cn/laydate/laydate.js"></script>
+<script type="text/javascript" src="https://static.ccmn.cn/layui-v2.2.3/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".num").hide();
+        $(".year").show();
+        $(".jinbi").hide();
+        $(".jinbipay").hide();
+        $(".wxpay").show();
+        $(".alipay").show();
+        $(".jinbiInput").hide();
+        $(".jinbiNum").hide();
+        var lock = true;
+        $(".time").click(function () {
+            // 查询起始时间超过近 1 年: 不允许金币购买, 提示升级为数据通会员
+            var _p = $(".recharge .time p").text() || "";
+            var _idx = _p.indexOf("到");
+            var _st = _idx > 0 ? _p.substring(0, _idx) : _p;
+            if (_st) {
+                var d = new Date(_st.replace(/-/g, "/"));
+                if (!isNaN(d.getTime())) {
+                    var oneYearAgo = new Date();
+                    oneYearAgo.setDate(oneYearAgo.getDate() - 365);
+                    if (d < oneYearAgo) {
+                        layer.alert("查询范围超过近 1 年数据,请升级为数据通会员");
+                        return false;
+                    }
+                }
+            }
+            $(".nav div").removeClass("cur");
+            $(this).addClass("cur");
+            $(".num").show();
+            $(".year").hide();
+            $(".jinbi").show();
+            $(".jinbipay").show();
+            $(".wxpay").hide();
+            $(".alipay").hide();
+            $(".jinbiInput").hide();
+            $(".jinbiNum").show();
+            $(".pay_ms a").removeClass("cur");
+            $(".jinbi a").addClass("cur");
+        })
+        $(".vip").click(function () {
+            $(".nav div").removeClass("cur");
+            $(this).addClass("cur");
+            $(".num").hide();
+            $(".year").show();
+            $(".jinbi").hide();
+            $(".jinbipay").hide();
+            $(".wxpay").show();
+            $(".alipay").show();
+            $(".jinbiInput").hide();
+            $(".jinbiNum").hide();
+            $(".pay_ms a").removeClass("cur");
+            $(".alipay a").addClass("cur");
+            recharge()
+        })
+        $(".close-btn").click(function () {
+            rechargeClose();
+        })
+        $(".cancel").click(function () {
+            rechargeClose();
+        })
+        $(".pay_ms a").click(function () {
+            $(".pay_ms a").removeClass("cur");
+            $(this).addClass("cur");
+            if ($(this).parent("li").hasClass("jinbipay")) {
+                $(".num").hide();
+                $(".jinbiInput").show();
+            } else if ($(this).parent("li").hasClass("wxpay") ||$(this).parent("li").hasClass("alipay") ) {
+                $(".num").hide();
+                $(".jinbiInput").hide();
+            }else{
+                $(".num").show();
+                $(".jinbiInput").hide();
+            }
+        })
+        $(".nav div").click(function () {
+            // 点的是"按次数查询历史数据" 时, 如果查询起始时间超过近 1 年, 不切换 cur, 保持"升级数据通会员" 选中
+            if ($(this).hasClass("time")) {
+                var _p = $(".recharge .time p").text() || "";
+                var _idx = _p.indexOf("到");
+                var _st = _idx > 0 ? _p.substring(0, _idx) : _p;
+                if (_st) {
+                    var d = new Date(_st.replace(/-/g, "/"));
+                    if (!isNaN(d.getTime())) {
+                        var oneYearAgo = new Date();
+                        oneYearAgo.setDate(oneYearAgo.getDate() - 365);
+                        if (d < oneYearAgo) {
+                            return false;
+                        }
+                    }
+                }
+            }
+            $(".nav div").removeClass("cur");
+            $(this).addClass("cur");
+        })
+        $('.year').on('click', 'li', function () {
+            $(".year li").removeClass("in");
+            $(this).addClass("in");
+        })
+
+        $("#never_return_btn").change(function() {
+            if($(this).is(":checked")) {
+                $(".payfor").removeClass("disabled");
+            } else {
+                $(".payfor").addClass("disabled");
+            }
+        });
+
+        $('.payfor').on('click', function () {
+            if(!$("#never_return_btn").is(":checked")) {
+                return false;
+            }
+            var payMethod = $(".pay_ms a.cur");
+            var time = $(".recharge").find(".time.cur");
+            var vip = $(".recharge").find(".vip.cur");
+            var pay = payMethod.parent("li");
+            if ((time.length == 0 && vip.length == 0)) {
+                alert("选择支付类型");
+                return false;
+            }
+            if (payMethod.length == 0) {
+                alert("选择支付方式");
+                return false;
+            }
+            var flag = $("#clickFlag").val();
+            var startTime;
+            var endTime;
+            var marketVmid;
+            var marketName;
+            var flag;
+            var memthod;
+            var url = "//" + location.host + location.pathname;
+            var productSortVmid;
+            var productSortName;
+            if (flag == 1) {
+                startTime = $("#calendar1").val();
+                endTime = $("#calendar1").val();
+                marketVmid = $(".metalMarkey1").val();
+                marketName = $(".metalMarkey1").find("option:selected").text();
+                flag = 1;
+                memthod = showList1;
+                url = url + "?startTime=" + startTime +"&endTime=" + endTime + "&marketVmid=" + marketVmid +"&payFlag=1";
+            } else if (flag == 2) {
+                startTime = $("#calendar2").val();
+                endTime = $("#calendar3").val();
+                marketVmid = $(".metalMarkey2").val();
+                marketName = $(".metalMarkey2").find("option:selected").text();
+                flag = 2;
+                memthod = showList2;
+                productSortVmid = $(".metalType").val();
+                productSortName = $(".metalType").find("option:selected").text();
+                url = url + "?startTime=" + startTime +"&endTime=" + endTime + "&marketVmid=" + marketVmid +"&productSortVmid=" + productSortVmid +"&payFlag=2";
+            } else if (flag == 3) {
+                startTime = $("#calendar4").val();
+                endTime = $("#calendar5").val();
+                marketVmid = $(".metalMarkey3").val();
+                marketName = $(".metalMarkey3").find("option:selected").text();
+                productSortVmid = $(".metalType3").val();
+                productSortName = $(".metalType3").find("option:selected").text();
+                flag = 3;
+                memthod = showList3;
+                url = url + "?startTime=" + $("#calendar4").val() +"&endTime=" + $("#calendar5").val() + "&marketVmid=" + marketVmid +"&productSortVmid=" + productSortVmid +"&payFlag=3";
+            }
+            var data = {
+                startTime: startTime,
+                endTime: endTime,
+                marketVmid: marketVmid,
+                productSortVmid:productSortVmid,
+                flag: flag,
+                productSortName:productSortName,
+
+            }
+            $("#_marketVmid").val(marketVmid);
+            $("#_marketName").val(marketName);
+            $("#_endTime").val(endTime);
+            $("#_startTime").val(startTime);
+            $("#_productSortVmid").val(productSortVmid);
+            $("#_productSortName").val(productSortName);
+            $("#_flag").val(flag);
+            $("#_url").val(url);
+            if (time.length != 0 && pay.attr("class") == 'alipay') {
+                      rechargeClose();
+                $("#payInputForm").attr("action", "/front/zhifubao/pay/historyprice").submit();
+            } else if (time.length != 0 && pay.attr("class") == 'wxpay') {
+                $("#payInputForm").attr("action", "/front/wechat/pay/historyprice").submit();
+            } else if (time.length != 0 && pay.attr("class") == 'jinbi') {
+                rechargeJinbi(data);
+            } else if (time.length != 0 && pay.attr("class") == 'jinbipay') {
+                var amount = $("#rechargeAmount").val();
+                if (!amount || amount < 200) {
+                    alert("请输入有效的充值金额,单笔最低充值200" +
+                        "");
+                    return false;
+                }
+                $("#coinPayAmount").val(amount);
+                $("#coinPayForm").submit();
+            } else if (vip.length != 0 && pay.attr("class") == 'alipay') {
+                if ($(".year .in").length == 0) {
+                    alert("选择订单金额类型");
+                    return false;
+                }
+                $("#recommendId").val($(".year .in").attr("data-id"));
+                $("#payInputForm").attr("action","/front/zhifubao/pay/vip").submit();
+                rechargeClose();
+//                setTimeout(function () {isSuccess(memthod);},1000);
+            } else if (vip.length != 0 && pay.attr("class") == 'wxpay') {
+                if ($(".year .in").length == 0) {
+                    alert("选择订单金额类型");
+                    return false;
+                }
+                $("#recommendId").val($(".year .in").attr("data-id"));
+                $("#payInputForm").attr("action", "/front/wechat/pay/vip").submit();
+                rechargeClose();
+            }
+        });
+        
+
+        function recharge() {
+            if (lock) {
+                $.ajax({
+                type: 'get',
+                url: 'https://mall.ccmn.cn/front/datavip/rechargeType',
+                data: {rechargeType: 3},
+                dataType: "json",
+                xhrFields: { withCredentials: true },
+                crossDomain: true,
+                async: true,
+                success: function (result) {
+                    if (result) {
+                        var html = "";
+                        for (var item in result) {
+                            if (item == 0) {
+                                html += "<li class='in' data-id='" + result[item].id + "'>";
+                            } else {
+                                html += "<li data-id='" + result[item].id + "'>";
+                            }
+                            html += result[item].duration + result[item].unit + result[item].discountPrice + "元</li>";
+                        }
+                        $(".year ul").empty().append(html);
+                        lock = false;
+                    }
+                },
+                error: function () {
+
+                }
+            });
+            }
+        }
+
+        function isSuccess(memthod) {
+            top.layer.confirm('您的订单已经被提交到支付平台。', {
+                icon: 3, title: '正在支付...', btn: ['付款成功', '付款失败'] //按钮
+            }, function (index) {
+               if(typeof memthod == "function"){
+                  memthod();
+                 top.layer.close(index)
+               }
+            }, function (index) {
+                top.layer.close(index)
+            });
+        }
+
+        function rechargeJinbi(data) {
+            var stMemberInfo = "";
+            if (stMemberInfo.userCode - parseInt($(".money").children(".num").find("em").text()) < 0) {
+                alert("账户金币余额不足")
+                return false;
+            } else {
+                if (confirm("确定要付款吗？")) {
+                    $.post("/front/gold/pay/historyprice", data, function (result) {
+                        if (result.success) {
+                            rechargeClose();
+                            if (data.flag == 1) {
+                                showList1();
+                            } else if (data.flag == 2) {
+                                showList2();
+                            } else if (data.flag == 3) {
+                                showList3();
+                            }
+                            alert(result.msg);
+                            $(".jinbiNum").text("金币余额："+result.data ).show();
+                        } else {
+                            alert(result.msg);
+                        }
+                    });
+                }
+            }
+        }
+
+        function rechargeClose() {
+            $(".maskOne").hide();
+            $(".recharge").hide();
+        }
+
+        function close() {
+            $(".cover").hide();
+            $(".stick").hide();
+            $("#recommend").hide();
+        }
+
+        layui.use(['laypage', 'layer'], function () {
+            var laypage = layui.laypage
+                , layer = layui.layer;
+            laypage.render({
+                elem: 'demo4'
+                , count: 100
+                , first: false
+                , last: false
+            });
+        });
+    })
+
+</script>
+</body>
+</html>
+</div>
+    </div>
+    <input type="hidden" value="" id="qrcodeurl">
+</div>
+
+<div class="bottomBar">
+
+</div>
+
+<script type="text/javascript" src="https://static.ccmn.cn/js/main.js"></script>
+<script type="text/javascript" src="https://static.ccmn.cn/js/zepto.min.js"></script>
+<script type="text/javascript" src="https://static.ccmn.cn/js/verify-login.js"></script>
+<script type="text/javascript" src="https://static.ccmn.cn/js/indexDataCount.js"></script>
+
+<script type="text/javascript">
+
+    $(function () {
+        $(".bottomBar").load("https://static.ccmn.cn/home/home_foot.html");
+    });
+
+
+    window.onload = function () {
+        menu('choice');
+        $(".current ul").show();
+        var marketVmid = $("#marketVmid").val();
+        var href=window.location.href;
+        if (href != "https://www.ccmn.cn/lme.shtml" && href != "https://www.ccmn.cn/cjxh.shtml" && href != "https://www.ccmn.cn/gdxh.shtml" && href!= "https://www.ccmn.cn/wmxh.shtml" && href != "https://www.ccmn.cn/fsfl.shtml" && href != "https://www.ccmn.cn/tjxh.shtml" && href != "https://www.ccmn.cn/cjysw.shtml") {
+            if(loginStatus){
+                console.log(12345);
+                alert("请先登录！");
+               window.location.href = "https://vip.ccmn.cn/login/";
+            }
+
+/*
+            $(".mask").load("https://marketName.ccmn.cn/home/login_index.html");
+*/
+        }else{
+            $('body').css("overflow","auto");
+        }
+    }
+</script>
+<script type="text/javascript">
+    var loginStatus = false;
+    var myDate = new Date();
+    var year = myDate.toLocaleDateString();
+    var minDate = (myDate.getFullYear() - 5) + "-" + (myDate.getMonth() + 1) + "-" + myDate.getDate();
+
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+        
+        laydate.render({
+            elem: '#year1',
+            theme: '#F9A809',
+            min: '2006-1-1',
+            max: 0,
+            type: 'year'
+        });
+        laydate.render({
+            elem: '#month1',
+            theme: '#F9A809',
+            min: '2006-1-1',
+            max: 0,
+            type: 'month'
+        });
+
+        laydate.render({
+            elem: '#calendar1',
+            value: new Date(),
+            theme: '#F9A809',
+            min: minDate,
+            max: 0,
+            showBottom: false
+        });
+
+        var start = laydate.render({
+            elem: '#calendar2',
+            theme: '#F9A809',
+            min: minDate,
+            max: 0,
+            showBottom: false,
+            trigger: 'click', 
+        });
+
+        var end = laydate.render({
+            elem: '#calendar3',
+            theme: '#F9A809',
+            min: minDate,
+            max: 0,
+            showBottom: false,
+            trigger: 'click',  
+        });
+
+        var start2 = laydate.render({
+            elem: '#calendar4',
+            theme: '#F9A809',
+            min: minDate,
+            max: 0,
+            type: 'month',
+            showBottom: true,
+            btns: ['confirm'],
+            trigger: 'click', 
+        });
+        var end2 = laydate.render({
+            elem: '#calendar5',
+            theme: '#F9A809',
+            min: minDate,
+            max: 0,
+            type: 'month',
+            showBottom: true,
+            btns: ['confirm'],
+            trigger: 'click', 
+        });
+
+
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    function DateDiff(sDate1, sDate2) { 
+        var aDate, oDate1, oDate2, iDays;
+        aDate = sDate1.split("-");
+        oDate1 = new Date(aDate[1] + '-' + aDate[2] + '-' + aDate[0]); 
+        aDate = sDate2.split("-");
+        oDate2 = new Date(aDate[1] + '-' + aDate[2] + '-' + aDate[0]);
+  //    iDays = parseInt(Math.abs(oDate2 - oDate1) / 1000 / 60 / 60 / 24);
+        iDays = parseInt((oDate2 - oDate1)/ 1000 / 60 / 60 / 24); 
+
+
+        return iDays; 
+    }
+
+    $(function () {
+        $.post("/isLogin", {}, function (result) {
+            if(!result.success){
+                loginStatus = true;
+                $(".mask").show();
+                $('body').css("overflow","hidden");
+            }
+        });
+    })
+    document.onkeydown=function(){
+        var e = window.event||arguments[0];
+        if(e.keyCode==123){
+            return false;
+        }else if((e.ctrlKey)&&(e.shiftKey)&&(e.keyCode==73)){
+            return false;
+        }else if((e.ctrlKey)&&(e.keyCode==85)){
+            return false;
+        }else if((e.ctrlKey)&&(e.keyCode==83)){
+            return false;
+        }else if((e.ctrlKey)&&(e.keyCode==67)){
+            return false;
+        }
+    }
+
+    </script>
+</body>
+</html>
