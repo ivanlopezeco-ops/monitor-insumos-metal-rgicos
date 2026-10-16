@@ -1,0 +1,1726 @@
+# Catálogo de series del monitor de insumos metalúrgicos.
+# Es la única fuente de verdad: de acá salen la descarga, las validaciones y los textos del tablero.
+#
+# Campos de cada serie
+#   id               identificador interno (no cambia nunca)
+#   nombre           cómo se muestra en el tablero
+#   mercado          país o región de referencia
+#   tipo             precio_real | futuro | precio_comercio_exterior | indice | estimacion
+#   que_mide         explicación simple, para el desplegable "Qué estamos midiendo"
+#   limitaciones     qué no dice el dato o cómo puede engañar
+#   fuente           nombre, url (para el lector) y acceso (cómo lo baja el pipeline)
+#   frecuencia       diaria | semanal | decadal (cada 10 días) | mensual | trimestral
+#   rezago           cuánto tarda en publicarse, aproximado
+#   desde            primer dato disponible (verificado en las pruebas cuando dice "verificado")
+#   unidad_original  como viene de la fuente
+#   unidad_tablero   como se muestra (USD/t siempre que se pueda; los índices quedan como índice)
+#   conversion       cómo se pasa de una a otra
+#   licencia         uso_interno | publicable_citando | publicable_con_aviso | a_confirmar
+#   estado           automatico | acumula (la fuente solo da el dato del día) | semiautomatico | pendiente
+#
+# Convenciones
+#   - Toneladas métricas. Tonelada corta (EE.UU.) = 0,907185 t. Libra = 0,000453592 t.
+#   - Los precios chinos vienen con IVA (13%): se muestran sin IVA para comparar con el resto.
+#   - El pase a pesos usa el tipo de cambio mayorista A3500 del BCRA del mismo día (o promedio del mes en series mensuales).
+
+tipos:
+  precio_real: "Precio de mercado efectivamente relevado (spot o de contado)."
+  futuro: "Precio de un contrato en bolsa para entrega futura. Se mueve casi igual que el precio de contado y se publica todos los días."
+  precio_comercio_exterior: "Valor de lo exportado o importado dividido por las toneladas, según la aduana. Es un precio promedio real, con uno o dos meses de demora y sensible a cambios en la mezcla de productos."
+  indice: "Índice oficial de precios (base 100). Muestra cuánto subió o bajó el precio, sin dar el valor en dinero."
+  estimacion: "Cálculo propio a partir de otras series. Se indica el método."
+
+auxiliares:
+  - id: tc_a3500
+    nombre: "Dólar mayorista A3500"
+    fuente: {nombre: BCRA, url: "https://www.bcra.gob.ar", acceso: "API de estadísticas v4, variable 5"}
+    frecuencia: diaria
+    unidad_original: ARS/USD
+    estado: automatico
+  - id: tc_cny_usd
+    nombre: "Yuan por dólar"
+    fuente: {nombre: Yahoo Finance, url: "https://finance.yahoo.com/quote/CNY=X/", acceso: "Yahoo chart API, CNY=X"}
+    frecuencia: diaria
+    unidad_original: CNY/USD
+    estado: pendiente
+    nota: "Falta probar el ticker. Alternativa: tipo de pase CNY del BCRA, que ya usa el tablero macro."
+  - id: tc_eur_usd
+    nombre: "Dólar por euro"
+    fuente: {nombre: Westmetall (fijación BCE), url: "https://www.westmetall.com/en/markdaten.php", acceso: "tabla Euro_EZB"}
+    frecuencia: diaria
+    unidad_original: USD/EUR
+    estado: pendiente
+    nota: "Falta probar el campo. Alternativa: Eurostat ert_bil_eur_d."
+
+insumos:
+
+# =====================================================================================
+# ACERO TERMINADO
+# =====================================================================================
+
+  - id: acero_hrc
+    grupo: Acero
+    nombre: "Bobina laminada en caliente"
+    que_es: "Chapa de acero laminada en caliente y enrollada. Es el producto plano más básico y la referencia de precio de todo el acero plano."
+    por_que_importa: "Es insumo directo de piezas estampadas, perfiles conformados, tubos con costura y estructuras, y la base sobre la que se fija el precio del laminado en frío y del galvanizado."
+    series:
+      - id: hrc_eeuu_futuro
+        nombre: "Bobina en caliente, Medio Oeste de EE.UU. (futuro)"
+        mercado: EE.UU.
+        tipo: futuro
+        que_mide: "Precio del contrato más cercano de la bolsa CME para bobina laminada en caliente entregada en el Medio Oeste de EE.UU."
+        limitaciones: "El mercado estadounidense está protegido con aranceles altos, así que suele estar por encima del resto del mundo."
+        fuente: {nombre: "CME Group vía Yahoo Finance", url: "https://www.cmegroup.com/markets/metals/ferrous/hrc-steel.html", acceso: "Yahoo chart API, HRC=F"}
+        frecuencia: diaria
+        rezago: "1 día"
+        desde: "2008-10 (verificado)"
+        unidad_original: USD/tonelada corta
+        unidad_tablero: USD/t
+        conversion: "dividir por 0,907185"
+        licencia: uso_interno
+        estado: automatico
+      - id: hrc_china_spot
+        nombre: "Bobina en caliente, China (precio de mercado)"
+        mercado: China
+        tipo: precio_real
+        que_mide: "Precio promedio de mercado de la bobina en caliente común (4,75 a 11,5 mm, Q235) relevado por la oficina de estadísticas china en 50 ciudades."
+        limitaciones: "Es un promedio nacional con IVA incluido y se publica cada diez días."
+        fuente: {nombre: "Oficina Nacional de Estadísticas de China (NBS)", url: "https://www.stats.gov.cn/sj/zxfb/", acceso: "HTML del informe de precios de medios de producción"}
+        frecuencia: decadal
+        rezago: "4 a 8 días"
+        desde: "2022 o antes (verificado hasta 2022-04)"
+        unidad_original: CNY/t con IVA
+        unidad_tablero: USD/t
+        conversion: "dividir por 1,13 (IVA) y por el tipo de cambio CNY/USD"
+        licencia: a_confirmar
+        estado: automatico
+      - id: hrc_china_futuro
+        nombre: "Bobina en caliente, Shanghái (futuro)"
+        mercado: China
+        tipo: futuro
+        que_mide: "Precio de liquidación del contrato más negociado de bobina en caliente en la bolsa de futuros de Shanghái."
+        limitaciones: "Incluye IVA. El contrato más negociado cambia cada pocos meses, lo que genera pequeños saltos."
+        fuente: {nombre: "Shanghai Futures Exchange", url: "https://www.shfe.com.cn", acceso: "archivo diario kxAAAAMMDD.dat, producto hc"}
+        frecuencia: diaria
+        rezago: "mismo día"
+        desde: "2014 (contrato lanzado ese año; archivos desde 2010 verificados)"
+        unidad_original: CNY/t con IVA
+        unidad_tablero: USD/t
+        conversion: "dividir por 1,13 y por CNY/USD"
+        licencia: uso_interno
+        estado: automatico
+      - id: hrc_europa_futuro
+        nombre: "Bobina en caliente, norte de Europa (futuro)"
+        mercado: Europa
+        tipo: futuro
+        que_mide: "Precio del contrato más cercano de la bolsa CME para bobina en caliente en el norte de Europa (índice Argus)."
+        limitaciones: "Yahoo solo publica el dato del día, sin historia. La serie empieza cuando arranque el tablero."
+        fuente: {nombre: "CME Group vía Yahoo Finance", url: "https://www.cmegroup.com/markets/metals/ferrous.html", acceso: "Yahoo chart API, EHR=F"}
+        frecuencia: diaria
+        rezago: "1 día"
+        desde: "2026-10 (se acumula)"
+        unidad_original: EUR/t
+        unidad_tablero: USD/t
+        conversion: "multiplicar por USD/EUR"
+        licencia: uso_interno
+        estado: acumula
+      - id: hrc_ue_import_china
+        nombre: "Bobina en caliente importada por la UE desde China"
+        mercado: Europa
+        tipo: precio_comercio_exterior
+        que_mide: "Valor promedio por tonelada de los laminados planos en caliente (posición 7208) que la Unión Europea importa de China."
+        limitaciones: "Promedio de todas las medidas y calidades de la posición. Llega con unos dos meses de demora."
+        fuente: {nombre: "Eurostat Comext", url: "https://ec.europa.eu/eurostat/comext/newxtweb/", acceso: "API Comext DS-045409, producto 7208, socio CN, flujo importación"}
+        frecuencia: mensual
+        rezago: "unos 2 meses"
+        desde: "a medir"
+        unidad_original: EUR y 100 kg
+        unidad_tablero: USD/t
+        conversion: "valor / (cantidad en 100 kg / 10), por USD/EUR promedio del mes"
+        licencia: publicable_citando
+        estado: automatico
+      - id: hrc_brasil_export
+        nombre: "Bobina en caliente exportada por Brasil"
+        mercado: Brasil
+        tipo: precio_comercio_exterior
+        que_mide: "Valor FOB promedio por tonelada de los laminados planos en caliente (posición 7208) que exporta Brasil."
+        limitaciones: "Los volúmenes mensuales son chicos y varían mucho, así que el promedio puede saltar."
+        fuente: {nombre: "Comex Stat (Ministerio de Desarrollo de Brasil)", url: "https://comexstat.mdic.gov.br", acceso: "API /general, flujo export, SH4 7208"}
+        frecuencia: mensual
+        rezago: "unos 10 días"
+        desde: "1997 (verificado en mineral)"
+        unidad_original: USD FOB y kg
+        unidad_tablero: USD/t
+        conversion: "FOB / kg x 1000"
+        licencia: publicable_citando
+        estado: automatico
+      - id: hrc_japon_indice
+        nombre: "Bobina en caliente, Japón (índice de productor)"
+        mercado: Japón
+        tipo: indice
+        que_mide: "Índice de precios al productor de las bandas de acero laminadas en caliente en el mercado japonés."
+        limitaciones: "Es un índice en yenes: muestra la variación, sin dar el nivel en dólares."
+        fuente: {nombre: "Banco de Japón", url: "https://www.stat-search.boj.or.jp", acceso: "API BOJ, PRCG20_2200950006"}
+        frecuencia: mensual
+        rezago: "unos 10 días"
+        desde: "1980 (verificado)"
+        unidad_original: "índice 2020=100"
+        unidad_tablero: "índice 2020=100"
+        licencia: publicable_con_aviso
+        estado: automatico
+      - id: hrc_japon_import
+        nombre: "Bobina en caliente importada por Japón (índice)"
+        mercado: Japón
+        tipo: indice
+        que_mide: "Índice de precios de importación de bandas laminadas en caliente, en la moneda del contrato (mayormente dólares)."
+        limitaciones: "Índice, sin nivel en dinero."
+        fuente: {nombre: "Banco de Japón", url: "https://www.stat-search.boj.or.jp", acceso: "API BOJ, PRCG20_2500350004"}
+        frecuencia: mensual
+        rezago: "unos 10 días"
+        desde: "1990 (verificado)"
+        unidad_original: "índice 2020=100"
+        unidad_tablero: "índice 2020=100"
+        licencia: publicable_con_aviso
+        estado: automatico
+
+  - id: acero_frio
+    grupo: Acero
+    nombre: "Laminado en frío"
+    que_es: "Chapa que, después del laminado en caliente, se lamina de nuevo a temperatura ambiente. Queda más fina, con mejor terminación y tolerancias más ajustadas."
+    por_que_importa: "Se usa en carrocerías, línea blanca, muebles metálicos, gabinetes y piezas de estampado fino."
+    series:
+      - id: frio_eeuu_indice
+        nombre: "Laminado en frío, EE.UU. (índice de productor)"
+        mercado: EE.UU.
+        tipo: indice
+        que_mide: "Índice de precios al productor de chapa y fleje laminados en frío en EE.UU."
+        limitaciones: "Índice, sin nivel en dólares."
+        fuente: {nombre: "Bureau of Labor Statistics", url: "https://www.bls.gov/ppi/", acceso: "API BLS v2, WPU101707"}
+        frecuencia: mensual
+        rezago: "unos 15 días"
+        desde: "a medir"
+        unidad_original: "índice 1982=100"
+        unidad_tablero: "índice 1982=100"
+        licencia: publicable_citando
+        estado: automatico
+      - id: frio_japon_indice
+        nombre: "Laminado en frío, Japón (índice de productor)"
+        mercado: Japón
+        tipo: indice
+        que_mide: "Índice de precios al productor de bandas laminadas en frío en Japón."
+        limitaciones: "Índice en yenes."
+        fuente: {nombre: "Banco de Japón", url: "https://www.stat-search.boj.or.jp", acceso: "API BOJ, PRCG20_2200950013"}
+        frecuencia: mensual
+        rezago: "unos 10 días"
+        desde: "1980 (verificado)"
+        unidad_original: "índice 2020=100"
+        unidad_tablero: "índice 2020=100"
+        licencia: publicable_con_aviso
+        estado: automatico
+      - id: frio_japon_import
+        nombre: "Laminado en frío importado por Japón (índice)"
+        mercado: Japón
+        tipo: indice
+        que_mide: "Índice de precios de importación de bandas laminadas en frío, en moneda del contrato."
+        limitaciones: "Índice, sin nivel en dinero."
+        fuente: {nombre: "Banco de Japón", url: "https://www.stat-search.boj.or.jp", acceso: "API BOJ, PRCG20_2500350005"}
+        frecuencia: mensual
+        rezago: "unos 10 días"
+        desde: "1990 (verificado)"
+        unidad_original: "índice 2020=100"
+        unidad_tablero: "índice 2020=100"
+        licencia: publicable_con_aviso
+        estado: automatico
+      - id: frio_brasil_export
+        nombre: "Laminado en frío exportado por Brasil"
+        mercado: Brasil
+        tipo: precio_comercio_exterior
+        que_mide: "Valor FOB promedio por tonelada de los laminados planos en frío (posición 7209) que exporta Brasil."
+        limitaciones: "Volúmenes chicos: el promedio puede saltar de un mes a otro."
+        fuente: {nombre: "Comex Stat", url: "https://comexstat.mdic.gov.br", acceso: "API /general, export, SH4 7209"}
+        frecuencia: mensual
+        rezago: "unos 10 días"
+        desde: "1997"
+        unidad_original: USD FOB y kg
+        unidad_tablero: USD/t
+        conversion: "FOB / kg x 1000"
+        licencia: publicable_citando
+        estado: automatico
+
+  - id: acero_galvanizado
+    grupo: Acero
+    nombre: "Chapa galvanizada y recubierta"
+    que_es: "Chapa de acero con una capa de zinc (u otro recubrimiento) que la protege de la corrosión."
+    por_que_importa: "Insumo de techos, conductos, silos, carrocería, línea blanca y construcción en seco. Su precio depende del acero y también del zinc."
+    series:
+      - id: galv_eeuu_prima
+        nombre: "Prima del galvanizado sobre la bobina en caliente, EE.UU. (futuro)"
+        mercado: EE.UU.
+        tipo: futuro
+        que_mide: "Cuánto más se paga por tonelada de galvanizado respecto de la bobina en caliente en el Medio Oeste de EE.UU., según el contrato de CME."
+        limitaciones: "Es un diferencial, no un precio: para el precio del galvanizado hay que sumarlo al futuro de bobina en caliente."
+        fuente: {nombre: "CME Group vía Yahoo Finance", url: "https://www.cmegroup.com/markets/metals/ferrous.html", acceso: "Yahoo chart API, HDG=F"}
+        frecuencia: diaria
+        rezago: "1 día"
+        desde: "2020-06 (verificado)"
+        unidad_original: USD/tonelada corta
+        unidad_tablero: USD/t
+        conversion: "dividir por 0,907185"
+        licencia: uso_interno
+        estado: automatico
+      - id: galv_eeuu_estimado
+        nombre: "Galvanizado, Medio Oeste de EE.UU. (estimado)"
+        mercado: EE.UU.
+        tipo: estimacion
+        que_mide: "Precio estimado del galvanizado: futuro de bobina en caliente más la prima del galvanizado."
+        limitaciones: "Cálculo propio con dos contratos de futuros."
+        fuente: {nombre: "Cálculo propio sobre CME", url: "", acceso: "hrc_eeuu_futuro + galv_eeuu_prima"}
+        frecuencia: diaria
+        unidad_tablero: USD/t
+        licencia: uso_interno
+        estado: automatico
+      - id: galv_eeuu_indice
+        nombre: "Galvanizado, EE.UU. (índice de productor)"
+        mercado: EE.UU.
+        tipo: indice
+        que_mide: "Índice de precios al productor de chapa y fleje galvanizados en EE.UU."
+        limitaciones: "Índice. La serie comenzó en una fecha a confirmar (valor de sep-26: 277,3)."
+        fuente: {nombre: "Bureau of Labor Statistics", url: "https://www.bls.gov/ppi/", acceso: "API BLS v2, WPU101708"}
+        frecuencia: mensual
+        rezago: "unos 15 días"
+        desde: "a medir"
+        unidad_original: índice
+        unidad_tablero: índice
+        licencia: publicable_citando
+        estado: automatico
+      - id: galv_japon_indice
+        nombre: "Chapa con recubrimiento de zinc, Japón (índice de productor)"
+        mercado: Japón
+        tipo: indice
+        que_mide: "Índice de precios al productor de chapa recubierta de zinc en Japón."
+        limitaciones: "Índice en yenes. Serie desde 2020."
+        fuente: {nombre: "Banco de Japón", url: "https://www.stat-search.boj.or.jp", acceso: "API BOJ, PRCG20_2200950019"}
+        frecuencia: mensual
+        rezago: "unos 10 días"
+        desde: "2020 (verificado)"
+        unidad_original: "índice 2020=100"
+        unidad_tablero: "índice 2020=100"
+        licencia: publicable_con_aviso
+        estado: automatico
+      - id: galv_japon_import
+        nombre: "Chapa recubierta importada por Japón (índice)"
+        mercado: Japón
+        tipo: indice
+        que_mide: "Índice de precios de importación de chapas recubiertas, en moneda del contrato."
+        limitaciones: "Índice."
+        fuente: {nombre: "Banco de Japón", url: "https://www.stat-search.boj.or.jp", acceso: "API BOJ, PRCG20_2500350007"}
+        frecuencia: mensual
+        rezago: "unos 10 días"
+        desde: "1995 (verificado)"
+        unidad_original: "índice 2020=100"
+        unidad_tablero: "índice 2020=100"
+        licencia: publicable_con_aviso
+        estado: automatico
+      - id: galv_brasil_export
+        nombre: "Galvanizado exportado por Brasil"
+        mercado: Brasil
+        tipo: precio_comercio_exterior
+        que_mide: "Valor FOB promedio por tonelada de los laminados planos revestidos (posición 7210) que exporta Brasil."
+        limitaciones: "La posición incluye otros recubrimientos además del zinc."
+        fuente: {nombre: "Comex Stat", url: "https://comexstat.mdic.gov.br", acceso: "API /general, export, SH4 7210"}
+        frecuencia: mensual
+        rezago: "unos 10 días"
+        desde: "1997"
+        unidad_original: USD FOB y kg
+        unidad_tablero: USD/t
+        conversion: "FOB / kg x 1000"
+        licencia: publicable_citando
+        estado: automatico
+
+  - id: acero_largos
+    grupo: Acero
+    nombre: "Barras, alambrón y perfiles"
+    que_es: "Productos largos: barras para hormigón, barras comerciales, alambrón (materia prima de alambres, mallas, tornillos y clavos) y perfiles livianos."
+    por_que_importa: "Insumo de construcción, mallas, alambres, bulonería, estructuras y maquinaria agrícola."
+    series:
+      - id: barra_china_spot
+        nombre: "Barra para hormigón, China (precio de mercado)"
+        mercado: China
+        tipo: precio_real
+        que_mide: "Precio promedio de mercado de la barra para hormigón de 20 mm (HRB400E) en China."
+        limitaciones: "Con IVA; cada diez días."
+        fuente: {nombre: "NBS China", url: "https://www.stats.gov.cn/sj/zxfb/", acceso: "HTML del informe de precios de medios de producción"}
+        frecuencia: decadal
+        rezago: "4 a 8 días"
+        desde: "2022 o antes"
+        unidad_original: CNY/t con IVA
+        unidad_tablero: USD/t
+        conversion: "dividir por 1,13 y por CNY/USD"
+        licencia: a_confirmar
+        estado: automatico
+      - id: alambron_china_spot
+        nombre: "Alambrón, China (precio de mercado)"
+        mercado: China
+        tipo: precio_real
+        que_mide: "Precio promedio de mercado del alambrón de 8 a 10 mm (HPB300) en China."
+        limitaciones: "Con IVA; cada diez días."
+        fuente: {nombre: "NBS China", url: "https://www.stats.gov.cn/sj/zxfb/", acceso: "HTML del informe"}
+        frecuencia: decadal
+        rezago: "4 a 8 días"
+        desde: "2022 o antes"
+        unidad_original: CNY/t con IVA
+        unidad_tablero: USD/t
+        conversion: "dividir por 1,13 y por CNY/USD"
+        licencia: a_confirmar
+        estado: automatico
+      - id: angulo_china_spot
+        nombre: "Perfil ángulo, China (precio de mercado)"
+        mercado: China
+        tipo: precio_real
+        que_mide: "Precio promedio de mercado del perfil ángulo número 5 en China."
+        limitaciones: "Con IVA; cada diez días."
+        fuente: {nombre: "NBS China", url: "https://www.stats.gov.cn/sj/zxfb/", acceso: "HTML del informe"}
+        frecuencia: decadal
+        rezago: "4 a 8 días"
+        desde: "2022 o antes"
+        unidad_original: CNY/t con IVA
+        unidad_tablero: USD/t
+        conversion: "dividir por 1,13 y por CNY/USD"
+        licencia: a_confirmar
+        estado: automatico
+      - id: barra_china_futuro
+        nombre: "Barra para hormigón, Shanghái (futuro)"
+        mercado: China
+        tipo: futuro
+        que_mide: "Precio de liquidación del contrato más negociado de barra para hormigón en la bolsa de Shanghái. Es el contrato de acero más negociado del mundo."
+        limitaciones: "Con IVA; saltos chicos al cambiar de contrato."
+        fuente: {nombre: "Shanghai Futures Exchange", url: "https://www.shfe.com.cn", acceso: "archivo diario, producto rb"}
+        frecuencia: diaria
+        rezago: "mismo día"
+        desde: "2010 (verificado)"
+        unidad_original: CNY/t con IVA
+        unidad_tablero: USD/t
+        conversion: "dividir por 1,13 y por CNY/USD"
+        licencia: uso_interno
+        estado: automatico
+      - id: alambron_china_futuro
+        nombre: "Alambrón, Shanghái (futuro)"
+        mercado: China
+        tipo: futuro
+        que_mide: "Precio de liquidación del contrato de alambrón en Shanghái."
+        limitaciones: "Contrato poco negociado: puede haber días sin operaciones."
+        fuente: {nombre: "Shanghai Futures Exchange", url: "https://www.shfe.com.cn", acceso: "archivo diario, producto wr"}
+        frecuencia: diaria
+        rezago: "mismo día"
+        desde: "2010"
+        unidad_original: CNY/t con IVA
+        unidad_tablero: USD/t
+        conversion: "dividir por 1,13 y por CNY/USD"
+        licencia: uso_interno
+        estado: automatico
+      - id: barra_turquia_ue
+        nombre: "Barra exportada por Turquía a la UE"
+        mercado: Turquía
+        tipo: precio_comercio_exterior
+        que_mide: "Valor promedio por tonelada de las barras (posición 7214) que la Unión Europea importa de Turquía. Sirve como aproximación del precio de exportación turco, referencia mundial de productos largos."
+        limitaciones: "Volúmenes chicos por las restricciones europeas a la importación: es una aproximación."
+        fuente: {nombre: "Eurostat Comext", url: "https://ec.europa.eu/eurostat/comext/newxtweb/", acceso: "API Comext, producto 7214, socio TR, importación"}
+        frecuencia: mensual
+        rezago: "unos 2 meses"
+        desde: "a medir"
+        unidad_original: EUR y 100 kg
+        unidad_tablero: USD/t
+        conversion: "valor / (cantidad / 10), por USD/EUR"
+        licencia: publicable_citando
+        estado: automatico
+      - id: barra_brasil_export
+        nombre: "Barra exportada por Brasil"
+        mercado: Brasil
+        tipo: precio_comercio_exterior
+        que_mide: "Valor FOB promedio por tonelada de las barras laminadas en caliente (posición 7214) que exporta Brasil."
+        limitaciones: "Volúmenes variables."
+        fuente: {nombre: "Comex Stat", url: "https://comexstat.mdic.gov.br", acceso: "API /general, export, SH4 7214"}
+        frecuencia: mensual
+        rezago: "unos 10 días"
+        desde: "1997"
+        unidad_original: USD FOB y kg
+        unidad_tablero: USD/t
+        conversion: "FOB / kg x 1000"
+        licencia: publicable_citando
+        estado: automatico
+      - id: largos_eeuu_indice
+        nombre: "Barras, chapa gruesa y perfiles, EE.UU. (índice de productor)"
+        mercado: EE.UU.
+        tipo: indice
+        que_mide: "Índice de precios al productor de barras, chapa gruesa y perfiles laminados en caliente en EE.UU."
+        limitaciones: "Mezcla largos y chapa gruesa en un mismo índice."
+        fuente: {nombre: "Bureau of Labor Statistics", url: "https://www.bls.gov/ppi/", acceso: "API BLS v2, WPU101704"}
+        frecuencia: mensual
+        rezago: "unos 15 días"
+        desde: "1982"
+        unidad_original: "índice 1982=100"
+        unidad_tablero: "índice 1982=100"
+        licencia: publicable_citando
+        estado: automatico
+      - id: barras_japon_indice
+        nombre: "Barras livianas, Japón (índice de productor)"
+        mercado: Japón
+        tipo: indice
+        que_mide: "Índice de precios al productor de barras livianas de acero en Japón."
+        limitaciones: "Índice en yenes."
+        fuente: {nombre: "Banco de Japón", url: "https://www.stat-search.boj.or.jp", acceso: "API BOJ, PRCG20_2200950003"}
+        frecuencia: mensual
+        rezago: "unos 10 días"
+        desde: "1980 (verificado)"
+        unidad_original: "índice 2020=100"
+        unidad_tablero: "índice 2020=100"
+        licencia: publicable_con_aviso
+        estado: automatico
+      - id: alambron_japon_indice
+        nombre: "Alambrón, Japón (índice de productor)"
+        mercado: Japón
+        tipo: indice
+        que_mide: "Índice de precios al productor de alambrón en Japón."
+        limitaciones: "Índice en yenes."
+        fuente: {nombre: "Banco de Japón", url: "https://www.stat-search.boj.or.jp", acceso: "API BOJ, PRCG20_2200950004"}
+        frecuencia: mensual
+        rezago: "unos 10 días"
+        desde: "2005 (verificado)"
+        unidad_original: "índice 2020=100"
+        unidad_tablero: "índice 2020=100"
+        licencia: publicable_con_aviso
+        estado: automatico
+      - id: barras_india_indice
+        nombre: "Barras de acero dulce, India (índice mayorista)"
+        mercado: India
+        tipo: indice
+        que_mide: "Índice de precios mayoristas de barras y redondos de acero dulce en India."
+        limitaciones: "Índice en rupias. Base 2022-23."
+        fuente: {nombre: "Office of the Economic Adviser, India", url: "https://eaindustry.nic.in", acceso: "planilla mensual wpi_monthly_index, ítem 1314010014"}
+        frecuencia: mensual
+        rezago: "unos 15 días"
+        desde: "2023-04 (base nueva)"
+        unidad_original: "índice 2022-23=100"
+        unidad_tablero: "índice 2022-23=100"
+        licencia: a_confirmar
+        estado: automatico
+
+  - id: acero_chapa_gruesa_tubos
+    grupo: Acero
+    nombre: "Chapa gruesa y tubos"
+    que_es: "Chapa de más de 10 mm (estructuras pesadas, recipientes, maquinaria) y tubos de acero con y sin costura."
+    por_que_importa: "Insumo de bienes de capital, recipientes a presión, estructuras, petróleo y gas."
+    series:
+      - id: chapa_gruesa_china_spot
+        nombre: "Chapa gruesa, China (precio de mercado)"
+        mercado: China
+        tipo: precio_real
+        que_mide: "Precio promedio de mercado de la chapa media de 20 mm (Q235) en China."
+        limitaciones: "Con IVA; cada diez días."
+        fuente: {nombre: "NBS China", url: "https://www.stats.gov.cn/sj/zxfb/", acceso: "HTML del informe"}
+        frecuencia: decadal
+        rezago: "4 a 8 días"
+        desde: "2022 o antes"
+        unidad_original: CNY/t con IVA
+        unidad_tablero: USD/t
+        conversion: "dividir por 1,13 y por CNY/USD"
+        licencia: a_confirmar
+        estado: automatico
+      - id: chapa_gruesa_japon_indice
+        nombre: "Chapa gruesa y media, Japón (índice de productor)"
+        mercado: Japón
+        tipo: indice
+        que_mide: "Índice de precios al productor de chapa gruesa y media en Japón."
+        limitaciones: "Índice en yenes."
+        fuente: {nombre: "Banco de Japón", url: "https://www.stat-search.boj.or.jp", acceso: "API BOJ, PRCG20_2200950005"}
+        frecuencia: mensual
+        rezago: "unos 10 días"
+        desde: "2000 (verificado)"
+        unidad_original: "índice 2020=100"
+        unidad_tablero: "índice 2020=100"
+        licencia: publicable_con_aviso
+        estado: automatico
+      - id: tubo_sin_costura_china_spot
+        nombre: "Tubo sin costura, China (precio de mercado)"
+        mercado: China
+        tipo: precio_real
+        que_mide: "Precio promedio de mercado del tubo sin costura 219x6 mm (acero 20#) en China."
+        limitaciones: "Con IVA; cada diez días."
+        fuente: {nombre: "NBS China", url: "https://www.stats.gov.cn/sj/zxfb/", acceso: "HTML del informe"}
+        frecuencia: decadal
+        rezago: "4 a 8 días"
+        desde: "2022 o antes"
+        unidad_original: CNY/t con IVA
+        unidad_tablero: USD/t
+        conversion: "dividir por 1,13 y por CNY/USD"
+        licencia: a_confirmar
+        estado: automatico
+      - id: tubos_japon_indice
+        nombre: "Tubos de acero común, Japón (índice de productor)"
+        mercado: Japón
+        tipo: indice
+        que_mide: "Índice de precios al productor de tubos y caños de acero común en Japón."
+        limitaciones: "Índice en yenes."
+        fuente: {nombre: "Banco de Japón", url: "https://www.stat-search.boj.or.jp", acceso: "API BOJ, PRCG20_2200950011"}
+        frecuencia: mensual
+        rezago: "unos 10 días"
+        desde: "2005 (verificado)"
+        unidad_original: "índice 2020=100"
+        unidad_tablero: "índice 2020=100"
+        licencia: publicable_con_aviso
+        estado: automatico
+
+  - id: acero_inoxidable
+    grupo: Acero
+    nombre: "Acero inoxidable"
+    que_es: "Acero aleado con cromo y níquel, resistente a la corrosión."
+    por_que_importa: "Insumo de equipamiento alimenticio, farmacéutico, gastronómico, petroquímico y de línea blanca. Su precio sigue mucho al níquel."
+    series:
+      - id: inox_china_futuro
+        nombre: "Inoxidable, Shanghái (futuro)"
+        mercado: China
+        tipo: futuro
+        que_mide: "Precio de liquidación del contrato más negociado de bobina de inoxidable laminada en caliente en Shanghái."
+        limitaciones: "Con IVA."
+        fuente: {nombre: "Shanghai Futures Exchange", url: "https://www.shfe.com.cn", acceso: "archivo diario, producto ss"}
+        frecuencia: diaria
+        rezago: "mismo día"
+        desde: "2019 (lanzamiento del contrato)"
+        unidad_original: CNY/t con IVA
+        unidad_tablero: USD/t
+        conversion: "dividir por 1,13 y por CNY/USD"
+        licencia: uso_interno
+        estado: automatico
+      - id: inox_japon_indice
+        nombre: "Chapa inoxidable laminada en frío, Japón (índice de productor)"
+        mercado: Japón
+        tipo: indice
+        que_mide: "Índice de precios al productor de chapa inoxidable laminada en frío en Japón."
+        limitaciones: "Índice en yenes."
+        fuente: {nombre: "Banco de Japón", url: "https://www.stat-search.boj.or.jp", acceso: "API BOJ, PRCG20_2200950016"}
+        frecuencia: mensual
+        rezago: "unos 10 días"
+        desde: "2010 (verificado)"
+        unidad_original: "índice 2020=100"
+        unidad_tablero: "índice 2020=100"
+        licencia: publicable_con_aviso
+        estado: automatico
+
+  - id: acero_general
+    grupo: Acero
+    nombre: "Acero en general (índices agregados)"
+    que_es: "Índices oficiales que agrupan todos los productos de acero de un país."
+    por_que_importa: "Permiten comparar la tendencia general del precio del acero entre países con datos oficiales."
+    series:
+      - id: acero_eeuu_indice
+        nombre: "Productos de acerías, EE.UU. (índice de productor)"
+        mercado: EE.UU.
+        tipo: indice
+        que_mide: "Índice de precios al productor del conjunto de productos de acerías en EE.UU."
+        limitaciones: "Índice agregado."
+        fuente: {nombre: "Bureau of Labor Statistics", url: "https://www.bls.gov/ppi/", acceso: "API BLS v2, WPU1017"}
+        frecuencia: mensual
+        rezago: "unos 15 días"
+        desde: "1947"
+        unidad_original: "índice 1982=100"
+        unidad_tablero: "índice 1982=100"
+        licencia: publicable_citando
+        estado: automatico
+      - id: acero_ue_indice
+        nombre: "Hierro y acero básicos, UE y países (índice de productor)"
+        mercado: Europa
+        tipo: indice
+        que_mide: "Índice de precios al productor de la industria de hierro y acero básicos (NACE C24.1) en el mercado interno: UE, Alemania, Italia, España y Francia."
+        limitaciones: "Índice agregado; el dato de la UE a veces es imputado por Eurostat."
+        fuente: {nombre: "Eurostat", url: "https://ec.europa.eu/eurostat/databrowser/view/sts_inppd_m/", acceso: "API Eurostat sts_inppd_m, C241"}
+        frecuencia: mensual
+        rezago: "unos 45 días"
+        desde: "2000"
+        unidad_original: "índice 2021=100"
+        unidad_tablero: "índice 2021=100"
+        licencia: publicable_citando
+        estado: automatico
+      - id: metalurgia_brasil_indice
+        nombre: "Metalurgia, Brasil (índice de productor)"
+        mercado: Brasil
+        tipo: indice
+        que_mide: "Índice de precios al productor de la metalurgia (división 24 de la CNAE) en Brasil."
+        limitaciones: "Incluye siderurgia y no ferrosos juntos."
+        fuente: {nombre: "IBGE", url: "https://sidra.ibge.gov.br/tabela/6903", acceso: "API SIDRA, tabla 6903, actividad 24"}
+        frecuencia: mensual
+        rezago: "unos 30 días"
+        desde: "2009-12 (verificado)"
+        unidad_original: "índice dic-2018=100"
+        unidad_tablero: "índice dic-2018=100"
+        licencia: publicable_citando
+        estado: automatico
+      - id: semis_brasil_export
+        nombre: "Semiterminados (planchones y palanquilla) exportados por Brasil"
+        mercado: Brasil
+        tipo: precio_comercio_exterior
+        que_mide: "Valor FOB promedio por tonelada de los semiterminados de acero (posición 7207) que exporta Brasil, uno de los mayores exportadores de planchones del mundo."
+        limitaciones: "Mezcla planchones y palanquilla."
+        fuente: {nombre: "Comex Stat", url: "https://comexstat.mdic.gov.br", acceso: "API /general, export, SH4 7207"}
+        frecuencia: mensual
+        rezago: "unos 10 días"
+        desde: "1997"
+        unidad_original: USD FOB y kg
+        unidad_tablero: USD/t
+        conversion: "FOB / kg x 1000"
+        licencia: publicable_citando
+        estado: automatico
+
+# =====================================================================================
+# MATERIAS PRIMAS SIDERÚRGICAS
+# =====================================================================================
+
+  - id: mineral_hierro
+    grupo: Materias primas siderúrgicas
+    nombre: "Mineral de hierro"
+    que_es: "Materia prima principal del acero en alto horno. La referencia mundial es el mineral con 62% de hierro entregado en China."
+    por_que_importa: "Es el primer eslabón del costo del acero: sus movimientos se trasladan con algunos meses de demora al precio de los laminados."
+    series:
+      - id: mineral_futuro
+        nombre: "Mineral de hierro 62%, CFR China (futuro)"
+        mercado: Mundial
+        tipo: futuro
+        que_mide: "Precio del contrato más cercano de CME para mineral de hierro con 62% de hierro, puesto en puerto chino (flete incluido)."
+        limitaciones: "Referencia de un solo grado de mineral."
+        fuente: {nombre: "CME Group vía Yahoo Finance", url: "https://www.cmegroup.com/markets/metals/ferrous/iron-ore-62pct-fe-cfr-china-tsi.html", acceso: "Yahoo chart API, TIO=F"}
+        frecuencia: diaria
+        rezago: "1 día"
+        desde: "2010-10 (verificado)"
+        unidad_original: USD/t seca
+        unidad_tablero: USD/t
+        licencia: uso_interno
+        estado: automatico
+      - id: mineral_banco_mundial
+        nombre: "Mineral de hierro, CFR China (Banco Mundial)"
+        mercado: Mundial
+        tipo: precio_real
+        que_mide: "Promedio mensual del precio spot del mineral de hierro puesto en China, publicado por el Banco Mundial."
+        limitaciones: "Mensual, sin detalle diario."
+        fuente: {nombre: "Banco Mundial (Pink Sheet)", url: "https://www.worldbank.org/en/research/commodity-markets", acceso: "CMO-Historical-Data-Monthly.xlsx"}
+        frecuencia: mensual
+        rezago: "primeros días del mes siguiente"
+        desde: "1960 (verificado)"
+        unidad_original: USD/t seca
+        unidad_tablero: USD/t
+        licencia: publicable_citando
+        estado: automatico
+      - id: mineral_brasil_export
+        nombre: "Mineral de hierro exportado por Brasil"
+        mercado: Brasil
+        tipo: precio_comercio_exterior
+        que_mide: "Valor FOB promedio por tonelada del mineral de hierro no aglomerado (NCM 2601.11) que exporta Brasil, segundo exportador mundial."
+        limitaciones: "Es FOB (sin flete) y con la ley de mineral de Brasil, así que queda por debajo de la referencia CFR China."
+        fuente: {nombre: "Comex Stat", url: "https://comexstat.mdic.gov.br", acceso: "API /general, export, NCM 26011100"}
+        frecuencia: mensual
+        rezago: "unos 10 días"
+        desde: "1997 (verificado)"
+        unidad_original: USD FOB y kg
+        unidad_tablero: USD/t
+        conversion: "FOB / kg x 1000"
+        licencia: publicable_citando
+        estado: automatico
+      - id: mineral_japon_import
+        nombre: "Mineral de hierro importado por Japón (índice)"
+        mercado: Japón
+        tipo: indice
+        que_mide: "Índice de precios de importación del mineral de hierro en Japón, en moneda del contrato."
+        limitaciones: "Índice."
+        fuente: {nombre: "Banco de Japón", url: "https://www.stat-search.boj.or.jp", acceso: "API BOJ, PRCG20_2500350024"}
+        frecuencia: mensual
+        rezago: "unos 10 días"
+        desde: "1980 (verificado)"
+        unidad_original: "índice 2020=100"
+        unidad_tablero: "índice 2020=100"
+        licencia: publicable_con_aviso
+        estado: automatico
+
+  - id: carbon_coque
+    grupo: Materias primas siderúrgicas
+    nombre: "Carbón coquizable y coque"
+    que_es: "El carbón coquizable se transforma en coque, que es el combustible y agente reductor del alto horno."
+    por_que_importa: "Junto con el mineral de hierro, explica la mayor parte del costo de producir acero en alto horno."
+    series:
+      - id: carbon_coque_china_spot
+        nombre: "Carbón coquizable, China (precio de mercado)"
+        mercado: China
+        tipo: precio_real
+        que_mide: "Precio promedio de mercado del carbón coquizable principal (主焦煤) en China."
+        limitaciones: "Con IVA; cada diez días."
+        fuente: {nombre: "NBS China", url: "https://www.stats.gov.cn/sj/zxfb/", acceso: "HTML del informe"}
+        frecuencia: decadal
+        rezago: "4 a 8 días"
+        desde: "2022 o antes"
+        unidad_original: CNY/t con IVA
+        unidad_tablero: USD/t
+        conversion: "dividir por 1,13 y por CNY/USD"
+        licencia: a_confirmar
+        estado: automatico
+      - id: carbon_coque_brasil_import
+        nombre: "Carbón coquizable importado por Brasil"
+        mercado: Brasil
+        tipo: precio_comercio_exterior
+        que_mide: "Valor CIF promedio por tonelada del carbón bituminoso (NCM 2701.12) que importa Brasil, casi todo destinado a la siderurgia."
+        limitaciones: "La posición también puede incluir algo de carbón térmico. Es una aproximación del precio internacional en dólares."
+        fuente: {nombre: "Comex Stat", url: "https://comexstat.mdic.gov.br", acceso: "API /general, import, NCM 27011200, métrica CIF"}
+        frecuencia: mensual
+        rezago: "unos 10 días"
+        desde: "1997"
+        unidad_original: USD CIF y kg
+        unidad_tablero: USD/t
+        conversion: "CIF / kg x 1000"
+        licencia: publicable_citando
+        estado: automatico
+      - id: carbon_coque_japon_import
+        nombre: "Carbón para coque importado por Japón (índice)"
+        mercado: Japón
+        tipo: indice
+        que_mide: "Índice de precios de importación del carbón para hacer coque en Japón, en moneda del contrato."
+        limitaciones: "Índice."
+        fuente: {nombre: "Banco de Japón", url: "https://www.stat-search.boj.or.jp", acceso: "API BOJ, PRCG20_2500550008"}
+        frecuencia: mensual
+        rezago: "unos 10 días"
+        desde: "1980 (verificado)"
+        unidad_original: "índice 2020=100"
+        unidad_tablero: "índice 2020=100"
+        licencia: publicable_con_aviso
+        estado: automatico
+      - id: carbon_coque_india_indice
+        nombre: "Carbón coquizable, India (índice mayorista)"
+        mercado: India
+        tipo: indice
+        que_mide: "Índice de precios mayoristas del carbón coquizable en India."
+        limitaciones: "Índice en rupias; mercado con fuerte peso del Estado."
+        fuente: {nombre: "Office of the Economic Adviser, India", url: "https://eaindustry.nic.in", acceso: "planilla mensual, ítem 1201010100"}
+        frecuencia: mensual
+        rezago: "unos 15 días"
+        desde: "2023-04"
+        unidad_original: "índice 2022-23=100"
+        unidad_tablero: "índice 2022-23=100"
+        licencia: a_confirmar
+        estado: automatico
+      - id: coque_china_spot
+        nombre: "Coque metalúrgico, China (precio de mercado)"
+        mercado: China
+        tipo: precio_real
+        que_mide: "Precio promedio de mercado del coque metalúrgico de primera categoría en China."
+        limitaciones: "Con IVA; cada diez días."
+        fuente: {nombre: "NBS China", url: "https://www.stats.gov.cn/sj/zxfb/", acceso: "HTML del informe"}
+        frecuencia: decadal
+        rezago: "4 a 8 días"
+        desde: "2022 o antes"
+        unidad_original: CNY/t con IVA
+        unidad_tablero: USD/t
+        conversion: "dividir por 1,13 y por CNY/USD"
+        licencia: a_confirmar
+        estado: automatico
+      - id: coque_japon_indice
+        nombre: "Coque, Japón (índice de productor)"
+        mercado: Japón
+        tipo: indice
+        que_mide: "Índice de precios al productor del coque de carbón en Japón."
+        limitaciones: "Índice en yenes."
+        fuente: {nombre: "Banco de Japón", url: "https://www.stat-search.boj.or.jp", acceso: "API BOJ, PRCG20_2200650011"}
+        frecuencia: mensual
+        rezago: "unos 10 días"
+        desde: "1980 (verificado)"
+        unidad_original: "índice 2020=100"
+        unidad_tablero: "índice 2020=100"
+        licencia: publicable_con_aviso
+        estado: automatico
+
+  - id: chatarra
+    grupo: Materias primas siderúrgicas
+    nombre: "Chatarra ferrosa"
+    que_es: "Acero recuperado que se funde en hornos eléctricos. Es la materia prima principal de los productos largos."
+    por_que_importa: "Marca el costo de las acerías eléctricas y, por eso, el precio de barras y perfiles. También es un ingreso para las metalúrgicas que venden su recorte."
+    series:
+      - id: chatarra_eeuu_indice
+        nombre: "Chatarra de hierro y acero, EE.UU. (índice de productor)"
+        mercado: EE.UU.
+        tipo: indice
+        que_mide: "Índice de precios al productor de la chatarra de hierro y acero en EE.UU."
+        limitaciones: "Índice agregado de todos los tipos de chatarra."
+        fuente: {nombre: "Bureau of Labor Statistics", url: "https://www.bls.gov/ppi/", acceso: "API BLS v2, WPU1012"}
+        frecuencia: mensual
+        rezago: "unos 15 días"
+        desde: "1947"
+        unidad_original: "índice 1982=100"
+        unidad_tablero: "índice 1982=100"
+        licencia: publicable_citando
+        estado: automatico
+      - id: chatarra_ue_turquia
+        nombre: "Chatarra exportada por la UE a Turquía"
+        mercado: Turquía
+        tipo: precio_comercio_exterior
+        que_mide: "Valor promedio por tonelada de la chatarra ferrosa (posición 7204) que la UE exporta a Turquía, el mayor importador mundial. Aproxima el precio de referencia de la chatarra en el mundo."
+        limitaciones: "Es FOB europeo, sin el flete hasta Turquía, y mezcla calidades."
+        fuente: {nombre: "Eurostat Comext", url: "https://ec.europa.eu/eurostat/comext/newxtweb/", acceso: "API Comext, producto 7204, socio TR, exportación"}
+        frecuencia: mensual
+        rezago: "unos 2 meses"
+        desde: "a medir"
+        unidad_original: EUR y 100 kg
+        unidad_tablero: USD/t
+        conversion: "valor / (cantidad / 10), por USD/EUR"
+        licencia: publicable_citando
+        estado: automatico
+      - id: chatarra_turquia_futuro
+        nombre: "Chatarra HMS 80:20, CFR Turquía (futuro)"
+        mercado: Turquía
+        tipo: futuro
+        que_mide: "Precio del contrato más cercano de CME para chatarra pesada HMS 80:20 puesta en Turquía."
+        limitaciones: "Yahoo solo publica el dato del día. La serie empieza cuando arranque el tablero."
+        fuente: {nombre: "CME Group vía Yahoo Finance", url: "https://cmegroup.com/trading/metals/ferrous/hms-80-20-ferrous-scrap-cfr-turkey-platts-swap.html", acceso: "Yahoo chart API, FSF=F"}
+        frecuencia: diaria
+        rezago: "1 día"
+        desde: "2026-10 (se acumula)"
+        unidad_original: USD/t
+        unidad_tablero: USD/t
+        licencia: uso_interno
+        estado: acumula
+      - id: chatarra_japon_export
+        nombre: "Chatarra exportada por Japón (índice)"
+        mercado: Japón
+        tipo: indice
+        que_mide: "Índice de precios de exportación de la chatarra de hierro en Japón, en moneda del contrato."
+        limitaciones: "Índice."
+        fuente: {nombre: "Banco de Japón", url: "https://www.stat-search.boj.or.jp", acceso: "API BOJ, PRCG20_2300350025"}
+        frecuencia: mensual
+        rezago: "unos 10 días"
+        desde: "2000 (verificado)"
+        unidad_original: "índice 2020=100"
+        unidad_tablero: "índice 2020=100"
+        licencia: publicable_con_aviso
+        estado: automatico
+
+  - id: arrabio
+    grupo: Materias primas siderúrgicas
+    nombre: "Arrabio y hierro de reducción directa"
+    que_es: "El arrabio es el hierro líquido que sale del alto horno; el hierro de reducción directa (DRI o HBI) se obtiene sin fundir el mineral. Los dos se usan como carga metálica en acerías y fundiciones."
+    por_que_importa: "Insumo de fundiciones y de acerías eléctricas que buscan acero de mejor calidad que el de chatarra."
+    series:
+      - id: arrabio_brasil_export
+        nombre: "Arrabio exportado por Brasil"
+        mercado: Brasil
+        tipo: precio_comercio_exterior
+        que_mide: "Valor FOB promedio por tonelada del arrabio no aleado (NCM 7201.10) que exporta Brasil, uno de los principales exportadores."
+        limitaciones: "FOB Brasil."
+        fuente: {nombre: "Comex Stat", url: "https://comexstat.mdic.gov.br", acceso: "API /general, export, NCM 72011000"}
+        frecuencia: mensual
+        rezago: "unos 10 días"
+        desde: "1997"
+        unidad_original: USD FOB y kg
+        unidad_tablero: USD/t
+        conversion: "FOB / kg x 1000"
+        licencia: publicable_citando
+        estado: automatico
+      - id: arrabio_india_indice
+        nombre: "Arrabio, India (índice mayorista)"
+        mercado: India
+        tipo: indice
+        que_mide: "Índice de precios mayoristas del arrabio en India."
+        limitaciones: "Índice en rupias."
+        fuente: {nombre: "Office of the Economic Adviser, India", url: "https://eaindustry.nic.in", acceso: "planilla mensual, ítem 1314010003"}
+        frecuencia: mensual
+        rezago: "unos 15 días"
+        desde: "2023-04"
+        unidad_original: "índice 2022-23=100"
+        unidad_tablero: "índice 2022-23=100"
+        licencia: a_confirmar
+        estado: automatico
+      - id: dri_india_indice
+        nombre: "Hierro esponja y HBI, India (índice mayorista)"
+        mercado: India
+        tipo: indice
+        que_mide: "Índice de precios mayoristas del hierro esponja, pellets y HBI en India, el mayor productor mundial de hierro de reducción directa."
+        limitaciones: "Índice en rupias que mezcla hierro esponja con pellets."
+        fuente: {nombre: "Office of the Economic Adviser, India", url: "https://eaindustry.nic.in", acceso: "planilla mensual, ítem 1314010001"}
+        frecuencia: mensual
+        rezago: "unos 15 días"
+        desde: "2023-04"
+        unidad_original: "índice 2022-23=100"
+        unidad_tablero: "índice 2022-23=100"
+        licencia: a_confirmar
+        estado: automatico
+
+  - id: ferroaleaciones
+    grupo: Materias primas siderúrgicas
+    nombre: "Ferroaleaciones"
+    que_es: "Aleaciones de hierro con manganeso, silicio, cromo u otros elementos que se agregan al acero para darle propiedades."
+    por_que_importa: "Insumo de acerías y fundiciones; pesa poco en el costo total del acero."
+    series:
+      - id: ferrosilicio_china_futuro
+        nombre: "Ferrosilicio, Zhengzhou (futuro)"
+        mercado: China
+        tipo: futuro
+        que_mide: "Precio de liquidación del contrato más negociado de ferrosilicio en la bolsa de Zhengzhou."
+        limitaciones: "Con IVA."
+        fuente: {nombre: "Zhengzhou Commodity Exchange", url: "http://www.czce.com.cn", acceso: "FutureDataDaily.txt, producto SF"}
+        frecuencia: diaria
+        rezago: "mismo día"
+        desde: "2018 o antes (verificado)"
+        unidad_original: CNY/t con IVA
+        unidad_tablero: USD/t
+        conversion: "dividir por 1,13 y por CNY/USD"
+        licencia: uso_interno
+        estado: automatico
+      - id: silicomanganeso_china_futuro
+        nombre: "Silicomanganeso, Zhengzhou (futuro)"
+        mercado: China
+        tipo: futuro
+        que_mide: "Precio de liquidación del contrato más negociado de silicomanganeso en Zhengzhou."
+        limitaciones: "Con IVA."
+        fuente: {nombre: "Zhengzhou Commodity Exchange", url: "http://www.czce.com.cn", acceso: "FutureDataDaily.txt, producto SM"}
+        frecuencia: diaria
+        rezago: "mismo día"
+        desde: "2018 o antes"
+        unidad_original: CNY/t con IVA
+        unidad_tablero: USD/t
+        conversion: "dividir por 1,13 y por CNY/USD"
+        licencia: uso_interno
+        estado: automatico
+      - id: ferromanganeso_japon_indice
+        nombre: "Ferromanganeso, Japón (índice de productor)"
+        mercado: Japón
+        tipo: indice
+        que_mide: "Índice de precios al productor del ferromanganeso en Japón."
+        limitaciones: "Índice en yenes."
+        fuente: {nombre: "Banco de Japón", url: "https://www.stat-search.boj.or.jp", acceso: "API BOJ, PRCG20_2200950001"}
+        frecuencia: mensual
+        rezago: "unos 10 días"
+        desde: "2005 (verificado)"
+        unidad_original: "índice 2020=100"
+        unidad_tablero: "índice 2020=100"
+        licencia: publicable_con_aviso
+        estado: automatico
+
+# =====================================================================================
+# METALES NO FERROSOS
+# Para cada metal: precio oficial de Londres (diario), Banco Mundial (mensual, publicable),
+# futuro de Shanghái (diario) y, cuando existe, futuro de Nueva York y spot chino.
+# =====================================================================================
+
+  - id: cobre
+    grupo: Metales no ferrosos
+    nombre: "Cobre"
+    que_es: "Metal conductor por excelencia. La referencia mundial es el precio oficial de la Bolsa de Metales de Londres (LME)."
+    por_que_importa: "Insumo de cables, bobinados, motores, transformadores, intercambiadores y semielaborados de cobre y latón."
+    series:
+      - id: cobre_lme
+        nombre: "Cobre, Londres (precio oficial contado)"
+        mercado: Mundial
+        tipo: precio_real
+        que_mide: "Precio oficial de contado (cash settlement) del cobre grado A en la LME."
+        limitaciones: "Dato republicado por un tercero (Westmetall). Uso interno por licencia de la LME."
+        fuente: {nombre: "LME vía Westmetall", url: "https://www.westmetall.com/en/markdaten.php", acceso: "tabla LME_Cu_cash, por año desde 2008"}
+        frecuencia: diaria
+        rezago: "1 día"
+        desde: "2008 (verificado)"
+        unidad_original: USD/t
+        unidad_tablero: USD/t
+        licencia: uso_interno
+        estado: automatico
+      - id: cobre_lme_stock
+        nombre: "Cobre, stocks en depósitos de la LME"
+        mercado: Mundial
+        tipo: precio_real
+        que_mide: "Toneladas de cobre almacenadas en los depósitos de la LME. Stocks que caen suelen anticipar precios firmes."
+        limitaciones: "Cubre solo los depósitos de la LME."
+        fuente: {nombre: "LME vía Westmetall", url: "https://www.westmetall.com/en/markdaten.php", acceso: "tabla LME_Cu_cash, columna stock"}
+        frecuencia: diaria
+        rezago: "1 día"
+        desde: "2008"
+        unidad_original: t
+        unidad_tablero: t
+        licencia: uso_interno
+        estado: automatico
+      - id: cobre_banco_mundial
+        nombre: "Cobre (Banco Mundial, promedio mensual)"
+        mercado: Mundial
+        tipo: precio_real
+        que_mide: "Promedio mensual del precio de contado del cobre en la LME, publicado por el Banco Mundial."
+        limitaciones: "Mensual."
+        fuente: {nombre: "Banco Mundial (Pink Sheet)", url: "https://www.worldbank.org/en/research/commodity-markets", acceso: "CMO-Historical-Data-Monthly.xlsx"}
+        frecuencia: mensual
+        rezago: "primeros días del mes siguiente"
+        desde: "1960"
+        unidad_original: USD/t
+        unidad_tablero: USD/t
+        licencia: publicable_citando
+        estado: automatico
+      - id: cobre_comex
+        nombre: "Cobre, Nueva York (futuro COMEX)"
+        mercado: EE.UU.
+        tipo: futuro
+        que_mide: "Precio del contrato más cercano de cobre en COMEX."
+        limitaciones: "Incluye el efecto de los aranceles de EE.UU. sobre el cobre, así que puede separarse de Londres."
+        fuente: {nombre: "CME Group vía Yahoo Finance", url: "https://www.cmegroup.com/markets/metals/base/copper.html", acceso: "Yahoo chart API, HG=F"}
+        frecuencia: diaria
+        rezago: "1 día"
+        desde: "2000 (verificado)"
+        unidad_original: USD/libra
+        unidad_tablero: USD/t
+        conversion: "multiplicar por 2204,62"
+        licencia: uso_interno
+        estado: automatico
+      - id: cobre_shfe
+        nombre: "Cobre, Shanghái (futuro)"
+        mercado: China
+        tipo: futuro
+        que_mide: "Precio de liquidación del contrato más negociado de cobre en Shanghái."
+        limitaciones: "Con IVA."
+        fuente: {nombre: "Shanghai Futures Exchange", url: "https://www.shfe.com.cn", acceso: "archivo diario, producto cu"}
+        frecuencia: diaria
+        rezago: "mismo día"
+        desde: "2010 (verificado)"
+        unidad_original: CNY/t con IVA
+        unidad_tablero: USD/t
+        conversion: "dividir por 1,13 y por CNY/USD"
+        licencia: uso_interno
+        estado: automatico
+      - id: cobre_china_spot
+        nombre: "Cobre electrolítico, China (precio de mercado)"
+        mercado: China
+        tipo: precio_real
+        que_mide: "Precio promedio de mercado del cobre electrolítico 1# en China."
+        limitaciones: "Con IVA; cada diez días."
+        fuente: {nombre: "NBS China", url: "https://www.stats.gov.cn/sj/zxfb/", acceso: "HTML del informe"}
+        frecuencia: decadal
+        rezago: "4 a 8 días"
+        desde: "2022 o antes"
+        unidad_original: CNY/t con IVA
+        unidad_tablero: USD/t
+        conversion: "dividir por 1,13 y por CNY/USD"
+        licencia: a_confirmar
+        estado: automatico
+      - id: cobre_alemania
+        nombre: "Cobre para cables, Alemania (cotización WM)"
+        mercado: Europa
+        tipo: precio_real
+        que_mide: "Cotización de referencia del cobre para cables en Alemania (límite inferior de la cotización WM), usada en contratos de semielaborados."
+        limitaciones: "Uso interno."
+        fuente: {nombre: Westmetall, url: "https://www.westmetall.com/en/markdaten.php", acceso: "tabla WM_Cu_low"}
+        frecuencia: diaria
+        rezago: "mismo día"
+        desde: "a medir"
+        unidad_original: EUR/100 kg
+        unidad_tablero: USD/t
+        conversion: "multiplicar por 10 y por USD/EUR"
+        licencia: uso_interno
+        estado: automatico
+      - id: laton_alemania
+        nombre: "Latón MS 58, Alemania (primer grado de elaboración)"
+        mercado: Europa
+        tipo: precio_real
+        que_mide: "Cotización de referencia del latón MS 58 en primer grado de elaboración en Alemania."
+        limitaciones: "Uso interno."
+        fuente: {nombre: Westmetall, url: "https://www.westmetall.com/en/markdaten.php", acceso: "tabla MB_MS_58_1"}
+        frecuencia: diaria
+        rezago: "mismo día"
+        desde: "a medir"
+        unidad_original: EUR/100 kg
+        unidad_tablero: USD/t
+        conversion: "multiplicar por 10 y por USD/EUR"
+        licencia: uso_interno
+        estado: automatico
+
+  - id: aluminio
+    grupo: Metales no ferrosos
+    nombre: "Aluminio"
+    que_es: "Metal liviano usado en perfiles, chapas, piezas fundidas y conductores."
+    por_que_importa: "Insumo de carpintería de aluminio, autopartes, envases, carrocerías y fundiciones. Al precio de Londres se le suma una prima regional que puede pesar mucho."
+    series:
+      - id: aluminio_lme
+        nombre: "Aluminio, Londres (precio oficial contado)"
+        mercado: Mundial
+        tipo: precio_real
+        que_mide: "Precio oficial de contado del aluminio primario en la LME."
+        limitaciones: "Uso interno por licencia de la LME."
+        fuente: {nombre: "LME vía Westmetall", url: "https://www.westmetall.com/en/markdaten.php", acceso: "tabla LME_Al_cash"}
+        frecuencia: diaria
+        rezago: "1 día"
+        desde: "2008"
+        unidad_original: USD/t
+        unidad_tablero: USD/t
+        licencia: uso_interno
+        estado: automatico
+      - id: aluminio_lme_stock
+        nombre: "Aluminio, stocks LME"
+        mercado: Mundial
+        tipo: precio_real
+        que_mide: "Toneladas de aluminio en depósitos de la LME."
+        limitaciones: "Solo depósitos LME."
+        fuente: {nombre: "LME vía Westmetall", url: "https://www.westmetall.com/en/markdaten.php", acceso: "tabla LME_Al_cash, columna stock"}
+        frecuencia: diaria
+        rezago: "1 día"
+        desde: "2008"
+        unidad_original: t
+        unidad_tablero: t
+        licencia: uso_interno
+        estado: automatico
+      - id: aluminio_banco_mundial
+        nombre: "Aluminio (Banco Mundial, promedio mensual)"
+        mercado: Mundial
+        tipo: precio_real
+        que_mide: "Promedio mensual del aluminio en la LME, publicado por el Banco Mundial."
+        limitaciones: "Mensual."
+        fuente: {nombre: "Banco Mundial (Pink Sheet)", url: "https://www.worldbank.org/en/research/commodity-markets", acceso: "CMO-Historical-Data-Monthly.xlsx"}
+        frecuencia: mensual
+        rezago: "primeros días del mes siguiente"
+        desde: "1960"
+        unidad_original: USD/t
+        unidad_tablero: USD/t
+        licencia: publicable_citando
+        estado: automatico
+      - id: aluminio_comex
+        nombre: "Aluminio, Nueva York (futuro COMEX)"
+        mercado: EE.UU.
+        tipo: futuro
+        que_mide: "Precio del contrato más cercano de aluminio en COMEX."
+        limitaciones: "Contrato menos negociado que el de Londres."
+        fuente: {nombre: "CME Group vía Yahoo Finance", url: "https://www.cmegroup.com/markets/metals/base/aluminum.html", acceso: "Yahoo chart API, ALI=F"}
+        frecuencia: diaria
+        rezago: "1 día"
+        desde: "2014 (verificado)"
+        unidad_original: USD/t
+        unidad_tablero: USD/t
+        licencia: uso_interno
+        estado: automatico
+      - id: aluminio_prima_eeuu
+        nombre: "Prima del aluminio en el Medio Oeste de EE.UU. (futuro)"
+        mercado: EE.UU.
+        tipo: futuro
+        que_mide: "Lo que se paga por encima del precio de Londres para tener aluminio entregado en EE.UU., incluido el arancel."
+        limitaciones: "Es un diferencial, no un precio."
+        fuente: {nombre: "CME Group vía Yahoo Finance", url: "https://www.cmegroup.com/markets/metals/base.html", acceso: "Yahoo chart API, AUP=F"}
+        frecuencia: diaria
+        rezago: "1 día"
+        desde: "2012 (verificado)"
+        unidad_original: USD/libra
+        unidad_tablero: USD/t
+        conversion: "multiplicar por 2204,62"
+        licencia: uso_interno
+        estado: automatico
+      - id: aluminio_prima_europa
+        nombre: "Prima del aluminio en Europa, con arancel pagado (futuro)"
+        mercado: Europa
+        tipo: futuro
+        que_mide: "Lo que se paga por encima del precio de Londres por aluminio en Rotterdam con el arancel europeo pagado."
+        limitaciones: "Es un diferencial, no un precio."
+        fuente: {nombre: "CME Group vía Yahoo Finance", url: "https://www.cmegroup.com/markets/metals/base.html", acceso: "Yahoo chart API, EDP=F"}
+        frecuencia: diaria
+        rezago: "1 día"
+        desde: "2016 (verificado)"
+        unidad_original: USD/t
+        unidad_tablero: USD/t
+        licencia: uso_interno
+        estado: automatico
+      - id: aluminio_shfe
+        nombre: "Aluminio, Shanghái (futuro)"
+        mercado: China
+        tipo: futuro
+        que_mide: "Precio de liquidación del contrato más negociado de aluminio en Shanghái."
+        limitaciones: "Con IVA."
+        fuente: {nombre: "Shanghai Futures Exchange", url: "https://www.shfe.com.cn", acceso: "archivo diario, producto al"}
+        frecuencia: diaria
+        rezago: "mismo día"
+        desde: "2010"
+        unidad_original: CNY/t con IVA
+        unidad_tablero: USD/t
+        conversion: "dividir por 1,13 y por CNY/USD"
+        licencia: uso_interno
+        estado: automatico
+      - id: aluminio_china_spot
+        nombre: "Aluminio A00, China (precio de mercado)"
+        mercado: China
+        tipo: precio_real
+        que_mide: "Precio promedio de mercado del lingote de aluminio A00 en China."
+        limitaciones: "Con IVA; cada diez días."
+        fuente: {nombre: "NBS China", url: "https://www.stats.gov.cn/sj/zxfb/", acceso: "HTML del informe"}
+        frecuencia: decadal
+        rezago: "4 a 8 días"
+        desde: "2022 o antes"
+        unidad_original: CNY/t con IVA
+        unidad_tablero: USD/t
+        conversion: "dividir por 1,13 y por CNY/USD"
+        licencia: a_confirmar
+        estado: automatico
+
+  - id: niquel
+    grupo: Metales no ferrosos
+    nombre: "Níquel"
+    que_es: "Metal que se usa sobre todo para fabricar acero inoxidable y aleaciones."
+    por_que_importa: "Determina buena parte del precio del inoxidable."
+    series:
+      - id: niquel_lme
+        nombre: "Níquel, Londres (precio oficial contado)"
+        mercado: Mundial
+        tipo: precio_real
+        que_mide: "Precio oficial de contado del níquel primario en la LME."
+        limitaciones: "Uso interno por licencia de la LME."
+        fuente: {nombre: "LME vía Westmetall", url: "https://www.westmetall.com/en/markdaten.php", acceso: "tabla LME_Ni_cash"}
+        frecuencia: diaria
+        rezago: "1 día"
+        desde: "2008"
+        unidad_original: USD/t
+        unidad_tablero: USD/t
+        licencia: uso_interno
+        estado: automatico
+      - id: niquel_banco_mundial
+        nombre: "Níquel (Banco Mundial, promedio mensual)"
+        mercado: Mundial
+        tipo: precio_real
+        que_mide: "Promedio mensual del níquel en la LME, publicado por el Banco Mundial."
+        limitaciones: "Mensual."
+        fuente: {nombre: "Banco Mundial (Pink Sheet)", url: "https://www.worldbank.org/en/research/commodity-markets", acceso: "CMO-Historical-Data-Monthly.xlsx"}
+        frecuencia: mensual
+        rezago: "primeros días del mes siguiente"
+        desde: "1960"
+        unidad_original: USD/t
+        unidad_tablero: USD/t
+        licencia: publicable_citando
+        estado: automatico
+      - id: niquel_shfe
+        nombre: "Níquel, Shanghái (futuro)"
+        mercado: China
+        tipo: futuro
+        que_mide: "Precio de liquidación del contrato más negociado de níquel en Shanghái."
+        limitaciones: "Con IVA."
+        fuente: {nombre: "Shanghai Futures Exchange", url: "https://www.shfe.com.cn", acceso: "archivo diario, producto ni"}
+        frecuencia: diaria
+        rezago: "mismo día"
+        desde: "2015 (lanzamiento del contrato)"
+        unidad_original: CNY/t con IVA
+        unidad_tablero: USD/t
+        conversion: "dividir por 1,13 y por CNY/USD"
+        licencia: uso_interno
+        estado: automatico
+
+  - id: zinc
+    grupo: Metales no ferrosos
+    nombre: "Zinc"
+    que_es: "Metal que se usa principalmente para galvanizar acero y en aleaciones de fundición a presión (zamac)."
+    por_que_importa: "Es parte del costo de la chapa galvanizada y de las piezas de zamac."
+    series:
+      - id: zinc_lme
+        nombre: "Zinc, Londres (precio oficial contado)"
+        mercado: Mundial
+        tipo: precio_real
+        que_mide: "Precio oficial de contado del zinc especial de alta pureza en la LME."
+        limitaciones: "Uso interno por licencia de la LME."
+        fuente: {nombre: "LME vía Westmetall", url: "https://www.westmetall.com/en/markdaten.php", acceso: "tabla LME_Zn_cash"}
+        frecuencia: diaria
+        rezago: "1 día"
+        desde: "2008"
+        unidad_original: USD/t
+        unidad_tablero: USD/t
+        licencia: uso_interno
+        estado: automatico
+      - id: zinc_banco_mundial
+        nombre: "Zinc (Banco Mundial, promedio mensual)"
+        mercado: Mundial
+        tipo: precio_real
+        que_mide: "Promedio mensual del zinc en la LME, publicado por el Banco Mundial."
+        limitaciones: "Mensual."
+        fuente: {nombre: "Banco Mundial (Pink Sheet)", url: "https://www.worldbank.org/en/research/commodity-markets", acceso: "CMO-Historical-Data-Monthly.xlsx"}
+        frecuencia: mensual
+        rezago: "primeros días del mes siguiente"
+        desde: "1960"
+        unidad_original: USD/t
+        unidad_tablero: USD/t
+        licencia: publicable_citando
+        estado: automatico
+      - id: zinc_comex
+        nombre: "Zinc, Nueva York (futuro COMEX)"
+        mercado: EE.UU.
+        tipo: futuro
+        que_mide: "Precio del contrato de zinc en COMEX."
+        limitaciones: "Contrato con poca operación: el precio puede quedar igual varios días seguidos (se vio en la prueba)."
+        fuente: {nombre: "CME Group vía Yahoo Finance", url: "https://www.cmegroup.com/markets/metals/base.html", acceso: "Yahoo chart API, ZNC=F"}
+        frecuencia: diaria
+        rezago: "1 día"
+        desde: "2015 (verificado)"
+        unidad_original: USD/t
+        unidad_tablero: USD/t
+        licencia: uso_interno
+        estado: automatico
+      - id: zinc_shfe
+        nombre: "Zinc, Shanghái (futuro)"
+        mercado: China
+        tipo: futuro
+        que_mide: "Precio de liquidación del contrato más negociado de zinc en Shanghái."
+        limitaciones: "Con IVA."
+        fuente: {nombre: "Shanghai Futures Exchange", url: "https://www.shfe.com.cn", acceso: "archivo diario, producto zn"}
+        frecuencia: diaria
+        rezago: "mismo día"
+        desde: "2010"
+        unidad_original: CNY/t con IVA
+        unidad_tablero: USD/t
+        conversion: "dividir por 1,13 y por CNY/USD"
+        licencia: uso_interno
+        estado: automatico
+      - id: zinc_china_spot
+        nombre: "Zinc 0#, China (precio de mercado)"
+        mercado: China
+        tipo: precio_real
+        que_mide: "Precio promedio de mercado del lingote de zinc 0# en China."
+        limitaciones: "Con IVA; cada diez días."
+        fuente: {nombre: "NBS China", url: "https://www.stats.gov.cn/sj/zxfb/", acceso: "HTML del informe"}
+        frecuencia: decadal
+        rezago: "4 a 8 días"
+        desde: "2022 o antes"
+        unidad_original: CNY/t con IVA
+        unidad_tablero: USD/t
+        conversion: "dividir por 1,13 y por CNY/USD"
+        licencia: a_confirmar
+        estado: automatico
+
+  - id: estano
+    grupo: Metales no ferrosos
+    nombre: "Estaño"
+    que_es: "Metal usado en soldaduras, hojalata y bronces."
+    por_que_importa: "Insumo de soldadura en electrónica y electricidad, de hojalata para envases y de bronces."
+    series:
+      - id: estano_lme
+        nombre: "Estaño, Londres (precio oficial contado)"
+        mercado: Mundial
+        tipo: precio_real
+        que_mide: "Precio oficial de contado del estaño en la LME."
+        limitaciones: "Uso interno por licencia de la LME."
+        fuente: {nombre: "LME vía Westmetall", url: "https://www.westmetall.com/en/markdaten.php", acceso: "tabla LME_Sn_cash"}
+        frecuencia: diaria
+        rezago: "1 día"
+        desde: "2008"
+        unidad_original: USD/t
+        unidad_tablero: USD/t
+        licencia: uso_interno
+        estado: automatico
+      - id: estano_banco_mundial
+        nombre: "Estaño (Banco Mundial, promedio mensual)"
+        mercado: Mundial
+        tipo: precio_real
+        que_mide: "Promedio mensual del estaño en la LME, publicado por el Banco Mundial."
+        limitaciones: "Mensual."
+        fuente: {nombre: "Banco Mundial (Pink Sheet)", url: "https://www.worldbank.org/en/research/commodity-markets", acceso: "CMO-Historical-Data-Monthly.xlsx"}
+        frecuencia: mensual
+        rezago: "primeros días del mes siguiente"
+        desde: "1960"
+        unidad_original: USD/t
+        unidad_tablero: USD/t
+        licencia: publicable_citando
+        estado: automatico
+      - id: estano_shfe
+        nombre: "Estaño, Shanghái (futuro)"
+        mercado: China
+        tipo: futuro
+        que_mide: "Precio de liquidación del contrato más negociado de estaño en Shanghái."
+        limitaciones: "Con IVA."
+        fuente: {nombre: "Shanghai Futures Exchange", url: "https://www.shfe.com.cn", acceso: "archivo diario, producto sn"}
+        frecuencia: diaria
+        rezago: "mismo día"
+        desde: "2015 (lanzamiento del contrato)"
+        unidad_original: CNY/t con IVA
+        unidad_tablero: USD/t
+        conversion: "dividir por 1,13 y por CNY/USD"
+        licencia: uso_interno
+        estado: automatico
+
+  - id: plomo
+    grupo: Metales no ferrosos
+    nombre: "Plomo"
+    que_es: "Metal usado sobre todo en baterías de auto."
+    por_que_importa: "Insumo de baterías, soldaduras, aleaciones y blindajes."
+    series:
+      - id: plomo_lme
+        nombre: "Plomo, Londres (precio oficial contado)"
+        mercado: Mundial
+        tipo: precio_real
+        que_mide: "Precio oficial de contado del plomo en la LME."
+        limitaciones: "Uso interno por licencia de la LME."
+        fuente: {nombre: "LME vía Westmetall", url: "https://www.westmetall.com/en/markdaten.php", acceso: "tabla LME_Pb_cash"}
+        frecuencia: diaria
+        rezago: "1 día"
+        desde: "2008"
+        unidad_original: USD/t
+        unidad_tablero: USD/t
+        licencia: uso_interno
+        estado: automatico
+      - id: plomo_banco_mundial
+        nombre: "Plomo (Banco Mundial, promedio mensual)"
+        mercado: Mundial
+        tipo: precio_real
+        que_mide: "Promedio mensual del plomo en la LME, publicado por el Banco Mundial."
+        limitaciones: "Mensual."
+        fuente: {nombre: "Banco Mundial (Pink Sheet)", url: "https://www.worldbank.org/en/research/commodity-markets", acceso: "CMO-Historical-Data-Monthly.xlsx"}
+        frecuencia: mensual
+        rezago: "primeros días del mes siguiente"
+        desde: "1960"
+        unidad_original: USD/t
+        unidad_tablero: USD/t
+        licencia: publicable_citando
+        estado: automatico
+      - id: plomo_shfe
+        nombre: "Plomo, Shanghái (futuro)"
+        mercado: China
+        tipo: futuro
+        que_mide: "Precio de liquidación del contrato más negociado de plomo en Shanghái."
+        limitaciones: "Con IVA."
+        fuente: {nombre: "Shanghai Futures Exchange", url: "https://www.shfe.com.cn", acceso: "archivo diario, producto pb"}
+        frecuencia: diaria
+        rezago: "mismo día"
+        desde: "2011 (lanzamiento del contrato)"
+        unidad_original: CNY/t con IVA
+        unidad_tablero: USD/t
+        conversion: "dividir por 1,13 y por CNY/USD"
+        licencia: uso_interno
+        estado: automatico
+
+# =====================================================================================
+# PRECIOS LOCALES (ARGENTINA)
+# =====================================================================================
+
+  - id: local_indices
+    grupo: Precios locales
+    nombre: "Índices mayoristas del INDEC"
+    que_es: "Índices oficiales de precios mayoristas internos de la Argentina, por rama de producción."
+    por_que_importa: "Muestran cómo se mueve en pesos el precio de los insumos metálicos dentro del país y permiten compararlo con la inflación y con el dólar."
+    series:
+      - id: ipim_metalicos_basicos
+        nombre: "Productos metálicos básicos (IPIM)"
+        mercado: Argentina
+        tipo: indice
+        que_mide: "Índice de precios internos al por mayor de los productos metálicos básicos (rama 27): hierro y acero, no ferrosos y fundición."
+        limitaciones: "Índice en pesos; incluye productos nacionales e importados."
+        fuente: {nombre: INDEC, url: "https://www.indec.gob.ar/Nivel4/Tema/3/5/32", acceso: "series_sipm_dic2015.xls, hoja IPIM, código 27"}
+        frecuencia: mensual
+        rezago: "unos 15 días"
+        desde: "2015-12 (base actual)"
+        unidad_original: "índice dic-2015=100"
+        unidad_tablero: "índice dic-2015=100"
+        licencia: publicable_citando
+        estado: automatico
+      - id: ipim_hierro_acero
+        nombre: "Hierro y acero en formas básicas (IPIM)"
+        mercado: Argentina
+        tipo: indice
+        que_mide: "Índice de precios internos al por mayor de los productos de minerales ferrosos en formas básicas (rama 271): el acero que sale de las acerías."
+        limitaciones: "Índice en pesos."
+        fuente: {nombre: INDEC, url: "https://www.indec.gob.ar/Nivel4/Tema/3/5/32", acceso: "series_sipm_dic2015.xls, hoja IPIM, código 271"}
+        frecuencia: mensual
+        rezago: "unos 15 días"
+        desde: "2015-12"
+        unidad_original: "índice dic-2015=100"
+        unidad_tablero: "índice dic-2015=100"
+        licencia: publicable_citando
+        estado: automatico
+      - id: ipim_no_ferrosos
+        nombre: "No ferrosos en formas básicas (IPIM)"
+        mercado: Argentina
+        tipo: indice
+        que_mide: "Índice de precios internos al por mayor de los productos de minerales no ferrosos en formas básicas (rama 272): aluminio, cobre y otros."
+        limitaciones: "Índice en pesos."
+        fuente: {nombre: INDEC, url: "https://www.indec.gob.ar/Nivel4/Tema/3/5/32", acceso: "series_sipm_dic2015.xls, hoja IPIM, código 272"}
+        frecuencia: mensual
+        rezago: "unos 15 días"
+        desde: "2015-12"
+        unidad_original: "índice dic-2015=100"
+        unidad_tablero: "índice dic-2015=100"
+        licencia: publicable_citando
+        estado: automatico
+      - id: ipim_fundicion
+        nombre: "Productos de fundición (IPIM)"
+        mercado: Argentina
+        tipo: indice
+        que_mide: "Índice de precios internos al por mayor de los productos de fundición (rama 273)."
+        limitaciones: "Índice en pesos."
+        fuente: {nombre: INDEC, url: "https://www.indec.gob.ar/Nivel4/Tema/3/5/32", acceso: "series_sipm_dic2015.xls, hoja IPIM, código 273"}
+        frecuencia: mensual
+        rezago: "unos 15 días"
+        desde: "2015-12"
+        unidad_original: "índice dic-2015=100"
+        unidad_tablero: "índice dic-2015=100"
+        licencia: publicable_citando
+        estado: automatico
+      - id: ipim_productos_metalicos
+        nombre: "Productos metálicos excepto maquinaria (IPIM)"
+        mercado: Argentina
+        tipo: indice
+        que_mide: "Índice de precios internos al por mayor de los productos metálicos excepto máquinas y equipos (rama 28), con sus aperturas de productos estructurales (281, 2811) y otros productos metálicos (289, 2899)."
+        limitaciones: "Mide el precio de lo que produce el sector metalúrgico, no de lo que compra."
+        fuente: {nombre: INDEC, url: "https://www.indec.gob.ar/Nivel4/Tema/3/5/32", acceso: "series_sipm_dic2015.xls, hoja IPIM, códigos 28, 281, 2811, 289, 2899"}
+        frecuencia: mensual
+        rezago: "unos 15 días"
+        desde: "2015-12"
+        unidad_original: "índice dic-2015=100"
+        unidad_tablero: "índice dic-2015=100"
+        licencia: publicable_citando
+        estado: automatico
+
+  - id: local_productos
+    grupo: Precios locales
+    nombre: "Precios locales por producto"
+    que_es: "Índices oficiales por producto de acero que se usan para actualizar contratos de obra pública, más los índices de materiales de la construcción."
+    por_que_importa: "Es lo más cercano a un precio local por producto que publica el Estado."
+    series:
+      - id: ipib_barras_acero
+        nombre: "Barras de hierro y acero (IPIB por producto)"
+        mercado: Argentina
+        tipo: indice
+        que_mide: "Índice de precios básicos al por mayor del producto barras de hierro y acero, del anexo que usa el INDEC para la redeterminación de contratos de obra."
+        limitaciones: "Índice en pesos; sin impuestos."
+        fuente: {nombre: INDEC, url: "https://www.indec.gob.ar/Nivel4/Tema/3/5/33", acceso: "op_icc_sipm_2016.xls, hoja '2 y 3 IPIB apertura', producto 41261-1"}
+        frecuencia: mensual
+        rezago: "unos 15 días"
+        desde: "2016"
+        unidad_original: índice
+        unidad_tablero: índice
+        licencia: publicable_citando
+        estado: automatico
+      - id: ipib_alambron
+        nombre: "Alambrón de hierro (IPIB por producto)"
+        mercado: Argentina
+        tipo: indice
+        que_mide: "Índice de precios básicos al por mayor del alambrón de hierro."
+        limitaciones: "Índice en pesos."
+        fuente: {nombre: INDEC, url: "https://www.indec.gob.ar/Nivel4/Tema/3/5/33", acceso: "op_icc_sipm_2016.xls, producto 41241-1"}
+        frecuencia: mensual
+        rezago: "unos 15 días"
+        desde: "2016"
+        unidad_original: índice
+        unidad_tablero: índice
+        licencia: publicable_citando
+        estado: automatico
+      - id: ipib_alambre_acero
+        nombre: "Alambres de acero (IPIB por producto)"
+        mercado: Argentina
+        tipo: indice
+        que_mide: "Índice de precios básicos al por mayor de los alambres de acero."
+        limitaciones: "Índice en pesos."
+        fuente: {nombre: INDEC, url: "https://www.indec.gob.ar/Nivel4/Tema/3/5/33", acceso: "op_icc_sipm_2016.xls, producto 41263-1"}
+        frecuencia: mensual
+        rezago: "unos 15 días"
+        desde: "2016"
+        unidad_original: índice
+        unidad_tablero: índice
+        licencia: publicable_citando
+        estado: automatico
+      - id: ipib_chapas
+        nombre: "Chapas metálicas (IPIB por producto)"
+        mercado: Argentina
+        tipo: indice
+        que_mide: "Índice de precios básicos al por mayor de las chapas metálicas."
+        limitaciones: "Índice en pesos. Hay que confirmar qué tipos de chapa incluye."
+        fuente: {nombre: INDEC, url: "https://www.indec.gob.ar/Nivel4/Tema/3/5/33", acceso: "op_icc_sipm_2016.xls, producto 42999-2"}
+        frecuencia: mensual
+        rezago: "unos 15 días"
+        desde: "2016"
+        unidad_original: índice
+        unidad_tablero: índice
+        licencia: publicable_citando
+        estado: automatico
+      - id: icc_carpinteria_metalica
+        nombre: "Carpintería metálica y herrería (costo de la construcción)"
+        mercado: Argentina
+        tipo: indice
+        que_mide: "Índice del costo de la construcción para el ítem carpintería metálica y herrería en el Gran Buenos Aires."
+        limitaciones: "Incluye materiales y mano de obra del ítem."
+        fuente: {nombre: INDEC, url: "https://www.indec.gob.ar/Nivel4/Tema/3/5/33", acceso: "icc_variaciones_indices_item_2016.xls, ítem 8"}
+        frecuencia: mensual
+        rezago: "unos 15 días"
+        desde: "2015-11"
+        unidad_original: índice
+        unidad_tablero: índice
+        licencia: publicable_citando
+        estado: automatico
+      - id: icc_acero_aletado
+        nombre: "Acero aletado en barra (costo de la construcción, materiales)"
+        mercado: Argentina
+        tipo: indice
+        que_mide: "Índice del material acero aletado conformado en barra dentro del costo de la construcción."
+        limitaciones: "Índice en pesos; ubicación exacta en la planilla a confirmar al programar."
+        fuente: {nombre: INDEC, url: "https://www.indec.gob.ar/Nivel4/Tema/3/5/33", acceso: "op_icc_sipm_2016.xls, hoja '11 y 12 Cap. Mat.', código 41242"}
+        frecuencia: mensual
+        rezago: "unos 15 días"
+        desde: "2016"
+        unidad_original: índice
+        unidad_tablero: índice
+        licencia: publicable_citando
+        estado: automatico
+      - id: rosario_materiales
+        nombre: "Hierro redondo, chapa galvanizada y tubos estructurales (Rosario)"
+        mercado: Argentina
+        tipo: indice
+        que_mide: "Variación mensual de los índices de materiales de la construcción de la Municipalidad de Rosario para hierro redondo de 10 mm, chapa galvanizada y tubos estructurales."
+        limitaciones: "Viene en PDF: si cambia el formato, la lectura automática puede fallar. Mide precios en corralones y proveedores de una sola ciudad."
+        fuente: {nombre: "Dirección General de Estadística, Municipalidad de Rosario", url: "https://datos.rosario.gob.ar", acceso: "PDF mensual 'Informe índices materiales de la construcción'"}
+        frecuencia: mensual
+        rezago: "unas 4 semanas"
+        desde: "2018-12 (base)"
+        unidad_original: "variación % e índice dic-2018=100"
+        unidad_tablero: "índice dic-2018=100"
+        licencia: a_confirmar
+        estado: semiautomatico
+
+  - id: local_precio_realizado
+    grupo: Precios locales
+    nombre: "Precio realizado del acero local"
+    que_es: "Ingreso promedio por tonelada de acero vendida por la principal siderúrgica de aceros planos de la región, según sus resultados trimestrales."
+    por_que_importa: "Es un precio efectivamente cobrado en dólares, aunque promedia toda la mezcla de productos vendidos."
+    series:
+      - id: acero_region_sur_usd_t
+        nombre: "Ingreso por tonelada de acero, Región Sur"
+        mercado: Argentina
+        tipo: precio_real
+        que_mide: "Ventas netas de productos de acero divididas por las toneladas despachadas en la Región Sur del grupo siderúrgico de planos, según su comunicado trimestral."
+        limitaciones: "Trimestral. Promedia la mezcla de productos (planos en caliente, frío, recubiertos). La empresa no detalla qué países incluye la Región Sur, aunque el grueso es la Argentina."
+        fuente: {nombre: "Comunicados trimestrales (formulario 6-K, SEC)", url: "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001342874", acceso: "EDGAR, prternium<T>q<AAAA>.htm"}
+        frecuencia: trimestral
+        rezago: "unas 5 semanas"
+        desde: "2020 (verificado en el listado)"
+        unidad_original: USD/t
+        unidad_tablero: USD/t
+        licencia: publicable_citando
+        estado: automatico
+
+  - id: local_pendientes
+    grupo: Precios locales
+    nombre: "Pendientes"
+    que_es: "Series que se suman en una etapa posterior."
+    por_que_importa: ""
+    series:
+      - id: importaciones_argentina_usd_t
+        nombre: "Precio de importación de la Argentina por producto"
+        mercado: Argentina
+        tipo: precio_comercio_exterior
+        que_mide: "Valor CIF promedio por tonelada de lo que importa la Argentina en cada posición de acero y metales."
+        limitaciones: "Se suma con la base de importaciones de Iván (ARCA / INDEC)."
+        fuente: {nombre: "ARCA / INDEC", url: "", acceso: "a definir"}
+        frecuencia: mensual
+        unidad_tablero: USD/t
+        licencia: a_confirmar
+        estado: pendiente
+      - id: paridad_importacion_hrc
+        nombre: "Paridad de importación de la bobina en caliente (estimada)"
+        mercado: Argentina
+        tipo: estimacion
+        que_mide: "Cuánto costaría poner en la Argentina una tonelada de bobina importada: precio internacional más flete, aranceles e impuestos, por el A3500."
+        limitaciones: "Cálculo propio; depende de supuestos de flete y de los aranceles vigentes por posición, que hay que confirmar."
+        fuente: {nombre: "Cálculo propio", url: "", acceso: "a definir"}
+        frecuencia: mensual
+        unidad_tablero: ARS/t
+        licencia: publicable_citando
+        estado: pendiente
+      - id: destatis_productos
+        nombre: "Precios al productor por producto, Alemania"
+        mercado: Europa
+        tipo: indice
+        que_mide: "Índices de precios al productor de productos de acero específicos (barra para hormigón, bobina en caliente, galvanizado, alambrón)."
+        limitaciones: "Requiere usuario gratuito en GENESIS (Destatis)."
+        fuente: {nombre: Destatis, url: "https://www-genesis.destatis.de", acceso: "API GENESIS, tabla 61241-0004"}
+        frecuencia: mensual
+        unidad_tablero: índice
+        licencia: publicable_citando
+        estado: pendiente
