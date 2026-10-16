@@ -1,0 +1,670 @@
+﻿<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <title>中国钢铁工业协会</title>
+    <meta name="keywords" content="中国钢铁工业协会，中国钢铁工业协会网站，中国钢铁工业协会官网" />
+	<meta name="description" content="中国钢铁工业协会的官方网站！" />
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="css/style_index.css"/>
+    <link rel="stylesheet" href="../../layui/css/layui.css" media="all">
+	<script src="../../layui/layui.js" charset="utf-8"></script>
+  	<script src="../js/jquery-1.8.3.min.js"></script>
+  	<script src='js/echarts.min.js'></script>
+	<script src='js/base.js'></script>
+	<script src='js/shutter.js'></script>
+	<script src='js/velocity.js'></script>
+  	<script src="./js/common.js"></script>
+  	<script type="text/javascript" src="../config/psUtils.js"></script>
+    <script src="./index.js"></script>
+<!--    <script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.min.js"></script>-->
+    <!--首页浏览统计引入-->
+    <script src="../../webVisit/dist/js/visitCountNoMethod.js" defer></script>
+</head>
+
+<body>
+<div >
+<!--<img src="img/jd100-pc.jpg" width="100%">-->
+<div class="top"></div>
+<script type="text/javascript">
+	localStorage.User = psUtil.checkLogin();
+	// 导入公共模板
+	if(localStorage.User==null || localStorage.User==undefined || localStorage.User==""){
+		$(".top").load("common/top.html");
+	}
+    else{
+    	$(".top").load("common/top_vip.html");
+    }
+	
+</script>
+
+<div class="w clear">
+    <div class="main">
+        <div class="l-body-panle">
+            <div id="list_pic" class="list_pic" data-id="list1"></div>
+        </div>
+        <div class="s-body-panle">
+            <div class="tab-item news">
+                <div class="tap-head">
+                    <ul>
+                        <li class="active" onclick="openPage('58af05dfb6b4300151760176d2aad0a04c275aaadbb1315039263f021f920dcd')">钢协动态</li>
+                        <li class="" onclick="openPage('a873c2e67b26b4a2d8313da769f6e106abc9a1ff04b7f1a50674dfa47cf91a7b')">领导讲话</li>
+                    </ul>
+                </div>
+                <div class="con-text">
+                    <div class="con-item active">
+                        <ul id="58af05dfb6b4300151760176d2aad0a04c275aaadbb1315039263f021f920dcd">
+                            <!--
+                            <li>
+                                <a href="content.html" target="_blank">钢协召开一季度部分钢铁企业经济运行座谈会</a>
+                                <span>2019-04-09</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">钢协开展春季植树活动</a>
+                                <span>2019-04-03</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">2019（第十届）中国钢铁发展论坛在北京举行</a>
+                                <span>2019-03-31</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">刘振江：在2019第十届中国钢铁发展论坛上的致辞</a>
+                                <span>2019-03-30</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">2019中国国际冶金铸造展览会开幕</a>
+                                <span>2019-03-13</span>
+                            </li>
+                            -->
+                        </ul>
+                    </div>
+                    <div class="con-item">
+                        <ul id="a873c2e67b26b4a2d8313da769f6e106abc9a1ff04b7f1a50674dfa47cf91a7b">
+                            <!--
+                            <li>
+                                <a href="javascript: void(0);">刘振江：在2019第十届中国钢铁发展论坛上的致辞</a>
+                                <span>2019-03-30</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">刘振江：在庆祝中国钢铁工业改革开放40年大会上的讲话</a>
+                                <span>2019-01-14</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">于勇：在中国钢铁工业协会2019年理事(扩大)会议上的报告</a>
+                                <span>2019-01-14</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">刘振江：在“首钢杯”第九届全国钢铁行业职业技能竞赛闭幕式上的讲话</a>
+                                <span>2018-09-28</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">刘振江：在第十八届中国钢铁原材料国际研讨会上的讲话</a>
+                                <span>2018-09-20</span>
+                            </li>
+                            -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="news_article">
+			<!--
+			<img src="./img/b01.gif" style="float:left;" />
+			<div style="float:left;color:#274a92;margin-left:8px; font-size:15px; font-weight:bold;">最新上传：</div>
+			-->
+			<!--
+			<div style="float:left;color:#274a92;font-size:20px; font-weight:bold;">最新上传：</div>
+			-->
+			<div style="float:left;"><span class="new_icon">最新上传：</span></div>
+			<div id = "feac22243215549d38ced59f33f32b13ffe90f977cd24de43386df696a453c1d" class="marquee"></div>
+		</div>
+        <div class="l-panle">
+            <div class="tab-item">
+                <div class="tap-head head-blue">
+                    <ul>
+                        <li class="active"><a href="list.html?columnId=c42511ce3f868a515b49668dd250290c80d4dc8930c7e455d0e6e14b8033eae2">要闻</a></li>
+                        <li class=""><a href="list.html?columnId=268f86fdf61ac8614f09db38a2d0295253043b03e092c7ff48ab94290296125c">会员动态</a></li>
+                        <!-- <li class="last"><a href="list.html?columnId=a83c48faeb34065fd9b33d3c84957a152675141458aedc0ec454b760c9fcad65">疫情应对</a></li> -->
+                    </ul>
+                </div>
+                <div class="con-text">
+                    <div class="con-item active">
+                        <ul id="c42511ce3f868a515b49668dd250290c80d4dc8930c7e455d0e6e14b8033eae2" style="height:250px;">
+                        	<!--
+                            <li>
+                                <a href="javascript: void(0);">销售火爆 地方债新增额度已用近半</a>
+                                <span>2019-04-16</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">刘昆：中国将继续实施更大规模减税降费</a>
+                                <span>2019-04-16</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">货币政策将继续保持稳定性和连续性</a>
+                                <span>2019-04-16</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">海关总署：3月我国外贸出口同比大幅增长21.3%</a>
+                                <span>2019-04-16</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">2018年民营钢铁企业实现利润2100亿元</a>
+                                <span>2019-04-16</span>
+                            </li>
+                             -->
+                        </ul>
+                    </div>
+					<div class="con-item">
+                        <ul id="268f86fdf61ac8614f09db38a2d0295253043b03e092c7ff48ab94290296125c" style="height:250px;">
+                        	<!--
+                            <li>
+                                <a href="javascript: void(0);">攀钢工程公司启动2019年精益六西格玛管理项目</a>
+                                <span>2019-04-16</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">方大特钢一项目获国家发明型专利</a>
+                                <span>2019-04-16</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">河钢邯钢党委打造星级党支部提高全员创新活力和产线市场竞争力</a>
+                                <span>2019-04-16</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">邢钢线材厂精品车间五线上线加热炉智能燃烧系统</a>
+                                <span>2019-04-16</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">河钢700兆帕螺纹钢筋引领国内高端建材升级换代</a>
+                                <span>2019-04-16</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">方大九钢动力厂优化TRT发电工艺提高发电量</a>
+                                <span>2019-04-16</span>
+                            </li>
+                             -->
+                        </ul>
+                    </div>
+                    <!-- 
+                    <div class="con-item">
+                        <ul id="a83c48faeb34065fd9b33d3c84957a152675141458aedc0ec454b760c9fcad65">
+                        </ul>
+                    </div>
+                     -->
+                </div>
+            </div>
+			<div class="tab-item">
+                <div class="tap-head head-blue">
+                    <ul>
+                        <li class="active"><a href="list.html?columnId=2e3c87064bdfc0e43d542d87fce8bcbc8fe0463d5a3da04d7e11b4c7d692194b">统计发布</a></li>
+                        <li class="last"><a href="list.html?columnId=1b4316d9238e09c735365896c8e4f677a3234e8363e5622ae6e79a5900a76f56">行业分析</a></li>
+                    </ul>
+                    <div class="morecg active">
+                    	<a class="right" href="list.html?columnId=3238889ba0fa3aabcf28f40e537d440916a361c9170a4054f9fc43517cb58c1e">生产经营</a><span>|</span>
+						<a class="right" href="list.html?columnId=95ef75c752af3b6c8be479479d8b931de7418c00150720280d78c8f0da0a438c">进出口</a><span>|</span>
+						<a class="right" href="list.html?columnId=619ce7b53a4291d47c19d0ee0765098ca435e252576fbe921280a63fba4bc712">环保统计</a>
+                    </div>
+					<div class="morecg">
+                        <a class="right" href="list.html?columnId=a44207e193a5caa5e64102604b6933896a0025eb85c57c583b39626f33d4dafd">市场价格分析</a><span>|</span>
+                        <a class="right" href="list.html?columnId=05d0e136828584d2cd6e45bdc3270372764781b98546cce122d9974489b1e2f2">板带材</a><span>|</span>
+                        <a class="right" href="list.html?columnId=197422a82d9a09b9cc86188444574816e93186f2fde87474f8b028fc61472d35">社会库存</a><span>|</span>
+                        <a class="right" href="list.html?columnId=6dfc16a60056ec0f2234d45f5fd7068ec4d75f66021df5ff544102801674a59a">钢铁原料</a>
+                    </div>
+                </div>
+                <div class="con-text">
+                    <div class="con-item active">
+                        <ul id="2e3c87064bdfc0e43d542d87fce8bcbc8fe0463d5a3da04d7e11b4c7d692194b" style="height:250px;">
+                           <!-- <li>
+                                <a href="javascript: void(0);">2019年2月会员钢铁企业营销概况</a>
+                                <span>2019-03-25</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">2019年1月会员钢铁企业营销概况</a>
+                                <span>2019-02-28</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">2018年12月会员钢铁企业营销概况</a>
+                                <span>2019-01-28</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">2018年11月会员钢铁企业营销概况</a>
+                                <span>2018-12-24</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">2018年10月会员钢铁企业营销概况</a>
+                                <span>2018-11-26</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">2018年9月会员钢铁企业营销概况</a>
+                                <span>2018-10-26</span>
+                            </li> -->
+                        </ul>
+                    </div>
+                    <div class="con-item">
+                        <ul id="1b4316d9238e09c735365896c8e4f677a3234e8363e5622ae6e79a5900a76f56" style="height:250px;">
+                        	<!--
+                            <li>
+                                <a href="javascript: void(0);">2019年3月钢材社会库存情况分析</a>
+                                <span>2019-03-29</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">2019年2月份重点统计企业板带材产销情况分析</a>
+                                <span>2019-03-29</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">2019年2月钢材社会库存情况分析</a>
+                                <span>2019-03-04</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">2019年1月份重点统计企业板带材产销情况分析</a>
+                                <span>2019-03-04</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">2019年1月钢材社会库存情况分析</a>
+                                <span>2019-01-29</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">2018年12月重点统计企业板带材产销情况分析</a>
+                                <span>2019-01-29</span>
+                            </li>
+                            -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-item">
+                <div class="tap-head head-blue">
+                    <ul>
+                        <li class="active last"><a href="list.html?columnId=17b6a9a214c94ccc28e56d4d1a2dbb5acef3e73da431ddc0a849a4dcfc487d04">钢材价格指数</a></li>
+                    </ul>
+                    <div class="morecg active">
+                        <a class="right" href="list.html?columnId=63913b906a7a663f7f71961952b1ddfa845714b5982655b773a62b85dd3b064e">综合价格指数</a><span>|</span>
+                        <a class="right" href="list.html?columnId=fc816c75aed82b9bc25563edc9cf0a0488a2012da38cbef5258da614d6e51ba9">地区价格</a>
+                    </div>
+                </div>
+                <div class="con-text">
+                    <div class="con-item active">
+                        <ul id="17b6a9a214c94ccc28e56d4d1a2dbb5acef3e73da431ddc0a849a4dcfc487d04" style="height:250px;">
+                            <!--
+                            <li>
+                                <a href="javascript: void(0);">2019年4月12日中国铁矿石价格指数</a>
+                                <span>2019-04-15</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">2019年4月11日中国铁矿石价格指数</a>
+                                <span>2019-04-15</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">2019年4月10日中国铁矿石价格指数</a>
+                                <span>2019-04-15</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">2019年4月9日中国铁矿石价格指数</a>
+                                <span>2019-04-15</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">2019年4月8日中国铁矿石价格指数</a>
+                                <span>2019-04-15</span>
+                            </li>
+                            -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-item">
+                <div class="tap-head head-blue">
+                    <ul>
+                        <li class="active"><a href="list.html?columnId=5d77b433182404193834120ceed16fe0625860fafd5fd9e71d0800c4df227060">宏观经济信息</a></li>
+                        <li class=""><a href="list.html?columnId=ae2a3c0fd4936acf75f4aab6fadd08bc6371aa65bdd50419e74b70d6f043c473">相关行业信息</a></li>
+						<li class="last"><a href="list.html?columnId=1bad7c56af746a666e4a4e56e54a9508d344d7bc1498360580613590c16b6c41">国际动态</a></li>
+                    </ul>
+                </div>
+                <div class="con-text">
+                    <div class="con-item active">
+                        <ul id="5d77b433182404193834120ceed16fe0625860fafd5fd9e71d0800c4df227060" style="height:250px;">
+							<!--
+							<li>
+                                <a href="javascript: void(0);">全球钢市隐现滞涨分化走势</a>
+                                <span>2019-04-15</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">3月中国铁矿石价格指数（CIOPI）波动调整后期难以维...</a>
+                                <span>2019-04-04</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">全球钢市持续缓步上涨走势</a>
+                                <span>2019-03-29</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">2月国内市场钢材价格稳中有升后期有望延续小幅上升走势</a>
+                                <span>2019-03-18</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">全球钢市继续缓步推升走势</a>
+                                <span>2019-03-15</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">全球钢市继续缓步推升走势</a>
+                                <span>2019-03-15</span>
+                            </li>
+                            -->
+                        </ul>
+                    </div>
+                    <div class="con-item">
+                        <ul id="ae2a3c0fd4936acf75f4aab6fadd08bc6371aa65bdd50419e74b70d6f043c473" style="height:250px;">
+                            <!--
+                            <li>
+								<a href="javascript: void(0);">全国首套房贷利率连降4个月 “银四”可以出手了？</a>
+                                <span>2019-04-16</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">出口向上BDI向下 商品风向标缘何“打架”</a>
+                                <span>2019-04-16</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">报告：房地产市场从严调控基调不变 3.0特征更明显</a>
+                                <span>2019-04-16</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">3月我国汽车销量降幅收窄 新能源车逆市增八成</a>
+                                <span>2019-04-16</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">一季度龙头房企销售“掉头向下” 中小房企“抢收”</a>
+                                <span>2019-04-15</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">一季度龙头房企销售“掉头向下” 中小房企“抢收”</a>
+                                <span>2019-04-15</span>
+                            </li>
+                            -->
+                        </ul>
+                    </div>
+					<div class="con-item">
+                        <ul id="1bad7c56af746a666e4a4e56e54a9508d344d7bc1498360580613590c16b6c41" style="height:250px;">
+							<!--
+							<li>
+                                <a href="javascript: void(0);">全球钢市隐现滞涨分化走势</a>
+                                <span>2019-04-15</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">3月中国铁矿石价格指数（CIOPI）波动调整后期难以维...</a>
+                                <span>2019-04-04</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">全球钢市持续缓步上涨走势</a>
+                                <span>2019-03-29</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">2月国内市场钢材价格稳中有升后期有望延续小幅上升走势</a>
+                                <span>2019-03-18</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">全球钢市继续缓步推升走势</a>
+                                <span>2019-03-15</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">全球钢市继续缓步推升走势</a>
+                                <span>2019-03-15</span>
+                            </li>
+                            -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-item" style="display: none;">
+                <div class="tap-head head-blue">
+                    <ul>
+                        <li class="active"><a href="javascript: void(0);">高质量发展</a></li>
+                        <li class=""><a href="javascript: void(0);">绿色发展</a></li>
+                        <li class="last"><a href="javascript: void(0);">智能制造</a></li>
+                    </ul>
+                </div>
+                <div class="con-text">
+                    <div class="con-item active">
+                        <ul>
+                           <!-- <li>
+                                <a href="javascript: void(0);">2019年4月12日中国铁矿石价格指数</a>
+                                <span>2019-04-15</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">2019年4月11日中国铁矿石价格指数</a>
+                                <span>2019-04-15</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">2019年4月10日中国铁矿石价格指数</a>
+                                <span>2019-04-15</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">2019年4月9日中国铁矿石价格指数</a>
+                                <span>2019-04-15</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">2019年4月8日中国铁矿石价格指数</a>
+                                <span>2019-04-15</span>
+                            </li> -->
+                        </ul>
+                    </div>
+                    <div class="con-item">
+                        <ul>
+                            <!-- <li>
+								<a href="javascript: void(0);">全国首套房贷利率连降4个月 “银四”可以出手了？</a>
+                                <span>2019-04-16</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">出口向上BDI向下 商品风向标缘何“打架”</a>
+                                <span>2019-04-16</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">报告：房地产市场从严调控基调不变 3.0特征更明显</a>
+                                <span>2019-04-16</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">3月我国汽车销量降幅收窄 新能源车逆市增八成</a>
+                                <span>2019-04-16</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">一季度龙头房企销售“掉头向下” 中小房企“抢收”</a>
+                                <span>2019-04-15</span>
+                            </li> -->
+                        </ul>
+                    </div>
+					<div class="con-item">
+                        <ul>
+                           <!-- <li>
+                                <a href="javascript: void(0);">攀钢工程公司启动2019年精益六西格玛管理项目</a>
+                                <span>2019-04-16</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">方大特钢一项目获国家发明型专利</a>
+                                <span>2019-04-16</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">河钢邯钢党委打造星级党支部提高全员创新活力和产线市场竞争力</a>
+                                <span>2019-04-16</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">邢钢线材厂精品车间五线上线加热炉智能燃烧系统</a>
+                                <span>2019-04-16</span>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);">河钢700兆帕螺纹钢筋引领国内高端建材升级换代</a>
+                                <span>2019-04-16</span>
+                            </li>-->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="s-panle">
+            <div class="sider">
+                <a href="list.html?columnId=10e8911e0c852d91f08e173c768700da608abfb4e7b0540cb49fa5498f33522b"><img src="img/title-1.jpg" alt=""></a>
+                <a class="siderlink" href="noticelist.html?columnId=179cde9e2d8f7e84968dbfb9948056843a6f9e27f2aefd09bbb3ce67c501cccf"><img src="img/title-2.jpg" alt=""></a>
+                <div class="notice">
+                    <ul id="179cde9e2d8f7e84968dbfb9948056843a6f9e27f2aefd09bbb3ce67c501cccf">
+                        <!--
+                        <li>
+                            <a href="javascript:;">迟京东会见日本铁钢联盟内山俊一专务理事一行</a>
+                            <span>[02-26]</span>
+                        </li>
+                        <li>
+                            <a href="javascript:;">荣程集团董事会主席张荣华一行到钢协座谈交流</a>
+                            <span>[02-26]</span>
+                        </li>
+                        <li>
+                            <a href="javascript:;">钢铁协会党委举办退休老干部迎新春茶话会</a>
+                            <span>[02-26]</span>
+                        </li>
+                        <li>
+                            <a href="javascript:;">钢铁协会党委组织开展2018年度代管协会、学会党建述职会</a>
+                            <span>[02-26]</span>
+                        </li>
+                        <li>
+                            <a href="javascript:;">中国钢铁工业协会《汽车座椅骨架用钢丝》等5项团体标准入选工信部201...</a>
+                            <span>[02-26]</span>
+                        </li>
+                        -->
+                    </ul>
+                </div>
+                <a class="siderlink" href="list.html?columnId=1a789fd662b134b034e613f8fedd6077a7833392e74c26df986694855275a978" target="_blank"><img src="img/title-7.jpg" alt=""></a>
+                <!-- <a class="siderlink" href="list.html?columnId=d34b090cc9476986740f49214f6bf839e035c05d06925d6ab69cb27c0c1fb32b"><img src="img/title-3.jpg" alt=""></a> -->
+                <a id="vip" class="siderlink" href="#" target="_blank"><img src="img/title-5.jpg" alt=""></a>
+                <a class="siderlink" href="reportPlat.html" target="_blank"><img src="img/title-4.jpg" alt=""></a>
+                <a class="siderlink" href="list.html?columnId=50d99531d5dee68346653ca9548f308764ad38410a091e662834a5ed66770174"><img src="img/link4.jpg" alt=""></a>
+                <a class="siderlink" href="list.html?columnId=2420135096a40fc435da7a4794bff023eccf49b91e2a463f24beece82092cae2"><img src="img/link5.jpg" alt=""></a>
+                <a class="siderlink" href="dtgwgjb.html" target="_blank"><img src="img/link1.jpg" alt=""></a>
+                <a class="siderlink" href="list.html?columnId=7f7509ff045023015e0d6c1ba22c32734b673be2ec14eae730a99c08e3badb3f"><img src="img/link2.jpg" alt=""></a>
+                <a class="siderlink" href="list.html?columnId=ed51af486f6d4b313b3aaf8fea0b32a4a2d4a89714c61992caf01942eb61831b"><img src="img/link3.jpg" alt=""></a>
+
+            </div>
+        </div>
+        <div class="l-chart-panle">
+            <h2></h2>
+            <div id='echart1' style='width: 100%; height: 260px; margin-top: 20px;'></div>
+        </div>
+        <div class="s-chart-panle">
+            <h2></h2>
+            <div id='echart2' style='width: 100%; height: 260px; margin-top: 20px;'></div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="ad w">
+    <div class="shutter" style="width: 100%; height: 100%;">
+        <div class="shutter-img">
+            <a href="javascript:void(0);" data-shutter-title="Iron Man" style="z-index: 0;"><img src="https://www.chinaisa.org.cn/gxportalFile/indeximage/banner_1.jpg"
+                                                                                                 alt="#"></a>
+            <a href="javascript:void(0);" data-shutter-title="Super Man" style="z-index: 1;"><img src="https://www.chinaisa.org.cn/gxportalFile/indeximage/banner_2.jpg"
+                                                                                                  alt="#"></a>
+            <a href="javascript:void(0);" data-shutter-title="The Hulk" style="z-index: 2;"><img src="https://www.chinaisa.org.cn/gxportalFile/indeximage/banner_3.jpg"
+                                                                                                  alt="#"></a>
+            <a href="javascript:void(0);" data-shutter-title="The your" style="z-index: 3;"><img src="https://www.chinaisa.org.cn/gxportalFile/indeximage/banner_4.jpg"
+                                                                                                  alt="#"></a>
+            <a href="javascript:void(0);" data-shutter-title="The your" style="z-index: 4;"><img src="https://www.chinaisa.org.cn/gxportalFile/indeximage/banner_5.jpg"
+                                                                                                 alt="#"></a>
+            <a href="javascript:void(0);" data-shutter-title="Iron Man" style="z-index: 5;"><img src="https://www.chinaisa.org.cn/gxportalFile/indeximage/banner_6.jpg"
+                                                                                                 alt="#"></a>
+            <a href="javascript:void(0);" data-shutter-title="Super Man" style="z-index: 6;"><img src="https://www.chinaisa.org.cn/gxportalFile/indeximage/banner_7.jpg"
+                                                                                                  alt="#"></a>
+        </div>
+        <ul class="shutter-btn">
+            <li class="prev"></li>
+            <li class="next"></li>
+        </ul>
+    </div>
+</div>
+<div class="link">
+   <table>
+        <tbody>
+        <tr>
+            <td><a href="https://www.baowugroup.com" target="_blank"><img width="140" src="https://www.chinaisa.org.cn/gxportalFile/indeximage/img/nav-img/nav-img2.jpg" alt=""></a></td>
+            <td><a href="http://www.ansteel.cn" target="_blank"><img width="140" src="https://www.chinaisa.org.cn/gxportalFile/indeximage/img/nav-img/nav-img3.jpg" alt=""></a></td>
+            <td><a href="https://www.shougang.com.cn" target="_blank"><img width="140" src="https://www.chinaisa.org.cn/gxportalFile/indeximage/img/nav-img/nav-img4.jpg" alt=""></a></td>
+            <td><a href="https://www.hbisco.com" target="_blank"><img width="140" src="https://www.chinaisa.org.cn/gxportalFile/indeximage/img/nav-img/nav-img5.jpg" alt=""></a></td>
+            <td><a href="http://www.tisco.com.cn" target="_blank"><img width="140" src="https://www.chinaisa.org.cn/gxportalFile/indeximage/img/nav-img/nav-img1.jpg" alt=""></a></td>
+            <td><a href="http://www.sha-steel.com" target="_blank"><img width="140" src="https://www.chinaisa.org.cn/gxportalFile/indeximage/img/nav-img/nav-img6.jpg" alt=""></a></td>
+            <td><a href="https://www.citicsteel.com" target="_blank"><img width="140" src="https://www.chinaisa.org.cn/gxportalFile/indeximage/img/nav-img/nav-img19.jpg" alt=""></a></td>
+        </tr>
+        <tr>
+            <td><a href="http://www.chinavalin.com" target="_blank"><img width="140" src="https://www.chinaisa.org.cn/gxportalFile/indeximage/img/nav-img/nav-img8.jpg" alt=""></a></td>
+            <td><a href="https://www.shansteelgroup.com/" target="_blank"><img width="140" src="https://www.chinaisa.org.cn/gxportalFile/indeximage/img/nav-img/nav-img9.jpg" alt=""></a></td>
+            <td><a href="http://www.btsteel.com" target="_blank"><img width="140" src="https://www.chinaisa.org.cn/gxportalFile/indeximage/img/nav-img/nav-img10.jpg" alt=""></a></td>
+            <td><a href="http://www.bxsteel.com" target="_blank"><img width="140" src="https://www.chinaisa.org.cn/gxportalFile/indeximage/img/nav-img/nav-img11.jpg" alt=""></a></td>
+            <td><a href="http://www.angang.com.cn" target="_blank"><img width="140" src="https://www.chinaisa.org.cn/gxportalFile/indeximage/img/nav-img/nav-img12.jpg" alt=""></a></td>
+            <td><a href="javascript:void(0);"><img width="140" src="https://www.chinaisa.org.cn/gxportalFile/indeximage/img/nav-img/nav-img13.jpg" alt=""></a></td>
+            <td><a href="http://www.minmetals.com.cn" target="_blank"><img width="140" src="https://www.chinaisa.org.cn/gxportalFile/indeximage/img/nav-img/nav-img14.jpg" alt=""></a></td>
+        </tr>
+        <tr>
+            <td><a href="https://www.sinosteel.com" target="_blank"><img width="140" src="https://www.chinaisa.org.cn/gxportalFile/indeximage/img/nav-img/nav-img16.jpg" alt=""></a></td>
+            <td><a href="https://www.cisri.com" target="_blank"><img width="140" src="https://www.chinaisa.org.cn/gxportalFile/indeximage/img/nav-img/nav-img17.jpg" alt=""></a></td>
+            <td><a href="https://www.ejianlong.com" target="_blank"><img width="140" src="https://www.chinaisa.org.cn/gxportalFile/indeximage/img/nav-img/nav-img18.jpg" alt=""></a></td>
+            <td><a href="http://www.njsteel.com.cn" target="_blank"><img width="140" src="https://www.chinaisa.org.cn/gxportalFile/indeximage/img/nav-img/nav-img21.jpg" alt=""></a></td>
+            <td><a href="http://www.fjsg.com.cn" target="_blank"><img width="140" src="https://www.chinaisa.org.cn/gxportalFile/indeximage/img/nav-img/nav-img22.jpg" alt=""></a></td>
+            <td><a href="https://www.shaangang.com" target="_blank"><img width="140" src="https://www.chinaisa.org.cn/gxportalFile/indeximage/img/nav-img/nav-img23.jpg" alt=""></a></td>
+            <td><a href="https://www.jiugang.com" target="_blank"><img width="140" src="https://www.chinaisa.org.cn/gxportalFile/indeximage/img/nav-img/nav-img24.jpg" alt=""></a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<!-- footer.html -->
+<div class="footer"></div>
+<script type="text/javascript">
+    // 导入公共模板
+    if(localStorage.User==null || localStorage.User==undefined || localStorage.User==""){
+		$(".footer").load("common/footer.html");
+	}
+    else{
+    	$(".footer").load("common/footer_vip.html");
+    }
+    
+	
+	//2024-01-30 begin
+	/**
+	 * 存储当前的用户信息
+	 */
+    var webUtil = {};
+	webUtil.checkLogin = function(){
+	    $.ajax({
+	        url:"../../system/login/getUserBySession",
+	        type : "POST", // 请求方式
+	        async:false,
+	        success : function(result) {
+	            var json = eval("("+result+")");
+	            if(json.code == "0"){
+	                login_user = json.data.user_code;
+	            }
+	        },
+	        error : function() {
+	        }
+	    });
+	    return login_user;
+	}
+	webUtil.checkLogin();
+	localStorage.User = login_user;
+	
+    //根据 localStorage.user 是否为空来决定点击“会员专区”时跳转到不同的页面
+    if(localStorage.User != null && localStorage.User !=''){
+    	
+		// 用户不为空时，点击“会员专区” 跳转到index_vip页面 
+		document.getElementById('vip').href = '../../xfgl/portal/index_vip.html';  
+		
+	} else {  
+		
+			//用户为空时， 点击“会员专区” 跳转到登录页面 
+		document.getElementById('vip').href = '../../login.html';
+			
+    }
+    
+  //2024-01-30  end
+</script>
+</body>
+<script>
+	$('.tap-head li').hover(function () {
+		$(this).addClass('active').siblings().removeClass('active');
+		var $el = $(this).closest('.tab-item').find('.con-text .con-item').eq($(this).index());
+		var $elTitle = $(this).closest('.tab-item').find('.tap-head .morecg').eq($(this).index());
+		$el.addClass('active').siblings().removeClass('active');
+		$elTitle.addClass('active').siblings().removeClass('active');
+	}, function () {})
+</script>
+</html>
