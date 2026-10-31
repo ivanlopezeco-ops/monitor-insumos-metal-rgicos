@@ -1,0 +1,771 @@
+{
+ "fuentes": {
+  "BCRA A3500": {
+   "estado": "ok",
+   "filas": 43,
+   "ultimo_ok": "2026-10-31T12:44:09",
+   "segundos": 1.1,
+   "detalle": "",
+   "error": ""
+  },
+  "BCRA tipos de pase": {
+   "estado": "ok",
+   "filas": 42,
+   "ultimo_ok": "2026-10-31T12:44:09",
+   "segundos": 1.3,
+   "detalle": "",
+   "error": ""
+  },
+  "Yahoo (futuros CME)": {
+   "estado": "ok",
+   "filas": 28667,
+   "ultimo_ok": "2026-10-31T12:44:09",
+   "segundos": 4.2,
+   "detalle": "",
+   "error": ""
+  },
+  "Westmetall (LME)": {
+   "estado": "ok",
+   "filas": 2948,
+   "ultimo_ok": "2026-10-31T12:44:09",
+   "segundos": 6.2,
+   "detalle": "",
+   "error": ""
+  },
+  "SHFE (Shanghái)": {
+   "estado": "ok",
+   "filas": 50,
+   "ultimo_ok": "2026-10-31T12:44:09",
+   "segundos": 8.1,
+   "detalle": "5 días con archivo; relleno hasta 2010-01-04",
+   "error": ""
+  },
+  "ZCE (Zhengzhou)": {
+   "estado": "ok",
+   "filas": 10,
+   "ultimo_ok": "2026-10-31T12:44:09",
+   "segundos": 14.3,
+   "detalle": "5 días con archivo; relleno hasta 2016-01-04",
+   "error": ""
+  },
+  "NBS China": {
+   "estado": "ok",
+   "filas": 50,
+   "ultimo_ok": "2026-10-31T12:44:09",
+   "segundos": 78.1,
+   "detalle": "5 informes nuevos; próxima página de relleno 63",
+   "error": "pág 67: 404 Client Error: Not Found for url: https://www.stats.gov.cn/sj/zxfb/index_67.html; pág 68: 404 Client Error: Not Found for url: https://www.stats.gov.cn/sj/zxfb/index_68.html; pág 69: 404 Client Error: Not Found for url: https://www.stats.gov.cn/sj/zxfb/index_69.html; pág 70: 404 Client Error: Not Found for url: https://www.stats.gov.cn/sj/zxfb/index_70.html; pág 71: 404 Client Error: No"
+  },
+  "Banco Mundial": {
+   "estado": "ok",
+   "filas": 5607,
+   "ultimo_ok": "2026-10-31T12:44:09",
+   "segundos": 1.1,
+   "detalle": "",
+   "error": ""
+  },
+  "BLS (EE.UU.)": {
+   "estado": "ok",
+   "filas": 105,
+   "ultimo_ok": "2026-10-31T12:44:09",
+   "segundos": 0.7,
+   "detalle": "",
+   "error": ""
+  },
+  "Comex Stat (Brasil)": {
+   "estado": "al día (no se volvió a pedir)",
+   "filas": 336,
+   "ultimo_ok": "2026-10-31T05:53:49",
+   "segundos": 107.7,
+   "detalle": "",
+   "error": ""
+  },
+  "Eurostat Comext": {
+   "estado": "ok",
+   "filas": 192,
+   "ultimo_ok": "2026-10-31T12:44:09",
+   "segundos": 3.4,
+   "detalle": "",
+   "error": ""
+  },
+  "Eurostat PPI": {
+   "estado": "ok",
+   "filas": 2108,
+   "ultimo_ok": "2026-10-31T12:44:09",
+   "segundos": 4.4,
+   "detalle": "",
+   "error": ""
+  },
+  "Banco de Japón": {
+   "estado": "ok",
+   "filas": 528,
+   "ultimo_ok": "2026-10-31T12:44:09",
+   "segundos": 1.4,
+   "detalle": "",
+   "error": ""
+  },
+  "IBGE": {
+   "estado": "ok",
+   "filas": 202,
+   "ultimo_ok": "2026-10-31T12:44:09",
+   "segundos": 1.7,
+   "detalle": "variables: {'1396': 'IPP - Variação mês/mês imediatamente anterior (M/M-1)', '1395': 'IPP - Variação acumulada no ano (em relação a dezembro do ano anterior)', '1394': 'IPP - Variação mês/mesmo mês do ano anterior (M/M-12)', '10008': 'IPP - Número-índice (dezembro de 2018 = 100)'}",
+   "error": ""
+  },
+  "India WPI": {
+   "estado": "ok",
+   "filas": 168,
+   "ultimo_ok": "2026-10-31T12:44:09",
+   "segundos": 4.8,
+   "detalle": "",
+   "error": ""
+  },
+  "INDEC SIPM": {
+   "estado": "ok",
+   "filas": 1290,
+   "ultimo_ok": "2026-10-31T12:44:09",
+   "segundos": 2.1,
+   "detalle": "",
+   "error": ""
+  },
+  "INDEC por producto": {
+   "estado": "ok",
+   "filas": 526,
+   "ultimo_ok": "2026-10-31T12:44:09",
+   "segundos": 3.5,
+   "detalle": "",
+   "error": ""
+  },
+  "Precio realizado (SEC)": {
+   "estado": "ok",
+   "filas": 0,
+   "ultimo_ok": "2026-10-31T12:44:09",
+   "segundos": 8.6,
+   "detalle": "",
+   "error": ""
+  }
+ },
+ "cursores": {
+  "shfe": "2010-01-04",
+  "zce": "2016-01-04",
+  "nbs_pagina": 63,
+  "shfe_fallidos": []
+ },
+ "series": {
+  "hrc_eeuu_futuro": {
+   "estado": "ok",
+   "ultimo": "2026-10-30",
+   "obs": 4497,
+   "notas": []
+  },
+  "hrc_china_spot": {
+   "estado": "ok",
+   "ultimo": "2026-10-20",
+   "obs": 166,
+   "notas": []
+  },
+  "hrc_china_futuro": {
+   "estado": "ok",
+   "ultimo": "2026-10-30",
+   "obs": 2760,
+   "notas": []
+  },
+  "hrc_europa_futuro": {
+   "estado": "ok",
+   "ultimo": "2026-10-30",
+   "obs": 11,
+   "notas": []
+  },
+  "hrc_ue_import_china": {
+   "estado": "viejo",
+   "ultimo": "2026-08-01",
+   "obs": 296,
+   "notas": [
+    "último dato hace 91 días"
+   ]
+  },
+  "hrc_brasil_export": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 357,
+   "notas": []
+  },
+  "hrc_japon_indice": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 561,
+   "notas": []
+  },
+  "hrc_japon_import": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 441,
+   "notas": []
+  },
+  "frio_eeuu_indice": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 532,
+   "notas": []
+  },
+  "frio_japon_indice": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 561,
+   "notas": []
+  },
+  "frio_japon_import": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 441,
+   "notas": []
+  },
+  "frio_brasil_export": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 357,
+   "notas": []
+  },
+  "galv_eeuu_prima": {
+   "estado": "ok",
+   "ultimo": "2026-10-30",
+   "obs": 1513,
+   "notas": []
+  },
+  "galv_eeuu_indice": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 532,
+   "notas": []
+  },
+  "galv_japon_indice": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 81,
+   "notas": []
+  },
+  "galv_japon_import": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 381,
+   "notas": []
+  },
+  "galv_brasil_export": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 357,
+   "notas": []
+  },
+  "barra_china_spot": {
+   "estado": "ok",
+   "ultimo": "2026-10-20",
+   "obs": 174,
+   "notas": []
+  },
+  "alambron_china_spot": {
+   "estado": "ok",
+   "ultimo": "2026-10-20",
+   "obs": 174,
+   "notas": []
+  },
+  "angulo_china_spot": {
+   "estado": "ok",
+   "ultimo": "2026-10-20",
+   "obs": 174,
+   "notas": []
+  },
+  "barra_china_futuro": {
+   "estado": "ok",
+   "ultimo": "2026-10-30",
+   "obs": 3776,
+   "notas": []
+  },
+  "alambron_china_futuro": {
+   "estado": "ok",
+   "ultimo": "2026-10-30",
+   "obs": 3751,
+   "notas": []
+  },
+  "barra_turquia_ue": {
+   "estado": "viejo",
+   "ultimo": "2026-08-01",
+   "obs": 296,
+   "notas": [
+    "último dato hace 91 días",
+    "salto de +42.1% en el último dato"
+   ]
+  },
+  "barra_brasil_export": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 357,
+   "notas": []
+  },
+  "largos_eeuu_indice": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 532,
+   "notas": []
+  },
+  "barras_japon_indice": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 561,
+   "notas": []
+  },
+  "alambron_japon_indice": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 261,
+   "notas": []
+  },
+  "barras_india_indice": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 42,
+   "notas": []
+  },
+  "chapa_gruesa_china_spot": {
+   "estado": "ok",
+   "ultimo": "2026-10-20",
+   "obs": 174,
+   "notas": []
+  },
+  "chapa_gruesa_japon_indice": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 321,
+   "notas": []
+  },
+  "tubo_sin_costura_china_spot": {
+   "estado": "ok",
+   "ultimo": "2026-10-20",
+   "obs": 174,
+   "notas": []
+  },
+  "tubos_japon_indice": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 261,
+   "notas": []
+  },
+  "inox_china_futuro": {
+   "estado": "ok",
+   "ultimo": "2026-10-30",
+   "obs": 1539,
+   "notas": []
+  },
+  "inox_japon_indice": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 201,
+   "notas": []
+  },
+  "acero_eeuu_indice": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 561,
+   "notas": []
+  },
+  "acero_ue_indice": {
+   "estado": "viejo",
+   "ultimo": "2026-08-01",
+   "obs": 320,
+   "notas": [
+    "último dato hace 91 días"
+   ]
+  },
+  "metalurgia_brasil_indice": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 202,
+   "notas": []
+  },
+  "semis_brasil_export": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 357,
+   "notas": []
+  },
+  "mineral_futuro": {
+   "estado": "ok",
+   "ultimo": "2026-10-30",
+   "obs": 4023,
+   "notas": []
+  },
+  "mineral_banco_mundial": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 801,
+   "notas": []
+  },
+  "mineral_brasil_export": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 357,
+   "notas": []
+  },
+  "mineral_japon_import": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 561,
+   "notas": []
+  },
+  "carbon_coque_china_spot": {
+   "estado": "ok",
+   "ultimo": "2026-10-20",
+   "obs": 174,
+   "notas": []
+  },
+  "carbon_coque_brasil_import": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 357,
+   "notas": []
+  },
+  "carbon_coque_japon_import": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 561,
+   "notas": []
+  },
+  "carbon_coque_india_indice": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 42,
+   "notas": []
+  },
+  "coque_china_spot": {
+   "estado": "ok",
+   "ultimo": "2026-10-20",
+   "obs": 174,
+   "notas": []
+  },
+  "coque_japon_indice": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 561,
+   "notas": []
+  },
+  "chatarra_eeuu_indice": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 561,
+   "notas": []
+  },
+  "chatarra_ue_turquia": {
+   "estado": "viejo",
+   "ultimo": "2026-08-01",
+   "obs": 296,
+   "notas": [
+    "último dato hace 91 días"
+   ]
+  },
+  "chatarra_turquia_futuro": {
+   "estado": "viejo",
+   "ultimo": "2026-10-19",
+   "obs": 3,
+   "notas": [
+    "último dato hace 12 días"
+   ]
+  },
+  "chatarra_japon_export": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 321,
+   "notas": []
+  },
+  "arrabio_brasil_export": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 357,
+   "notas": []
+  },
+  "arrabio_india_indice": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 42,
+   "notas": []
+  },
+  "dri_india_indice": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 42,
+   "notas": []
+  },
+  "ferrosilicio_china_futuro": {
+   "estado": "ok",
+   "ultimo": "2026-10-30",
+   "obs": 2627,
+   "notas": []
+  },
+  "silicomanganeso_china_futuro": {
+   "estado": "ok",
+   "ultimo": "2026-10-30",
+   "obs": 2627,
+   "notas": []
+  },
+  "ferromanganeso_japon_indice": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 261,
+   "notas": []
+  },
+  "cobre_lme": {
+   "estado": "ok",
+   "ultimo": "2026-10-30",
+   "obs": 4760,
+   "notas": []
+  },
+  "cobre_lme_stock": {
+   "estado": "ok",
+   "ultimo": "2026-10-30",
+   "obs": 4762,
+   "notas": []
+  },
+  "cobre_banco_mundial": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 801,
+   "notas": []
+  },
+  "cobre_comex": {
+   "estado": "ok",
+   "ultimo": "2026-10-30",
+   "obs": 6574,
+   "notas": []
+  },
+  "cobre_shfe": {
+   "estado": "ok",
+   "ultimo": "2026-10-30",
+   "obs": 3776,
+   "notas": []
+  },
+  "cobre_china_spot": {
+   "estado": "ok",
+   "ultimo": "2026-10-20",
+   "obs": 174,
+   "notas": []
+  },
+  "cobre_alemania": {
+   "estado": "ok",
+   "ultimo": "2026-10-30",
+   "obs": 1191,
+   "notas": []
+  },
+  "laton_alemania": {
+   "estado": "ok",
+   "ultimo": "2026-10-30",
+   "obs": 4661,
+   "notas": []
+  },
+  "aluminio_lme": {
+   "estado": "ok",
+   "ultimo": "2026-10-30",
+   "obs": 4761,
+   "notas": []
+  },
+  "aluminio_lme_stock": {
+   "estado": "ok",
+   "ultimo": "2026-10-30",
+   "obs": 4761,
+   "notas": []
+  },
+  "aluminio_banco_mundial": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 801,
+   "notas": []
+  },
+  "aluminio_comex": {
+   "estado": "ok",
+   "ultimo": "2026-10-30",
+   "obs": 3106,
+   "notas": []
+  },
+  "aluminio_prima_eeuu": {
+   "estado": "ok",
+   "ultimo": "2026-10-30",
+   "obs": 3478,
+   "notas": []
+  },
+  "aluminio_prima_europa": {
+   "estado": "ok",
+   "ultimo": "2026-10-30",
+   "obs": 2637,
+   "notas": []
+  },
+  "aluminio_shfe": {
+   "estado": "ok",
+   "ultimo": "2026-10-30",
+   "obs": 3776,
+   "notas": []
+  },
+  "aluminio_china_spot": {
+   "estado": "ok",
+   "ultimo": "2026-10-20",
+   "obs": 174,
+   "notas": []
+  },
+  "niquel_lme": {
+   "estado": "ok",
+   "ultimo": "2026-10-30",
+   "obs": 4761,
+   "notas": []
+  },
+  "niquel_banco_mundial": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 801,
+   "notas": []
+  },
+  "niquel_shfe": {
+   "estado": "ok",
+   "ultimo": "2026-10-30",
+   "obs": 2512,
+   "notas": []
+  },
+  "zinc_lme": {
+   "estado": "ok",
+   "ultimo": "2026-10-30",
+   "obs": 4761,
+   "notas": []
+  },
+  "zinc_banco_mundial": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 801,
+   "notas": []
+  },
+  "zinc_comex": {
+   "estado": "ok",
+   "ultimo": "2026-10-30",
+   "obs": 2840,
+   "notas": []
+  },
+  "zinc_shfe": {
+   "estado": "ok",
+   "ultimo": "2026-10-30",
+   "obs": 3776,
+   "notas": []
+  },
+  "zinc_china_spot": {
+   "estado": "ok",
+   "ultimo": "2026-10-20",
+   "obs": 174,
+   "notas": []
+  },
+  "estano_lme": {
+   "estado": "ok",
+   "ultimo": "2026-10-30",
+   "obs": 4761,
+   "notas": []
+  },
+  "estano_banco_mundial": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 801,
+   "notas": []
+  },
+  "estano_shfe": {
+   "estado": "ok",
+   "ultimo": "2026-10-30",
+   "obs": 2512,
+   "notas": []
+  },
+  "plomo_lme": {
+   "estado": "ok",
+   "ultimo": "2026-10-30",
+   "obs": 4761,
+   "notas": []
+  },
+  "plomo_banco_mundial": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 801,
+   "notas": []
+  },
+  "plomo_shfe": {
+   "estado": "ok",
+   "ultimo": "2026-10-30",
+   "obs": 3483,
+   "notas": []
+  },
+  "ipim_metalicos_basicos": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 129,
+   "notas": []
+  },
+  "ipim_hierro_acero": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 129,
+   "notas": []
+  },
+  "ipim_no_ferrosos": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 129,
+   "notas": []
+  },
+  "ipim_fundicion": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 129,
+   "notas": []
+  },
+  "ipim_productos_metalicos": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 129,
+   "notas": []
+  },
+  "ipib_barras_acero": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 81,
+   "notas": []
+  },
+  "ipib_alambron": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 74,
+   "notas": []
+  },
+  "ipib_alambre_acero": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 52,
+   "notas": []
+  },
+  "ipib_chapas": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 130,
+   "notas": []
+  },
+  "icc_carpinteria_metalica": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 57,
+   "notas": []
+  },
+  "icc_acero_aletado": {
+   "estado": "ok",
+   "ultimo": "2026-09-01",
+   "obs": 132,
+   "notas": []
+  },
+  "rosario_materiales": {
+   "estado": "sin_datos"
+  },
+  "acero_region_sur_usd_t": {
+   "estado": "ok",
+   "ultimo": "2026-04-01",
+   "obs": 8,
+   "notas": []
+  }
+ },
+ "generado": "2026-10-31T12:44:09Z"
+}
